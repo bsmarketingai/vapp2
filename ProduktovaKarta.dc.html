@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0!important;padding:0!important;}
+  #dc-root{margin:0!important;padding:0!important;width:100%!important;
+           max-width:none!important;border:0!important;}
+  #dc-root>.sc-host{margin:0!important;padding:0!important;width:100%!important;}
+</style>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  @media (max-width:819px){ .dt{display:none !important;} }
+  html,body{margin:0;background:#F7F9FB;}
+  .h-card{transition:box-shadow .15s;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);} .h-card:hover{box-shadow:0 6px 20px rgba(20,47,86,.10) !important;}
+  .h-buy{transition:background .12s;} .h-buy:hover{background:#0B6937 !important;}
+  .pk-fluid{width:100% !important;min-width:0 !important;max-width:none !important;}
+  /* Řádek skladovosti: styl přichází jako prop (nelze doplnit inline), proto class —
+     min-width:0 dovolí zalomení textu na 2 řádky místo odstřižení. */
+  .pk-av{min-width:0 !important;flex-wrap:nowrap;} .pk-av > span{min-width:0 !important;}
+  /* Kvantifikátor a Koupit drží jeden řádek na všech šířkách; když se text nevejde,
+     přepne se Koupit na icon-only (44 px) — zalomení do dvou řádků se nezavádí. */
+  .pk-buyicon{display:none;}
+  @container (max-width:269px){
+    .pk-buyfull{display:none !important;}
+    .pk-buyicon{display:flex !important;flex:none;}
+    /* stepper dorovná zbylou šířku před icon-only tlačítkem */
+    .pk-qty{flex:1 !important;min-width:0;}
+    .pk-qty > .sc-host{display:block;width:100%;}
+    .pk-qty > .sc-host > div{display:flex !important;width:100%;}
+    .pk-qty > .sc-host > div > span{flex:1;}
+  }
+  .a11y-i{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-align:inherit;line-height:inherit;text-decoration:none;cursor:pointer;}
+  /* mobil (S a níž): název produktu 18 px, rezerva na 2 řádky */
+  @media (max-width:819px){ .pk-title{font-size:18px !important;min-height:48px !important;} }
+  /* karta dílu (bez parametrů): mezera obj. č. → řádek ceny 8 px místo 14 (záporný okraj, margin-top:auto u ceny zůstává) */
+  .pk-head-dil{margin-bottom:-6px;}
+  .pk-title::after{content:"";position:absolute;inset:0;z-index:0;}
+  .pk-title:focus-visible{outline:none;}
+  .pk-title:focus-visible::after{outline:2px solid #1E5AA8;outline-offset:-2px;border-radius:8px;}
+  .pk-over{position:relative;z-index:1;}
+  .pk-img2{opacity:0;transition:opacity .12s ease;}
+  @media (hover:hover) and (pointer:fine){ .h-card:hover .pk-img2{opacity:1;} }
+  .pk-cmp:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+.pk-cmp{transition:color .12s;} .pk-cmp:hover{color:#15181C !important;}
+.pk-cmpbox{transition:border-color .12s, background .12s;} .pk-cmp:hover .pk-cmpbox[data-on="false"]{border-color:#5A626C !important;}
+  /* poměr fotky 4:3 na celém webu — rozhodnuto 15. 10. 2026 (V2); přepínač poměru je zrušený */
+  .pk-photo > div{aspect-ratio:var(--vp-photo-ar,4/3) !important;}
+  /* fotka uvnitř plochy menší (4:3 = default webu): i snímek focený do krajů má kolem sebe bílý okraj; plocha/placeholder se nemění. Jiné poměry vrací --vp-photo-pad */
+  .pk-photo > div[role="img"], .pk-photo > .pk-img2{padding:var(--vp-photo-pad,4px 10%) !important;background-origin:content-box !important;}
+  /* poměr 4:3 platí pro vnitřní prostor fotky (modrý rámeček), ne pro celou plochu — plocha je tak nižší. Placeholder bez fotky drží stejnou výšku. V1/V3 na Náhradních dílech vrací border-box přes --vp-photo-box */
+  .pk-photo > div[role="img"]{box-sizing:var(--vp-photo-box,content-box) !important;}
+  /* hover fotka leží absolutně přes plochu — velikost určí inset, ne poměr stran */
+  .pk-photo > .pk-img2{aspect-ratio:auto !important;height:auto !important;box-sizing:border-box !important;}
+  .pk-photo > div:not([role="img"]):not(.pk-img2){box-sizing:var(--vp-photo-box,content-box) !important;padding:var(--vp-photo-pad,4px 10%) !important;}
+  /* úzká karta (dva sloupce na XS): parametry i skladovost/cena pod sebe, vše zarovnané doleva */
+  @container (max-width:215px){
+    .pk-body{padding:12px 12px 12px !important;gap:12px !important;}
+    .pk-spec{flex-direction:column !important;align-items:flex-start !important;gap:0 !important;}
+    .pk-spec > span:last-child{white-space:normal !important;}
+    .pk-pricerow{flex-direction:column !important;align-items:flex-start !important;justify-content:flex-end !important;height:auto !important;min-height:64px;gap:4px !important;overflow:visible !important;}
+    .pk-pricerow > .sc-host:last-child > div{align-items:flex-start !important;}
+    .pk-objnum{white-space:normal !important;}
+  }
+</style>
+<script src="./mena.js"></script>
+</helmet>
+<div class="h-card {{ sizeClass }}" style="position:relative;font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;background:#fff;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s;cursor:pointer;height:100%;min-width:280px;max-width:300px;container-type:inline-size;" style-hover="box-shadow:0 6px 20px rgba(20,47,86,.10);">
+  <div class="pk-photo" onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" style="position:relative;">
+    <sc-if value="{{ p.img }}" hint-placeholder-val=""><div role="img" aria-label="{{ p.name }}" style="{{ p.imgBgStyle }}"></div></sc-if>
+    <sc-if value="{{ p.img2 }}" hint-placeholder-val=""><div class="pk-img2" aria-hidden="true" style="{{ p.imgBg2Style }}"></div></sc-if>
+    <sc-if value="{{ p.noImg }}" hint-placeholder-val=""><div style="{{ p.phStyle }}">{{ p.imgLabel }}</div></sc-if>
+    <sc-if value="{{ p.badge }}" hint-placeholder-val=""><span style="{{ p.badgeStyle }}">{{ p.badge }}</span></sc-if><span class="dt" aria-hidden="true" style="position:absolute;top:8px;right:8px;display:flex;gap:4px;"><span style="{{ p.dot1 }}"></span><span style="{{ p.dot2 }}"></span></span>
+  </div>
+  <div class="pk-body" style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:14px;flex:1;">
+    <div class="pk-head {{ headCls }}" style="display:flex;flex-direction:column;gap:6px;">
+      <a class="pk-title a11y-i" href="{{ detailHref }}" onClick="{{ onCardNav }}" style="display:block;font-size:16px;font-weight:700;color:#15181C;line-height:1.3;min-height:42px;">{{ p.name }}</a>
+      <sc-if value="{{ notRental }}" hint-placeholder-val="{{ true }}">
+      <dc-import name="Hodnoceni" value="{{ ratingValue }}" count="{{ reviews }}" hint-size="140px,18px"></dc-import>
+      <span class="pk-objnum" style="font-size:13px;font-weight:400;line-height:1.4;color:#666E78;white-space:nowrap;">Obj. č. {{ p.objNum }}</span>
+      </sc-if>
+    </div>
+    <sc-if value="{{ p.hasSpecs }}" hint-placeholder-val="">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;">
+        <sc-for list="{{ p.specs }}" as="sp" hint-placeholder-count="2">
+          <li class="pk-spec" style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:13px;font-weight:400;line-height:1.4;color:#666E78;">
+            <span style="min-width:0;">{{ sp.label }}</span><span style="flex:none;font-weight:700;color:#15181C;white-space:nowrap;">{{ sp.value }}</span>
+          </li>
+        </sc-for>
+      </ul>
+    </sc-if>
+    <sc-if value="{{ rental }}" hint-placeholder-val="">
+    <span style="{{ rentStatusStyle }}"><span aria-hidden="true" style="flex:none;display:inline-flex;width:18px;height:18px;"><dc-import name="Ikony" icon-name="calendar" size="18" hint-size="18px,18px"></dc-import></span><span style="min-width:0;">{{ rentStatusText }}</span></span>
+    <div style="display:flex;align-items:baseline;gap:2px;flex-wrap:wrap;">
+      <span style="font-size:22px;font-weight:700;line-height:1.25;color:#15181C;white-space:nowrap;">{{ rentPrice }}</span><span style="font-size:16px;font-weight:700;line-height:1.25;color:#5A626C;">/den</span>
+    </div>
+    <div class="pk-buyrow pk-over" onClick="{{ stop }}" style="display:flex;align-items:stretch;justify-content:flex-start;">
+      <dc-import name="Tlacitko" variant="primary" size="medium" label="Detail" icon-trailing="chevron-right" aria-label="{{ detailAria }}" href="{{ detailHref }}" on-click="{{ onCardNav }}" hint-size="120px,44px"></dc-import>
+    </div>
+    </sc-if>
+    <sc-if value="{{ notRental }}" hint-placeholder-val="{{ true }}">
+    <div class="pk-pricerow" style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:46px;overflow:hidden;">
+      <span class="pk-av" style="{{ p.availStyle }}"><sc-if value="{{ p.availIn }}" hint-placeholder-val=""><dc-import name="Ikony" icon-name="circle-check" size="18" hint-size="18px,18px"></dc-import></sc-if><sc-if value="{{ p.availOut }}" hint-placeholder-val=""><dc-import name="Ikony" icon-name="circle-x" size="18" hint-size="18px,18px"></dc-import></sc-if><span style="min-width:0;">{{ p.avail }}</span></span>
+      <dc-import name="Cena" size="large" price-net="{{ netNum }}" price-gross="{{ grossNum }}" original="{{ originalNum }}" currency="{{ currency }}" hint-size="120px,52px"></dc-import>
+    </div>
+    </sc-if>
+    <sc-if value="{{ buyK1 }}" hint-placeholder-val="{{ true }}">
+    <div class="pk-buyrow pk-over" onClick="{{ stop }}" style="display:flex;align-items:stretch;gap:8px;">
+      <div class="pk-qty" style="flex:none;"><dc-import name="Kvantifikator" value="{{ qtyVal }}" on-change="{{ onQty }}" hint-size="120px,44px"></dc-import></div>
+      <div class="pk-buyfull" style="position:relative;flex:1;display:flex;min-width:0;">
+        <dc-import name="Tlacitko" variant="buy" size="medium" label="Koupit" aria-label="{{ buyAria }}" full-width="true" disabled="{{ buyDisabled }}" on-click="{{ onBuyClick }}" style="width:100%;" hint-size="100%,44px"></dc-import>
+        <sc-if value="{{ showCartQty }}" hint-placeholder-val=""><span aria-hidden="true" style="{{ cartBadgeStyle }}">{{ cartQty }}</span></sc-if>
+      </div>
+      <div class="pk-buyicon" style="position:relative;margin-left:auto;">
+        <dc-import name="Tlacitko" variant="buy" size="medium" icon-only="{{ true }}" icon="shopping-cart" aria-label="{{ buyAria }}" disabled="{{ buyDisabled }}" on-click="{{ onBuyClick }}" hint-size="44px,44px"></dc-import>
+        <sc-if value="{{ showCartQty }}" hint-placeholder-val=""><span aria-hidden="true" style="{{ cartBadgeStyle }}">{{ cartQty }}</span></sc-if>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ buyK2 }}" hint-placeholder-val="">
+    <div class="pk-buyrow pk-over" onClick="{{ stop }}" style="display:flex;align-items:stretch;justify-content:flex-start;">
+      <div style="position:relative;flex:none;display:flex;">
+        <sc-if value="{{ k2Detail }}" hint-placeholder-val=""><dc-import name="Tlacitko" variant="primary" size="medium" label="Vybrat variantu" icon-trailing="chevron-right" aria-label="{{ detailAria }}" href="{{ detailHref }}" on-click="{{ onCardNav }}" hint-size="170px,44px"></dc-import></sc-if>
+        <sc-if value="{{ k2Buy }}" hint-placeholder-val=""><dc-import name="Tlacitko" variant="primary" size="medium" label="Detail přívěsu" icon-trailing="chevron-right" aria-label="{{ detailAria }}" href="{{ detailHref }}" on-click="{{ onCardNav }}" hint-size="170px,44px"></dc-import></sc-if>
+        <sc-if value="{{ k2BuyBadge }}" hint-placeholder-val=""><span aria-hidden="true" style="{{ cartBadgeStyle }}">{{ cartQty }}</span></sc-if>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ showCompare }}" hint-placeholder-val="">
+    <div class="pk-over" onClick="{{ stop }}" style="display:flex;align-items:center;gap:8px;height:26px;padding-top:2px;">
+      <button type="button" class="a11y-i pk-cmp" role="checkbox" aria-checked="{{ p.cmpChecked }}" aria-label="Porovnat produkt" onClick="{{ p.onCmp }}" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#5A626C;cursor:pointer;min-height:24px;white-space:nowrap;"><span class="pk-cmpbox" data-on="{{ p.cmpChecked }}" style="{{ p.cmpBox }}"><sc-if value="{{ p.cmp }}" hint-placeholder-val=""><svg width="9" height="9" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2.8" stroke-linecap="round"></path></svg></sc-if></span>Porovnat</button>
+    </div>
+    </sc-if>
+  </div>
+</div>
+<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showCompare&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;},&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:560},&quot;p&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;,&quot;default&quot;:null},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dil&quot;,&quot;prives&quot;,&quot;pujcovna&quot;],&quot;default&quot;:&quot;dil&quot;,&quot;tsType&quot;:&quot;'dil'|'prives'|'pujcovna'&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;available&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;buyLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;K1&quot;,&quot;K2&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;'K1'|'K2'|''&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;onDetail&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;,&quot;default&quot;:null}}">class Component extends DCLogic {
+  state = { qty:1, cmp:false, inCartDemo:0 };
+  // čítač v košíku: stejný vzhled jako u Porovnat a Košíku v hlavičce
+  CART_BADGE = 'position:absolute;top:-6px;right:-6px;min-width:16px;width:16px;height:16px;border-radius:999px;background:#C5232B;color:#fff;font-size:10px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;pointer-events:none;';
+  cartVals(inCart, disabled){
+    const n = Number(inCart) || 0;
+    return {
+      cartQty: n, showCartQty: n > 0, cartBadgeStyle: this.CART_BADGE,
+      buyAria: n > 0 ? ('Koupit — v košíku ' + n + ' ks') : 'Koupit',
+      buyDisabled: disabled
+    };
+  }
+  stars(filled){
+    const n = Math.max(0, Math.min(5, Math.round(filled||0)));
+    return Array.from({length:5}, (_,i)=>({ icon: i<n ? 'star-filled' : 'star', style:'color:'+(i<n?'#F5A623':'#D5DAE0')+';display:inline-flex;' }));
+  }
+  renderVals(){
+    const parseKc = (s)=> typeof s==='number' ? s : (parseInt(String(s||'').replace(/[^0-9]/g,''),10)||0);
+    const stop = (e)=>{ if(e && e.stopPropagation) e.stopPropagation(); };
+    // Řádek skladovosti má v šabloně pevnou výšku 40 px, takže i zalomení na 2 řádky
+    // nerozhodí zarovnání karet v gridu; text se proto nezkracuje ellipsis.
+    const OUT = 'display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#C5232B;min-width:0;';
+    const oneLine = (s)=> (s||'') + 'min-width:0;';
+    if (this.props.p){
+      const p = Object.assign({}, this.props.p);
+      const filled = (p.rating!==undefined) ? p.rating : (typeof p.starsOn==='string' ? (p.starsOn.match(/★/g)||[]).length : 4);
+      p.starList = this.stars(filled);
+      // karta přívěsu: jen 2 parametry (Ložná plocha, Celková hmotnost) — rozhodnuto 15. 10. 2026
+      const specs = (Array.isArray(p.specs) ? p.specs : []).slice(0,2).map(s=>({ label:s.label, value:s.value }));
+      p.specs = specs; p.hasSpecs = specs.length > 0;
+      const avail = (p.available!==undefined) ? !!p.available : ((this.props.available!==undefined) ? !!this.props.available : true);
+      if (!avail){ p.availIn=false; p.availOut=true; p.avail='Není skladem'; p.availStyle=OUT; }
+      else { p.availStyle = oneLine(p.availStyle); }
+      const detail = p.onDetail || this.props.onDetail;
+      p.cmpChecked = p.cmp ? 'true' : 'false';
+      const _cmpFn = p.onCmp;
+      p.onCmpKey = (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); if(_cmpFn) _cmpFn(e); } };
+      return { p, sizeClass:'pk-fluid', stop,
+        showCompare: this.props.showCompare === true,
+        buyDisabled: !avail,
+        onCard: detail || (()=>{}),
+        detailHref: p.detailHref || this.props.detailHref || '#',
+        // s reálným odkazem se navigace nechává na prohlížeči, jinak jen callback
+        onCardNav: (e)=>{ const href = p.detailHref || this.props.detailHref; if(href) return; if(e&&e.preventDefault) e.preventDefault(); if(detail) detail(e); },
+        ratingValue: filled, reviews: p.reviews,
+        netNum: parseKc(p.priceNet), grossNum: parseKc(p.price), originalNum: parseKc(p.original),
+        currency: this.props.currency || 'CZK',
+        ...this.cartVals(p.inCart, !avail),
+        onBuyClick: p.onBuy || (()=>{}),
+        qtyVal: p.qty || 1, onQty: p.onQty || (()=>{}) };
+    }
+    const availDemo = (this.props.available!==undefined) ? !!this.props.available : true;
+    const isPrives = this.props.variant === 'prives' || this.props.variant === 'pujcovna';
+    const demoSpecs = isPrives ? [
+      { label:'Ložná plocha', value:'3030 × 1530 mm' },
+      { label:'Celková hmotnost', value:'1 500 kg' }
+    ] : [];
+    const cmp = this.state.cmp;
+    // Ukázková data pro samostatný náhled komponenty
+    return { showCompare: this.props.showCompare === true, sizeClass:'', ratingValue:4, reviews:23, netNum:397, grossNum:480, originalNum:0, stop,
+      ...this.cartVals(this.state.inCartDemo, !availDemo),
+      onBuyClick: ()=>this.setState(s=>({ inCartDemo: s.inCartDemo + (s.qty || 1) })),
+      onCard: this.props.onDetail || (()=>{}),
+      detailHref: this.props.detailHref || '#',
+      onCardNav: (e)=>{ if(e&&e.preventDefault) e.preventDefault(); const f=this.props.onDetail; if(f) f(e); },
+      qtyVal:this.state.qty, onQty:(v)=>this.setState({qty:v}), p: {
+      name:'Opěrné kolečko ⌀48 mm, nosnost 150 kg', starList:this.stars(4), reviews:23,
+      img:'uploads/kolecko-operne-dtr-prum-48-150-kg.jpg',
+      imgBgStyle:'aspect-ratio:4/3;background:#fff url("./uploads/kolecko-operne-dtr-prum-48-150-kg.jpg") center/contain no-repeat;background-origin:content-box;padding:18px 12px;',
+      noImg:false, phStyle:'', imgLabel:'',
+      badge:'−15 %', badgeStyle:'position:absolute;top:8px;left:8px;font-size:13px;font-weight:700;border-radius:6px;padding:4px 9px;color:#fff;background:#C5232B;',
+      dot1:'display:none;', dot2:'display:none;',
+      availStyle: availDemo ? oneLine('display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#0B6937;') : OUT,
+      availIn: availDemo, availOut: !availDemo, avail: availDemo ? 'Skladem > 15 ks' : 'Není skladem',
+      priceNet:'397 Kč', price:'480 Kč', objNum:'404815',
+      specs: demoSpecs, hasSpecs: demoSpecs.length > 0,
+      qty:this.state.qty, cmp,
+      cmpBox:'flex:none;width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;border:1px solid '+(cmp?'#1E5AA8':'#91959B')+';background:'+(cmp?'#1E5AA8':'#fff')+';',
+      onMinus:()=>this.setState(s=>({qty:Math.max(1,s.qty-1)})),
+      onPlus:()=>this.setState(s=>({qty:s.qty+1})),
+      cmpChecked: cmp ? 'true' : 'false',
+      onCmp:()=>this.setState(s=>({cmp:!s.cmp})),
+      onCmpKey:(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); this.setState(s=>({cmp:!s.cmp})); } },
+      onEnter:()=>{}, onLeave:()=>{},
+    } };
+  }
+}
+
+// DebugBar: prop debug -> šablona
+(function(){ const rv = Component.prototype.renderVals;
+  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; if (v.debug === undefined) v.debug = this.props.debug ?? true; 
+    // K1/K2: explicitní prop vyhrává; jinak karta přívěsu (má specs) čte volbu z localStorage 'vapp-card' (default K2), díl zůstává K1
+    let lay = this.props.buyLayout;
+    if (!lay) { let st = null; try{ st = localStorage.getItem('vapp-card'); }catch(e){} lay = (v.p && v.p.hasSpecs) ? 'K2' : 'K1'; } // K2 u přívěsu rozhodnuto 15. 10. 2026 — localStorage už neovlivňuje
+    if (v.p && v.p.hasSpecs) lay = 'K2';
+    v.buyK2 = lay === 'K2'; v.buyK1 = !v.buyK2; 
+    v.headCls = (v.p && v.p.hasSpecs) ? '' : 'pk-head-dil'; v.k2Detail = !!(v.p && v.p.variants); v.k2Buy = !v.k2Detail; v.k2BuyBadge = false;
+    // K2: CTA vždy modré — s variantami „Vybrat variantu", bez variant „Detail přívěsu" (oba vedou na detail)
+    v.detailAria = (v.k2Detail ? 'Vybrat variantu — ' : 'Detail přívěsu — ') + ((v.p && v.p.name) || '');
+    // karta přívěsu v půjčovně (p.rentPerDay): fotka, název, 2 parametry, cena za den a CTA Detail — bez hodnocení, obj. č., skladovosti a nákupu
+    const rental = !!(v.p && v.p.rentPerDay != null) || (!this.props.p && this.props.variant === 'pujcovna');
+    v.rental = rental; v.notRental = !rental;
+    if (rental){ v.buyK1 = false; v.buyK2 = false; v.headCls = '';
+      const n = Number(v.p.rentPerDay != null ? v.p.rentPerDay : 400) || 0;
+      v.rentPrice = String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00A0') + '\u00A0Kč';
+      v.detailAria = 'Detail — ' + ((v.p && v.p.name) || '');
+      // příznak dostupnosti v půjčovně: ok = Možno rezervovat (status.inStock) · off = Nedostupné (status.outOfStock) · ask = Na dotaz (status.onRequest)
+      const RS = { ok:['Možno rezervovat','#0B6937'], off:['Nedostupné','#C5232B'], ask:['Na dotaz','#666E78'] };
+      const rs = RS[v.p.rentStatus] || RS.ok;
+      v.rentStatusText = rs[0];
+      v.rentStatusStyle = 'margin-top:auto;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;line-height:1.4;color:' + rs[1] + ';'; }
+    return v; };
+  const dm = Component.prototype.componentDidMount, du = Component.prototype.componentWillUnmount;
+  Component.prototype.componentDidMount = function(){ if (dm) dm.call(this); this._cardLs = ()=>this.forceUpdate(); window.addEventListener('vapp-card', this._cardLs); window.addEventListener('storage', this._cardLs); };
+  Component.prototype.componentWillUnmount = function(){ if (du) du.call(this); window.removeEventListener('vapp-card', this._cardLs); window.removeEventListener('storage', this._cardLs); };
+})();
+</script>
+</body>
+</html>

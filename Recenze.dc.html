@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#F7F9FB;font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;}
+  .rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media (max-width:999px){ .rc-grid{grid-template-columns:repeat(2,1fr);} }
+  .rc-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
+  .rc-badge{transition:opacity .12s;} .rc-badge:hover{opacity:.85;} .rc-badge:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  .rc-all:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  .rc-h2{font-size:28px;line-height:1.2;letter-spacing:-0.01em;}
+  @media (max-width:819px){ .rc-h2{font-size:26px;line-height:1.2;} .rc-grid{grid-template-columns:1fr;} }
+</style>
+</helmet>
+<section aria-labelledby="rc-title" style="width:100%;">
+  <div class="rc-head">
+    <h2 id="rc-title" class="rc-h2" style="margin:0;font-weight:700;color:#15181C;">{{ title }}</h2>
+    <a class="rc-badge" href="https://obchody.heureka.cz/" target="_blank" rel="noopener noreferrer" aria-label="Heureka: {{ scoreText }} — celková spokojenost s obchodem" style="display:inline-flex;align-items:center;gap:12px;flex:none;height:70px;padding:0 20px 0 8px;background:#FFFFFF;border-radius:999px;text-decoration:none;"><span style="display:flex;align-items:center;justify-content:center;flex:none;width:56px;height:56px;border-radius:999px;background:#fff;"><img src="./uploads/logo-verified-by-customers-gold--cs.png" alt="" width="48" height="48" style="display:block;width:48px;height:48px;"></span><span style="display:flex;flex-direction:column;gap:2px;min-width:0;"><span style="display:flex;align-items:center;gap:8px;"><span style="font-size:17px;font-weight:700;color:#15181C;">{{ scoreNum }}</span><span aria-hidden="true" style="display:inline-flex;align-items:center;gap:1px;color:#F5A623;"><dc-import name="Ikony" icon-name="star-filled" size="16" hint-size="16px,16px"></dc-import><dc-import name="Ikony" icon-name="star-filled" size="16" hint-size="16px,16px"></dc-import><dc-import name="Ikony" icon-name="star-filled" size="16" hint-size="16px,16px"></dc-import><dc-import name="Ikony" icon-name="star-filled" size="16" hint-size="16px,16px"></dc-import><dc-import name="Ikony" icon-name="star-filled" size="16" hint-size="16px,16px"></dc-import></span></span><span style="font-size:13px;font-weight:500;color:#5A626C;white-space:nowrap;">celková spokojenost s obchodem</span></span></a>
+  </div>
+  <ul class="rc-grid" style="list-style:none;margin:0;padding:0;">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+      <li style="background:#FFFFFF;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);">
+        <dc-import name="Hodnoceni" value="{{ r.value }}" hint-size="120px,20px"></dc-import>
+        <blockquote style="margin:0;font-size:16px;font-weight:400;line-height:1.6;color:#15181C;text-wrap:pretty;">{{ r.text }}</blockquote>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#666E78;">
+          <span style="font-weight:700;color:#5A626C;">{{ r.author }}</span>
+          <span aria-hidden="true">·</span>
+          <span>{{ r.meta }}</span>
+        </div>
+      </li>
+    </sc-for>
+  </ul>
+  <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+    <a class="rc-all" href="{{ allHref }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;background:transparent;border:0;font-size:14px;font-weight:700;color:#1E5AA8;text-decoration:none;transition:background 120ms ease;" style-hover="text-decoration:underline;text-underline-offset:3px;" style-active="transform:translateY(1px);">Všechna hodnocení<dc-import name="Ikony" icon-name="chevron-right" size="{{ 24 }}" hint-size="24px,24px"></dc-import></a>
+  </div>
+</section>
+<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:320},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Co říkají zákazníci&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;scoreText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;4,8 z 5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sourceText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ověřeno zákazníky · Heureka&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;reviews&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{value:number,count:number,text:string,author:string,meta:string}[]&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+class Component extends DCLogic {
+  DEFAULT = [
+    { value:5, count:1, author:'Petr H.', meta:'nájezdová brzda KNOTT',
+      text:'Objednáno v pondělí, ve středu jsem díl montoval. Na telefonu mi rovnou poradili, který typ brzdy mám.' },
+    { value:5, count:1, author:'Jana K.', meta:'valníkový přívěs',
+      text:'Přívěs převzatý na pobočce, všechno vysvětlené na místě. Za rok jsme byli na garanční prohlídce, bez problémů.' },
+    { value:4.5, count:1, author:'Miloš V.', meta:'osvětlení a kabeláž',
+      text:'Sortiment dílů je opravdu velký, našel jsem i staré typy svítilen. Balení pečlivé, nic se nepoškodilo.' }
+  ];
+  renderVals(){
+    const P = this.props;
+    const src = (Array.isArray(P.reviews) && P.reviews.length) ? P.reviews.filter(Boolean) : this.DEFAULT;
+    return {
+      title: P.title ?? 'Co říkají zákazníci',
+      scoreText: P.scoreText ?? '4,8 z 5',
+      scoreNum: (P.scoreText ?? '4,8 z 5').split(' ')[0],
+      sourceText: P.sourceText ?? 'Ověřeno zákazníky · Heureka',
+      reviews: src,
+      allHref: P.allHref ?? 'https://obchody.heureka.cz/vapp-cz/recenze/',
+      debug: P.debug ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

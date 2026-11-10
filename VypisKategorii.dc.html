@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  .vk-logo:hover{border-color:#5189CC !important;}
+  .vk-acc{display:grid;grid-template-rows:1fr;transition:grid-template-rows .25s ease, opacity .25s ease;} .vk-acc > *{min-height:0;overflow:hidden;padding:0 20px 20px;margin:0 -20px -20px;} /* rezerva pro hover stín dlaždic */ .vk-acc[data-shown="false"]{grid-template-rows:0fr;opacity:0;}
+  @media (prefers-reduced-motion:reduce){ .vk-acc{transition:none !important;} }
+  .vk-acchead{transition:box-shadow .15s ease;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);} .vk-acchead:hover{box-shadow:0 6px 20px rgba(20,47,86,.10);} .vk-logo:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  .a11y-i{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-align:inherit;line-height:inherit;text-decoration:none;cursor:pointer;}
+  .a11y-i:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  html,body{margin:0;background:#F7F9FB;font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;}
+  /* mřížka kategorií: S dvousloupcová, jeden sloupec až na XS a XXS */
+  /* jednotný počet sloupců rozcestníku (Náhradní díly i Přívěsy): od L 4, M 3, S 2, XS a XXS 1 */
+  @media (min-width:1000px){ .vk-grid{grid-template-columns:repeat(4,minmax(0,1fr)) !important;} }
+  @media (min-width:820px) and (max-width:999px){ .vk-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;} }
+  @media (max-width:819px){ .vk-grid{grid-template-columns:repeat(2,1fr) !important;} }
+  @media (max-width:549px){ .vk-grid{grid-template-columns:1fr !important;} }
+  /* nejhledanější: desktop jeden řádek s labelem vlevo, pod 820 px label nad chipsy */
+  @media (max-width:819px){ .vk-top{flex-direction:column !important;align-items:flex-start !important;gap:8px !important;} }
+</style>
+</helmet>
+<sc-if value="{{ showTop }}" hint-placeholder-val="{{ true }}">
+  <nav class="vk-top" aria-label="{{ topAria }}" style="display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;margin-bottom:{{ topMargin }};">
+    <span style="flex:none;font-size:13px;font-weight:700;line-height:1.4;text-transform:uppercase;letter-spacing:.06em;color:#666E78;">{{ topLabel }}</span>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;">
+      <sc-if value="{{ showTopChips }}" hint-placeholder-val="{{ true }}">
+      <sc-for list="{{ topItems }}" as="t" hint-placeholder-count="5">
+        <dc-import name="Chip" kind="{{ t.kind }}" size="small" label="{{ t.label }}" icon-name="{{ t.iconName }}" href="{{ t.href }}" hint-size="150px,32px"></dc-import>
+      </sc-for>
+      </sc-if>
+      <sc-if value="{{ showTopLogos }}" hint-placeholder-val="">
+      <sc-for list="{{ topLogoItems }}" as="l" hint-placeholder-count="4">
+        <a class="vk-logo" href="{{ l.href }}" aria-label="{{ l.name }}" style="display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:88px;padding:4px 16px;border-radius:999px;background:#FFFFFF;border:1px solid #B4CEEC;text-decoration:none;transition:border-color 120ms ease;">
+          <sc-if value="{{ l.hasLogo }}" hint-placeholder-val=""><img src="{{ l.logo }}" alt="" style="display:block;height:16px;width:auto;max-width:96px;object-fit:contain;"></sc-if>
+          <sc-if value="{{ l.noLogo }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;font-weight:700;line-height:1;color:#3A424C;letter-spacing:.02em;">{{ l.name }}</span></sc-if>
+        </a>
+      </sc-for>
+      </sc-if>
+    </div>
+  </nav>
+</sc-if>
+<sc-if value="{{ showRest }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ accOff }}" hint-placeholder-val="{{ true }}">
+<div class="vk-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;">
+  <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+    <dc-import name="KategorickaDlazdice" cat="{{ c }}" variant="{{ tileVariant }}" media="{{ tileMedia }}" hint-size="100%,240px"></dc-import>
+  </sc-for>
+</div>
+<sc-if value="{{ showBrands }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;align-items:center;gap:16px;margin:16px 0 8px;">
+    <span style="flex:1;height:1px;background:#D5DAE0;"></span>
+    <span style="flex:none;font-size:13px;font-weight:700;line-height:1.4;text-transform:uppercase;letter-spacing:.06em;color:#666E78;">Díly podle výrobce</span>
+    <span style="flex:1;height:1px;background:#D5DAE0;"></span>
+  </div>
+  <div class="vk-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;">
+    <sc-for list="{{ brandCats }}" as="b" hint-placeholder-count="4">
+      <dc-import name="KategorickaDlazdice" cat="{{ b }}" variant="{{ tileVariant }}" media="{{ tileMedia }}" hint-size="100%,88px"></dc-import>
+    </sc-for>
+  </div>
+</sc-if>
+</sc-if>
+<sc-if value="{{ accOn }}" hint-placeholder-val="">
+  <button type="button" class="a11y-i vk-acchead" aria-expanded="{{ catsExpanded }}" aria-controls="vk-acc-cats" onClick="{{ toggleAcc }}" style="width:100%;min-height:48px;padding:0 16px;background:#FFFFFF;border-radius:8px;display:flex;align-items:center;gap:12px;">
+    <span aria-hidden="true" style="flex:none;display:flex;color:#1E5AA8;"><dc-import name="Ikony" icon-name="layout-grid" size="24" hint-size="24px,24px"></dc-import></span>
+    <span style="flex:1;min-width:0;font-size:16px;font-weight:700;line-height:1.3;color:#15181C;text-align:left;">{{ accLabel }}</span>
+    <span style="flex:none;font-size:13px;font-weight:400;color:#666E78;">{{ catsCountText }}</span>
+    <span aria-hidden="true" style="{{ catsChevronStyle }}"><dc-import name="Ikony" icon-name="chevron-down" size="24" hint-size="24px,24px"></dc-import></span>
+  </button>
+  <sc-if value="{{ catsMounted }}" hint-placeholder-val="">
+    <div class="vk-acc" data-shown="{{ catsShown }}"><div>
+    <div id="vk-acc-cats" class="vk-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;padding-top:12px;">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+        <dc-import name="KategorickaDlazdice" cat="{{ c }}" variant="{{ tileVariant }}" media="{{ tileMedia }}" hint-size="100%,240px"></dc-import>
+      </sc-for>
+    </div>
+    </div></div>
+  </sc-if>
+  <sc-if value="{{ showBrands }}" hint-placeholder-val="{{ true }}">
+    <button type="button" class="a11y-i vk-acchead" aria-expanded="{{ brandsExpanded }}" aria-controls="vk-acc-brands" onClick="{{ toggleBrands }}" style="width:100%;min-height:48px;padding:0 16px;margin-top:16px;background:#FFFFFF;border-radius:8px;display:flex;align-items:center;gap:12px;">
+      <span aria-hidden="true" style="flex:none;display:flex;color:#1E5AA8;"><dc-import name="Ikony" icon-name="tag" size="24" hint-size="24px,24px"></dc-import></span>
+      <span style="flex:1;min-width:0;font-size:16px;font-weight:700;line-height:1.3;color:#15181C;text-align:left;">{{ brandsLabel }}</span>
+      <span style="flex:none;font-size:13px;font-weight:400;color:#666E78;">{{ brandsCountText }}</span>
+      <span aria-hidden="true" style="{{ brandsChevronStyle }}"><dc-import name="Ikony" icon-name="chevron-down" size="24" hint-size="24px,24px"></dc-import></span>
+    </button>
+    <sc-if value="{{ brandsMounted }}" hint-placeholder-val="">
+      <div class="vk-acc" data-shown="{{ brandsShown }}"><div>
+      <div id="vk-acc-brands" class="vk-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;padding-top:12px;">
+        <sc-for list="{{ brandCats }}" as="b" hint-placeholder-count="4">
+          <dc-import name="KategorickaDlazdice" cat="{{ b }}" variant="{{ tileVariant }}" media="{{ tileMedia }}" hint-size="100%,88px"></dc-import>
+        </sc-for>
+      </div>
+      </div></div>
+    </sc-if>
+  </sc-if>
+</sc-if>
+</sc-if>
+<sc-if value="{{ showDocs }}" hint-placeholder-val="">
+  <div style="display:flex;flex-direction:column;gap:5px;padding:2px 4px;margin-top:16px;">
+    <div style="font-size:13px;line-height:1.5;color:#0B6937;"><strong>Kdy:</strong> rozcestník kategorií na výpisu. Komponenta nese <strong>jen mřížku</strong> (auto-fit minmax 280, gap 8) a v ní <code>KategorickaDlazdice</code>. Layout <code>kompaktni-akordeon</code> (V1b) zabalí mřížku kategorií i výrobců do akordeonu pod hranicí 549 px (pásma XS a XXS); nad ní se chová shodně s <code>kompaktni</code>.</div>
+    <div style="font-size:13px;line-height:1.5;color:#C5232B;"><strong>Kdy ne:</strong> nepřidávat nadpis, obal, padding ani pozadí — vnější mezery drží stránka. Drill-down do podkategorií zatím žije na stránce, ne tady. Komponenta drží jediný vlastní stav — zabaleno/rozbaleno v layoutu <code>kompaktni-akordeon</code>. Je čistě prezentační. Který uzel stromu je otevřený dál drží stránka.</div>
+    <div style="font-size:13px;line-height:1.5;color:#5A626C;"><strong>Kontrakt:</strong> <code>categories</code> jsou data bez funkcí — <code>{ name, count, subs:[{ name, count }] }</code>. Callbacky se posílají zvlášť jako <code>onOpenCategory(name)</code> a <code>onPickSub(catName, subName)</code>; per-položkové handlery si komponenta vyrábí sama.</div>
+  </div>
+</sc-if>
+<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:700},&quot;media&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fotky&quot;,&quot;ikony&quot;],&quot;default&quot;:&quot;fotky&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dlazdice&quot;,&quot;kompaktni&quot;,&quot;kompaktni-akordeon&quot;],&quot;default&quot;:&quot;kompaktni&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;accordionLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Všechny kategorie&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;accordionOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;brandsAccordionLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Díly podle výrobce&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;topOnly&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Nejhledanější&quot;},&quot;nejhledanejsi&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Nejhledanější&quot;},&quot;showGuideChip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;topLogos&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{name:string,logo?:string,href?:string}[]&quot;,&quot;default&quot;:null,&quot;section&quot;:&quot;Nejhledanější&quot;},&quot;topAria&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Nejhledanější kategorie&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Nejhledanější&quot;},&quot;topSearched&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{kind:string,label:string,iconName?:string,href?:string}[]&quot;,&quot;default&quot;:null,&quot;section&quot;:&quot;Nejhledanější&quot;},&quot;categories&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{name:string,count:number,subs:{name:string,count:number}[]}[]&quot;,&quot;default&quot;:null},&quot;onOpenCategory&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(name:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;onPickSub&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(catName:string,subName:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+class Component extends DCLogic {
+  // plynulé otevření i zavření: prvek zůstane v DOM po dobu odjezdu (ms), data-shown řídí CSS přechod
+  fade(key, open, ms){ ms = ms || 200; const F = this._fx || (this._fx = {}); const f = F[key] || (F[key] = { m:false, s:false, t:null, r:false, w:false });
+    f.w = !!open;
+    if (open){ if (f.t){ clearTimeout(f.t); f.t = null; } if (!f.m){ f.m = true; f.s = false; }
+      if (!f.s && !f.r){ f.r = true; requestAnimationFrame(()=>requestAnimationFrame(()=>{ f.r = false; if (f.w && !f.s){ f.s = true; this.forceUpdate(); } })); } }
+    else if (f.m){ f.s = false; if (!f.t) f.t = setTimeout(()=>{ f.t = null; if (!f.w){ f.m = false; this.forceUpdate(); } }, ms); }
+    return { mounted: f.m, shown: f.s ? 'true' : 'false' }; }
+
+  DEMO_BRANDS = [
+    { name:'Sport Jacht', count:196 }, { name:'Agados', count:274 },
+    { name:'KNOTT', count:486 }, { name:'AL-KO', count:612 }
+  ];
+  DEMO = [
+    { name:'Akce a slevy %', sale:true, count:184, subs:[] },
+    { name:'Elektro, svítilny, odrazky', image:'uploads/elektro-a-osvetleni.jpg', count:474, subs:[{name:'Zadní světla',count:146},{name:'Poziční a obrysová světla',count:98},{name:'Kabeláž a zásuvky',count:114},{name:'Odrazky',count:52}] },
+    { name:'Pneu, kola, disky', image:'uploads/kola-a-pneumatiky.jpg', count:296, subs:[{name:'Pneumatiky s diskem',count:108},{name:'Samostatné disky',count:64},{name:'Pneumatiky',count:82},{name:'Šrouby a matice kol',count:42}] },
+    { name:'Spojovací zařízení a zámky', image:'uploads/kulove-tazne-spojky.jpg', count:388, subs:[{name:'Kulové spojky',count:121},{name:'Kloubové spojky',count:44},{name:'Oje a příčníky',count:59},{name:'Zabezpečení proti krádeži',count:63}] },
+    { name:'Plynové vzpěry', image:'uploads/plynova-vzpera-mala-o.jpg', count:34, subs:[] },
+    { name:'Nájezdové brzdy a díly', image:'uploads/celisti-brzdove-knott-200x50-mala-sada-na-2-kola.jpg', count:212, subs:[{name:'Nájezdové brzdy',count:94},{name:'Lanka a tyčoví',count:66}] },
+    { name:'Nápravy kompletní', image:'uploads/napravy-a-brzdy.jpg', count:76, subs:[{name:'Nebrzděné nápravy',count:38},{name:'Brzděné nápravy',count:38}] },
+    { name:'Díly náprav', image:'uploads/celisti.jpg', count:188, subs:[{name:'Brzdové čelisti a obložení',count:96},{name:'Náboje kol',count:52},{name:'Ložiska a gufera',count:40}] },
+    { name:'Nájezdy', image:'uploads/najezdy.jpg', count:28, subs:[] },
+    { name:'Opěrná kolečka, nohy, držáky', image:'uploads/kolecka-1.jpg', count:132, subs:[{name:'Opěrná kolečka',count:64},{name:'Podpěrné nohy',count:48},{name:'Držáky',count:20}] },
+    { name:'Blatníky a zástěrky', image:'uploads/blatniky.jpg', count:134, subs:[{name:'Blatníky',count:98},{name:'Zástěrky',count:36}] },
+    { name:'Bočnice, uzávěry, panty', image:'uploads/bocnice.jpg', count:118, subs:[{name:'Bočnice',count:58},{name:'Uzávěry a panty',count:60}] },
+    { name:'Zabezpečení nákladu', image:'uploads/zabezpeceni_nakladu.jpg', count:72, subs:[] },
+    { name:'Navijáky a příslušenství', image:'uploads/navijaky-a-kladky.jpg', count:58, subs:[{name:'Navijáky',count:34},{name:'Kladky a lana',count:24}] },
+    { name:'Konstrukční díly', image:'uploads/konstrukcni_dily.jpg', count:164, subs:[] },
+    { name:'Plachty a příslušenství', image:'uploads/plachty.jpg', count:96, subs:[{name:'Plachty',count:52},{name:'Konstrukce',count:44}] },
+    { name:'Boxy na nářadí a držáky', image:'uploads/box-naradi.jpg', count:44, subs:[] },
+    { name:'Klíny a držáky', image:'uploads/kliny.jpg', count:38, subs:[] },
+    { name:'Hydraulika přívěsů', image:'uploads/hydraulika.jpg', count:52, subs:[] },
+    { name:'Doplňky k přívěsům', image:'uploads/doplnky.jpg', count:126, subs:[] },
+    { name:'Pomůcky pro údržbu', image:'uploads/pomucky.jpg', count:64, subs:[] }
+  ];
+  // první je odkaz do poradny (accent + ikona), dál nejnavštěvovanější podkategorie
+  TOP = [
+    { kind:'guide', label:'Schéma zapojení zásuvky 7 / 13 pin', iconName:'book', href:'#poradna-zasuvka' },
+    { kind:'secondary', label:'Plynové vzpěry',       href:'#plynove-vzpery' },
+    { kind:'secondary', label:'Nájezdové brzdy',      href:'#najezdove-brzdy' },
+    { kind:'secondary', label:'Kabeláž a zásuvky',    href:'#kabelaz-a-zasuvky' },
+    { kind:'secondary', label:'Pneumatiky s diskem',  href:'#pneumatiky-s-diskem' }
+  ];
+  // drží se defaultu v data-props; prázdný prop layout znamená „podle komponenty“
+  DEFAULT_LAYOUT = 'kompaktni';
+  state = { narrow: (typeof window!=='undefined' && window.matchMedia) ? window.matchMedia('(max-width:549px)').matches : false, accTick:0 };
+  componentDidMount(){
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    this._mq = window.matchMedia('(max-width:549px)');
+    this._sync = ()=>{ if (this._mq.matches !== this.state.narrow) this.setState({ narrow:this._mq.matches }); };
+    this._mq.addEventListener('change', this._sync);
+    this._sync();
+  }
+  componentWillUnmount(){ if (this._sync) this._mq.removeEventListener('change', this._sync); }
+  plural(n, a, b, c){ return n===1 ? a : (n>=2 && n<=4 ? b : c); }
+  renderVals(){
+    const given = this.props.categories;
+    const demo = !given || !given.length;
+    const src = demo ? this.DEMO : given;
+    const open = this.props.onOpenCategory || function(){};
+    const pick = this.props.onPickSub || function(){};
+    const openBrand = this.props.onOpenBrand || function(){};
+    const cats = src.map(k=>({
+      name: k.name,
+      countText: k.countText,
+      count: k.count,
+      image: k.image,
+      icon: k.icon,
+      sale: !!k.sale,
+      href: k.href,
+      subs: (k.subs||[]).map(s=>({ name: s.name, count: s.count, href: s.href, onPick: ()=>pick(k.name, s.name) })),
+      onOpen: ()=>open(k.name)
+    }));
+    const brandSrc = (this.props.brandCategories && this.props.brandCategories.length)
+      ? this.props.brandCategories : (demo ? this.DEMO_BRANDS : []);
+    const brandCats = brandSrc.map(b=>({
+      name: b.name, count: b.count, image: b.image, href: b.href, subs: [],
+      onOpen: ()=>openBrand(b.name)
+    }));
+    // odkaz do poradny patří až do podkategorie, kam se váže obsahem — na hlavní kategorii se skryje
+    const topItems = ((this.props.topSearched && this.props.topSearched.length)
+      ? this.props.topSearched
+      : this.TOP).filter(it => it.kind !== 'guide' || this.props.showGuideChip === true);
+    const P = this.props;
+    // Nejhledanější: místo chipů mohou přijít loga (NEJ3) — {name, logo?, href}
+    const topLogoItems = (Array.isArray(P.topLogos) ? P.topLogos : []).map(l=>({ name:l.name, logo:l.logo, href:l.href || '#', hasLogo: !!l.logo, noLogo: !l.logo }));
+    const layout = P.layout || this.DEFAULT_LAYOUT;
+    const accLayout = layout === 'kompaktni-akordeon';
+    const accOn = accLayout && !!this.state.narrow;
+    const key = String(P.accordionLabel||'') + '|' + String(!!P.accordionOpen);
+    if (this._accKey !== key){ this._accKey = key; this._accOpen = !!P.accordionOpen; }
+    if (this._brKey !== key){ this._brKey = key; this._brOpen = false; }
+    const chev = (open)=>'flex:none;display:flex;color:#5189CC;transition:transform .25s ease;'+(open?'transform:rotate(180deg);':'');
+    // v režimu topOnly jde o výřez pro stránku, ne o samostatný náhled — dokumentace se nevykresluje
+    return {
+      topLogoItems, showTopLogos: topLogoItems.length > 0, showTopChips: topLogoItems.length === 0,
+      topLabel: P.topLabel || 'Nejhledanější',
+      topAria: P.topAria || 'Nejhledanější kategorie', cats, brandCats, showBrands: brandCats.length > 0, showDocs: demo && this.props.topOnly !== true,
+      tileVariant: (layout === 'dlazdice' ? 'standard' : 'kompaktni'),
+      tileMedia: (P.media === 'ikony' || P.media === 'zadne') ? P.media : 'fotky',
+      showTop: (P.nejhledanejsi ?? true) && topItems.length > 0, topItems,
+      // topOnly: jen sekce Nejhledanější (stránka si ji umístí vedle nadpisu)
+      showRest: P.topOnly !== true,
+      topMargin: P.topOnly === true ? '0' : '24px',
+      accOn, accOff: !accOn,
+      accLabel: P.accordionLabel || 'Všechny kategorie',
+      brandsLabel: P.brandsAccordionLabel || 'Díly podle výrobce',
+      catsOpen: this._accOpen, brandsOpen: this._brOpen,
+      ...(()=>{ const a = this.fade('cats', this._accOpen, 250), b = this.fade('brands', this._brOpen, 250); return { catsMounted: a.mounted, catsShown: a.shown, brandsMounted: b.mounted, brandsShown: b.shown }; })(),
+      catsExpanded: this._accOpen ? 'true' : 'false',
+      brandsExpanded: this._brOpen ? 'true' : 'false',
+      catsCountText: cats.length + ' ' + this.plural(cats.length,'kategorie','kategorie','kategorií'),
+      brandsCountText: brandCats.length + ' ' + this.plural(brandCats.length,'výrobce','výrobci','výrobců'),
+      catsChevronStyle: chev(this._accOpen), brandsChevronStyle: chev(this._brOpen),
+      toggleAcc: ()=>{ this._accOpen = !this._accOpen; this.setState({ accTick:(this.state.accTick||0)+1 }); },
+      toggleBrands: ()=>{ this._brOpen = !this._brOpen; this.setState({ accTick:(this.state.accTick||0)+1 }); } };
+  }
+}
+
+
+// DebugBar: prop debug -> šablona
+(function(){ const rv = Component.prototype.renderVals;
+  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; if (v.debug === undefined) v.debug = this.props.debug ?? true; return v; }; })();
+</script>
+</body>
+</html>

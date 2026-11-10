@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0!important;padding:0!important;}
+  #dc-root{margin:0!important;padding:0!important;width:100%!important;
+           max-width:none!important;border:0!important;}
+  #dc-root>.sc-host{margin:0!important;padding:0!important;width:100%!important;}
+</style>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  .a11y-i{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-align:inherit;line-height:inherit;text-decoration:none;cursor:pointer;}
+  .a11y-i:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+
+  html,body{margin:0;background:#F7F9FB;font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;}
+  body{padding:24px;}
+  /* M a níž: cena v boxu větší, aby ladila s 28px ikonami mobilní hlavičky */
+  @media (max-width:999px){ .ks-price{font-size:16px !important;} }
+  .ks-box, .ks-mob{transition:border-color .12s;} .ks-box:hover, .ks-mob:hover{border-color:#5189CC !important;}
+  .ks-cur{transition:background .12s;} .ks-cur:hover{background:#F2F4F7 !important;border-radius:0 7px 7px 0;}
+  .ks-curitem{transition:background .12s;} .ks-curitem:hover{background:#F2F4F7 !important;}
+  .ks-cartbtn .ks-price{transition:color .12s;} .ks-cartbtn:hover .ks-price{color:#1E5AA8 !important;}
+  .ks-cartbtn:hover{border-radius:8px 0 0 8px;}
+  .ks-mob{transition:background .12s;} .ks-mob:hover{background:#F2F4F7 !important;}
+  .ks-dd{transition:opacity .15s ease, transform .15s ease;} .ks-dd[data-shown="false"]{opacity:0;transform:translateY(-4px);pointer-events:none;}
+  @media (prefers-reduced-motion:reduce){ .ks-dd{transition:none !important;} }
+  /* M a níž (kde je hamburger): měnu si zákazník přepíná v mobilním menu */
+  @media (max-width:999px){ .ks-sep, .ks-curwrap{display:none !important;} }
+  .ks-mob{display:none;}
+  @media (max-width:549px){ .ks-box{display:none !important;} .ks-mob{display:flex !important;} }
+  .ks-f-desk .ks-box, .ks-force-desk .ks-box{display:inline-flex !important;} .ks-f-desk .ks-mob, .ks-force-desk .ks-mob{display:none !important;}
+  .ks-f-mob .ks-box, .ks-force-mob .ks-box{display:none !important;} .ks-f-mob .ks-mob, .ks-force-mob .ks-mob{display:flex !important;}
+</style>
+<script src="./mena.js"></script>
+</helmet>
+<sc-if value="{{ single }}" hint-placeholder-val="">
+  <div class="{{ viewCls }}" style="display:inline-flex;align-items:center;">
+    <div class="ks-box" style="position:relative;display:inline-flex;align-items:center;min-height:44px;border:0;border-radius:8px;background:#fff;color:#15181C;">
+      <button type="button" class="a11y-i ks-cartbtn" onClick="{{ onClick }}" onMouseEnter="{{ onHoverEnter }}" onMouseLeave="{{ onHoverLeave }}" aria-label="{{ cartAria }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;cursor:pointer;">
+        <span style="position:relative;display:flex;align-items:center;color:#1E5AA8;"><dc-import name="Ikony" icon-name="shopping-cart" size="24" hint-size="24px,24px"></dc-import><sc-if value="{{ showCount }}" hint-placeholder-val=""><span aria-hidden="true" style="position:absolute;top:-4px;right:-8px;min-width:16px;width:16px;height:16px;border-radius:999px;background:#C5232B;color:#fff;font-size:10px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;">{{ count }}</span></sc-if></span>
+        <span class="ks-price" style="font-size:14px;font-weight:700;color:#15181C;white-space:nowrap;">{{ label }}</span>
+      </button>
+      <sc-if value="{{ showCur }}" hint-placeholder-val="{{ true }}">
+        <span class="ks-sep" aria-hidden="true" style="flex:none;width:1px;align-self:stretch;margin:8px 0;background:#D5DAE0;"></span>
+        <div class="ks-curwrap" style="position:relative;flex:none;">
+          <button type="button" class="a11y-i ks-cur" aria-haspopup="listbox" aria-expanded="{{ curExpanded }}" aria-label="{{ curAria }}" onClick="{{ toggleCur }}" style="display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 10px 0 12px;cursor:pointer;"><img src="{{ langFlag }}" alt="" aria-hidden="true" style="display:block;flex:none;height:16px;width:25px;border-radius:4px;"><span aria-hidden="true" style="{{ curChevronStyle }}"><dc-import name="Ikony" icon-name="chevron-down" size="18" hint-size="18px,18px"></dc-import></span></button>
+          <sc-if value="{{ curMounted }}" hint-placeholder-val="">
+            <div class="ks-dd" data-shown="{{ curShown }}" role="listbox" aria-label="Jazyk a měna" style="position:absolute;top:calc(100% + 8px);right:0;min-width:132px;padding:4px;background:#fff;border-radius:8px;box-shadow:0 10px 30px rgba(20,30,45,.14);z-index:90;">
+              <sc-for list="{{ langItems }}" as="c" hint-placeholder-count="2">
+                <button type="button" class="a11y-i ks-curitem" role="option" aria-selected="{{ c.selected }}" onClick="{{ c.onClick }}" style="{{ c.style }}"><img src="{{ c.flag }}" alt="" aria-hidden="true" style="display:block;flex:none;height:16px;width:25px;border-radius:4px;">{{ c.code }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+    <button type="button" class="ks-mob a11y-i" onClick="{{ onClick }}" aria-label="{{ cartAria }}" style="position:relative;align-items:center;justify-content:center;box-sizing:border-box;width:44px;height:44px;border:0;border-radius:8px;background:transparent;color:#1E5AA8;cursor:pointer;">
+      <span style="position:relative;display:flex;align-items:center;">
+        <dc-import name="Ikony" icon-name="shopping-cart" size="24" hint-size="24px,24px"></dc-import>
+        <sc-if value="{{ showCount }}" hint-placeholder-val=""><span aria-hidden="true" style="position:absolute;top:-4px;right:-8px;min-width:16px;width:16px;height:16px;border-radius:999px;background:#C5232B;color:#fff;font-size:10px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;">{{ count }}</span></sc-if>
+      </span>
+    </button>
+  </div>
+</sc-if>
+<sc-if value="{{ gallery }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:16px;max-width:560px;">
+  <div style="background:#fff;border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:24px;">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#666E78;">Desktop (≥ 550 px)</span>
+      <div class="ks-f-desk" style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;">
+        <sc-for list="{{ states }}" as="it" hint-placeholder-count="3">
+          <div class="ks-box" style="position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:8px;background:#fff;color:#15181C;">
+      <span style="position:relative;display:flex;align-items:center;color:#1E5AA8;"><dc-import name="Ikony" icon-name="shopping-cart" size="24" hint-size="24px,24px"></dc-import><sc-if value="{{ it.showCount }}" hint-placeholder-val=""><span style="position:absolute;top:-4px;right:-8px;min-width:16px;width:16px;height:16px;border-radius:999px;background:#C5232B;color:#fff;font-size:10px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;">{{ it.count }}</span></sc-if></span>
+      <span style="font-size:14px;font-weight:700;color:#15181C;white-space:nowrap;">{{ it.label }}</span>
+    </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#666E78;">Mobil XS a XXS (&lt; 550 px)</span>
+      <div class="ks-f-mob" style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;">
+        <sc-for list="{{ states }}" as="it" hint-placeholder-count="3">
+          <div class="ks-mob" style="position:relative;align-items:center;justify-content:center;box-sizing:border-box;width:44px;height:44px;border:0;border-radius:8px;background:transparent;color:#1E5AA8;">
+      <span style="position:relative;display:flex;align-items:center;">
+        <dc-import name="Ikony" icon-name="shopping-cart" size="24" hint-size="24px,24px"></dc-import>
+        <sc-if value="{{ it.showCount }}" hint-placeholder-val=""><span style="position:absolute;top:-4px;right:-8px;min-width:16px;width:16px;height:16px;border-radius:999px;background:#C5232B;color:#fff;font-size:10px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;">{{ it.count }}</span></sc-if>
+      </span>
+    </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:5px;padding:2px 4px;">
+    <div style="font-size:13px;line-height:1.5;color:#0B6937;"><strong>Kdy:</strong> v hlavičce jako vstup do košíku. Bez rámečku na všech šířkách. Desktop: výška 44, ikona + částka bez DPH, čítač 16×16 v pravém horním rohu ikony (u prázdného košíku popisek „Košík" a bez čítače). XS a XXS: jen ikona (klikací plocha 44×44) se stejným čítačem, jen když počet &gt; 0.</div>
+    <div style="font-size:13px;line-height:1.5;color:#C5232B;"><strong>Kdy ne:</strong> rámeček kolem košíku nevracet; čítač nedělat větší než 16×16; nezobrazovat cenu s DPH ani popisek „s DPH"; čítač neukazovat při nule.</div>
+  </div>
+</div>
+</sc-if>
+<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;},&quot;$preview&quot;:{&quot;width&quot;:520,&quot;height&quot;:190},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;desktop&quot;,&quot;mobil&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Náhled&quot;},&quot;defaultCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Výchozí stav&quot;},&quot;defaultTotal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:42556,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Výchozí stav&quot;},&quot;count&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:10,&quot;tsType&quot;:&quot;number&quot;},&quot;total&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:42440,&quot;tsType&quot;:&quot;number&quot;},&quot;onClick&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;function&quot;,&quot;default&quot;:null}}">
+// Výchozí stav košíku — jediné místo, odkud ho dědí i Hlavicka.
+const CART_DEFAULT = { count: 2, total: 42556 };
+
+class Component extends DCLogic {
+  state = { curOpen:false };
+  // plynulé otevření i zavření: prvek zůstane v DOM po dobu odjezdu (ms), data-shown řídí CSS přechod
+  fade(key, open, ms){ ms = ms || 200; const F = this._fx || (this._fx = {}); const f = F[key] || (F[key] = { m:false, s:false, t:null, r:false, w:false });
+    f.w = !!open;
+    if (open){ if (f.t){ clearTimeout(f.t); f.t = null; } if (!f.m){ f.m = true; f.s = false; }
+      if (!f.s && !f.r){ f.r = true; requestAnimationFrame(()=>requestAnimationFrame(()=>{ f.r = false; if (f.w && !f.s){ f.s = true; this.forceUpdate(); } })); } }
+    else if (f.m){ f.s = false; if (!f.t) f.t = setTimeout(()=>{ f.t = null; if (!f.w){ f.m = false; this.forceUpdate(); } }, ms); }
+    return { mounted: f.m, shown: f.s ? 'true' : 'false' }; }
+
+  componentDidMount(){
+    this._away = (e)=>{ if(!this.state.curOpen) return; const n=e.target; if(n&&n.closest&&n.closest('.ks-cur, [role="listbox"]')) return; this.setState({ curOpen:false }); };
+    this._esc = (e)=>{ if(e.key==='Escape' && this.state.curOpen) this.setState({ curOpen:false }); };
+    document.addEventListener('click', this._away);
+    document.addEventListener('keydown', this._esc);
+  }
+  componentWillUnmount(){
+    document.removeEventListener('click', this._away);
+    document.removeEventListener('keydown', this._esc);
+  }
+  fmt(n){
+    const M = typeof window !== 'undefined' ? window.VappMena : null;
+    const cur = this.props.currency || 'CZK';
+    if (M) return M.format(n, cur);
+    return String(Math.round(n||0)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00A0') + ' Kč';
+  }
+  cell(count,total){
+    return { count, showCount: count>0,
+      label: count>0 ? this.fmt(total) : 'Košík',
+      labelStyle: count>0 ? 'font-size:13px;font-weight:700;color:#15181C;' : 'font-size:13px;font-weight:600;color:#5A626C;' };
+  }
+  renderVals(){
+    const P = this.props;
+    const embedded = P.count!==undefined || P.total!==undefined || typeof P.onClick==='function';
+    if (embedded){
+      const has = (v)=> v!==undefined && v!==null && v!=='';
+      const count = has(P.count) ? (parseInt(P.count,10)||0) : (has(P.defaultCount) ? (parseInt(P.defaultCount,10)||0) : CART_DEFAULT.count);
+      const total = has(P.total) ? (parseInt(P.total,10)||0) : (has(P.defaultTotal) ? (parseInt(P.defaultTotal,10)||0) : CART_DEFAULT.total);
+      const c = this.cell(count,total);
+      const v = P.view || 'auto';
+      const viewCls = v==='desktop' ? 'ks-force-desk' : (v==='mobil' ? 'ks-force-mob' : '');
+      const codes = Array.isArray(P.currencies) && P.currencies.length ? P.currencies : ['CZK','EUR'];
+      const cur = P.currency || codes[0];
+      const setCur = typeof P.onCurrencyChange === 'function' ? P.onCurrencyChange : null;
+      const curOpen = !!this.state.curOpen;
+      return { single:true, gallery:false, viewCls, count:c.count, showCount:c.showCount, label:c.label, labelStyle:c.labelStyle,
+        cartAria: count>0 ? ('Košík — ' + count + (count===1?' položka':(count<5?' položky':' položek'))) : 'Košík — prázdný',
+        onClick:P.onClick||(()=>{}),
+        // náhled košíku se otevírá jen nad cenou — nad přepínačem měny ne, jinak se měna nedá vybrat
+        onHoverEnter: typeof P.onHoverEnter === 'function' ? P.onHoverEnter : (()=>{}),
+        onHoverLeave: typeof P.onHoverLeave === 'function' ? P.onHoverLeave : (()=>{}),
+        showCur: !!setCur && codes.length > 1,
+        curCode: cur, curOpen,
+      ...(()=>{ const x = this.fade('cur', curOpen, 150); return { curMounted: x.mounted, curShown: x.shown }; })(), curExpanded: curOpen ? 'true' : 'false',
+        // přepínač jazyka: CZ = ceny v Kč, SK = ceny v EUR
+        curAria: 'Jazyk: ' + (cur === 'EUR' ? 'SK' : 'CZ'),
+        langFlag: cur === 'EUR' ? './vapp-flag-sk.svg' : './vapp-flag-cz.svg',
+        langItems: [['CZ','CZK','./vapp-flag-cz.svg'],['SK','EUR','./vapp-flag-sk.svg']].map(([code,curCode,flag])=>({
+          code, flag, selected: curCode === cur ? 'true' : 'false',
+          style: 'width:100%;min-height:44px;padding:0 12px;border-radius:6px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:'
+            + (curCode === cur ? '700' : '500') + ';color:' + (curCode === cur ? '#1E5AA8' : '#5A626C') + ';cursor:pointer;',
+          onClick: ()=>{ this.setState({ curOpen:false }); if (setCur) setCur(curCode); }
+        })),
+        curChevronStyle: 'display:inline-flex;flex:none;color:#5189CC;transition:transform .12s ease;' + (curOpen ? 'transform:rotate(180deg);' : ''),
+        toggleCur: ()=>this.setState({ curOpen: !this.state.curOpen }),
+        currencyItems: codes.map(code=>({
+          code, selected: code === cur ? 'true' : 'false',
+          style: 'width:100%;min-height:44px;padding:0 12px;border-radius:6px;display:flex;align-items:center;font-size:14px;font-weight:'
+            + (code === cur ? '700' : '500') + ';color:' + (code === cur ? '#1E5AA8' : '#5A626C') + ';cursor:pointer;',
+          onClick: ()=>{ this.setState({ curOpen:false }); if (setCur) setCur(code); }
+        })) };
+    }
+    return { single:false, gallery:true, showCur:false, states:[ this.cell(0,0), this.cell(1,397), this.cell(12,14990) ] };
+  }
+}
+
+
+// DebugBar: prop debug -> šablona
+(function(){ const rv = Component.prototype.renderVals;
+  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; if (v.debug === undefined) v.debug = this.props.debug ?? true; return v; }; })();
+</script>
+</body>
+</html>

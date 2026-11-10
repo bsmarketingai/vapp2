@@ -1,0 +1,541 @@
+{
+  "v": 1,
+  "mode": "omelette",
+  "root": "project/",
+  "title": "Vapp.cz",
+  "entry": "rozcestnik.dc.html",
+  "pages": [
+    {
+      "path": "rozcestnik.dc.html",
+      "title": "rozcestnik",
+      "kind": "page"
+    },
+    {
+      "path": "baglog2.dc.html",
+      "title": "baglog2",
+      "kind": "page"
+    },
+    {
+      "path": "BasketPopup.dc.html",
+      "title": "BasketPopup",
+      "kind": "component"
+    },
+    {
+      "path": "Hlavicka.dc.html",
+      "title": "Hlavicka",
+      "kind": "component"
+    },
+    {
+      "path": "kosik-dekujeme.dc.html",
+      "title": "kosik-dekujeme",
+      "kind": "page"
+    },
+    {
+      "path": "kosik-krok3.dc.html",
+      "title": "kosik-krok3",
+      "kind": "page"
+    },
+    {
+      "path": "kosik-krok2.dc.html",
+      "title": "kosik-krok2",
+      "kind": "page"
+    },
+    {
+      "path": "Select.dc.html",
+      "title": "Select",
+      "kind": "component"
+    },
+    {
+      "path": "kosik-krok1.dc.html",
+      "title": "kosik-krok1",
+      "kind": "page"
+    },
+    {
+      "path": "Tlacitko.dc.html",
+      "title": "Tlacitko",
+      "kind": "component"
+    },
+    {
+      "path": "Ikony.dc.html",
+      "title": "Ikony",
+      "kind": "component"
+    },
+    {
+      "path": "index.html",
+      "title": "VAPP.cz — prototyp",
+      "kind": "plain"
+    },
+    {
+      "path": "servis.dc.html",
+      "title": "servis",
+      "kind": "page"
+    },
+    {
+      "path": "vysledky-hledani.dc.html",
+      "title": "vysledky-hledani",
+      "kind": "page"
+    },
+    {
+      "path": "Vyhledavani.dc.html",
+      "title": "Vyhledavani",
+      "kind": "component"
+    },
+    {
+      "path": "pujcovna.dc.html",
+      "title": "pujcovna",
+      "kind": "page"
+    },
+    {
+      "path": "poptat-produkt.dc.html",
+      "title": "poptat-produkt",
+      "kind": "page"
+    },
+    {
+      "path": "onas.dc.html",
+      "title": "onas",
+      "kind": "page"
+    },
+    {
+      "path": "clanek-tachograf.dc.html",
+      "title": "clanek-tachograf",
+      "kind": "page"
+    },
+    {
+      "path": "RozcestnikSekci.dc.html",
+      "title": "RozcestnikSekci",
+      "kind": "component"
+    },
+    {
+      "path": "Recenze.dc.html",
+      "title": "Recenze",
+      "kind": "component"
+    },
+    {
+      "path": "ProduktovyKarusel.dc.html",
+      "title": "ProduktovyKarusel",
+      "kind": "component"
+    },
+    {
+      "path": "ProduktovaKarta.dc.html",
+      "title": "ProduktovaKarta",
+      "kind": "component"
+    },
+    {
+      "path": "PribehFirmy.dc.html",
+      "title": "PribehFirmy",
+      "kind": "component"
+    },
+    {
+      "path": "PoradnaBlok.dc.html",
+      "title": "PoradnaBlok",
+      "kind": "component"
+    },
+    {
+      "path": "PoptavkaPopup.dc.html",
+      "title": "PoptavkaPopup",
+      "kind": "component"
+    },
+    {
+      "path": "KartaClanku.dc.html",
+      "title": "KartaClanku",
+      "kind": "component"
+    },
+    {
+      "path": "HeroHomepage.dc.html",
+      "title": "HeroHomepage",
+      "kind": "component"
+    },
+    {
+      "path": "DesignSystemVAPP.dc.html",
+      "title": "DesignSystemVAPP",
+      "kind": "component"
+    },
+    {
+      "path": "privesy-V1.dc.html",
+      "title": "privesy-V1",
+      "kind": "page"
+    },
+    {
+      "path": "nahradnidily.dc.html",
+      "title": "nahradnidily",
+      "kind": "page"
+    },
+    {
+      "path": "detail-pujcovna.dc.html",
+      "title": "detail-pujcovna",
+      "kind": "page"
+    },
+    {
+      "path": "detail-prives-V1.dc.html",
+      "title": "detail-prives-V1",
+      "kind": "page"
+    },
+    {
+      "path": "detail-nahradnidil-V1.dc.html",
+      "title": "detail-nahradnidil-V1",
+      "kind": "page"
+    },
+    {
+      "path": "kontakty.dc.html",
+      "title": "kontakty",
+      "kind": "page"
+    },
+    {
+      "path": "VypisKategorii.dc.html",
+      "title": "VypisKategorii",
+      "kind": "component"
+    },
+    {
+      "path": "KartaServis.dc.html",
+      "title": "KartaServis",
+      "kind": "page"
+    },
+    {
+      "path": "KategorickaDlazdice.dc.html",
+      "title": "KategorickaDlazdice",
+      "kind": "component"
+    },
+    {
+      "path": "Diskuze.dc.html",
+      "title": "Diskuze",
+      "kind": "component"
+    },
+    {
+      "path": "Paticka.dc.html",
+      "title": "Paticka",
+      "kind": "component"
+    },
+    {
+      "path": "FiltrDrawer.dc.html",
+      "title": "FiltrDrawer",
+      "kind": "component"
+    },
+    {
+      "path": "DotazModal.dc.html",
+      "title": "DotazModal",
+      "kind": "component"
+    },
+    {
+      "path": "RezervaceModal.dc.html",
+      "title": "RezervaceModal",
+      "kind": "component"
+    },
+    {
+      "path": "LoginPopup.dc.html",
+      "title": "LoginPopup",
+      "kind": "component"
+    },
+    {
+      "path": "Kosik.dc.html",
+      "title": "Kosik",
+      "kind": "component"
+    },
+    {
+      "path": "FiltracniLista.dc.html",
+      "title": "FiltracniLista",
+      "kind": "component"
+    },
+    {
+      "path": "PoradenskyBlok.dc.html",
+      "title": "PoradenskyBlok",
+      "kind": "component"
+    },
+    {
+      "path": "MobilniMenu.dc.html",
+      "title": "MobilniMenu",
+      "kind": "component"
+    },
+    {
+      "path": "index.dc.html",
+      "title": "index",
+      "kind": "page"
+    },
+    {
+      "path": "Breadcrumb.dc.html",
+      "title": "Breadcrumb",
+      "kind": "component"
+    },
+    {
+      "path": "MegaMenu.dc.html",
+      "title": "MegaMenu",
+      "kind": "component"
+    },
+    {
+      "path": "PrezentacniLista.dc.html",
+      "title": "PrezentacniLista",
+      "kind": "component"
+    },
+    {
+      "path": "Usp.dc.html",
+      "title": "Usp",
+      "kind": "component"
+    },
+    {
+      "path": "privesy-V2.dc.html",
+      "title": "privesy-V2",
+      "kind": "page"
+    },
+    {
+      "path": "poradna.dc.html",
+      "title": "poradna",
+      "kind": "page"
+    },
+    {
+      "path": "nahradnidily-V3.dc.html",
+      "title": "nahradnidily-V3",
+      "kind": "page"
+    },
+    {
+      "path": "nahradnidily-V2.dc.html",
+      "title": "nahradnidily-V2",
+      "kind": "page"
+    },
+    {
+      "path": "nahradnidily-V1.dc.html",
+      "title": "nahradnidily-V1",
+      "kind": "page"
+    },
+    {
+      "path": "nahled-vlajky.html",
+      "title": "nahled-vlajky",
+      "kind": "plain"
+    },
+    {
+      "path": "_standalone-src.dc.html",
+      "title": "_standalone-src",
+      "kind": "page"
+    },
+    {
+      "path": "WireframeVypisProduktuVAPP.dc.html",
+      "title": "WireframeVypisProduktuVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "WireframeHomepageVAPP.dc.html",
+      "title": "WireframeHomepageVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "VyberVariant.dc.html",
+      "title": "VyberVariant",
+      "kind": "component"
+    },
+    {
+      "path": "UXBacklogVAPP.dc.html",
+      "title": "UXBacklogVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "Toast.dc.html",
+      "title": "Toast",
+      "kind": "component"
+    },
+    {
+      "path": "TestSirkyM.html",
+      "title": "Blok M — meridlo sirek",
+      "kind": "plain"
+    },
+    {
+      "path": "SluzbyBloky.dc.html",
+      "title": "SluzbyBloky",
+      "kind": "component"
+    },
+    {
+      "path": "Skladovost.dc.html",
+      "title": "Skladovost",
+      "kind": "component"
+    },
+    {
+      "path": "PrototypNahradniDilyVAPP.dc.html",
+      "title": "PrototypNahradniDilyVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "PlaygroundVAPP.dc.html",
+      "title": "PlaygroundVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "Paginace.dc.html",
+      "title": "Paginace",
+      "kind": "component"
+    },
+    {
+      "path": "LedIndikator.dc.html",
+      "title": "LedIndikator",
+      "kind": "component"
+    },
+    {
+      "path": "Kvantifikator.dc.html",
+      "title": "Kvantifikator",
+      "kind": "component"
+    },
+    {
+      "path": "KontrolaKomponentW.dc.html",
+      "title": "KontrolaKomponentW",
+      "kind": "page"
+    },
+    {
+      "path": "KontrolaKomponentT.dc.html",
+      "title": "KontrolaKomponentT",
+      "kind": "page"
+    },
+    {
+      "path": "KontaktBlok.dc.html",
+      "title": "KontaktBlok",
+      "kind": "component"
+    },
+    {
+      "path": "KomponentyVAPP.dc.html",
+      "title": "KomponentyVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "Hodnoceni.dc.html",
+      "title": "Hodnoceni",
+      "kind": "component"
+    },
+    {
+      "path": "HandoffVAPP.dc.html",
+      "title": "HandoffVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffSelect.dc.html",
+      "title": "HandoffSelect",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffProduktovaKarta.dc.html",
+      "title": "HandoffProduktovaKarta",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffNav.dc.html",
+      "title": "HandoffNav",
+      "kind": "component"
+    },
+    {
+      "path": "HandoffMobilniMenu.dc.html",
+      "title": "HandoffMobilniMenu",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffKvantifikator.dc.html",
+      "title": "HandoffKvantifikator",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffHlavicka.dc.html",
+      "title": "HandoffHlavicka",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffFiltrDrawer.dc.html",
+      "title": "HandoffFiltrDrawer",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffChip.dc.html",
+      "title": "HandoffChip",
+      "kind": "page"
+    },
+    {
+      "path": "HandoffAssets.dc.html",
+      "title": "HandoffAssets",
+      "kind": "page"
+    },
+    {
+      "path": "FormularovePrvky.dc.html",
+      "title": "FormularovePrvky",
+      "kind": "component"
+    },
+    {
+      "path": "DebugBar.dc.html",
+      "title": "DebugBar",
+      "kind": "component"
+    },
+    {
+      "path": "ControlBar.dc.html",
+      "title": "ControlBar",
+      "kind": "component"
+    },
+    {
+      "path": "Chip.dc.html",
+      "title": "Chip",
+      "kind": "component"
+    },
+    {
+      "path": "CenovyFiltr.dc.html",
+      "title": "CenovyFiltr",
+      "kind": "component"
+    },
+    {
+      "path": "Cena.dc.html",
+      "title": "Cena",
+      "kind": "component"
+    },
+    {
+      "path": "Canvas.dc.html",
+      "title": "Canvas",
+      "kind": "page"
+    },
+    {
+      "path": "Badge.dc.html",
+      "title": "Badge",
+      "kind": "component"
+    },
+    {
+      "path": "AuditKomponentVAPP.dc.html",
+      "title": "AuditKomponentVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "ArchivBarevnaPaletaVAPP.dc.html",
+      "title": "ArchivBarevnaPaletaVAPP",
+      "kind": "page"
+    },
+    {
+      "path": "uploads/DesignSystemVAPP.dc.html",
+      "title": "DesignSystemVAPP",
+      "kind": "page"
+    }
+  ],
+  "migratorVersion": "artifact-migrator (claude-design-backend ed667f7ac9c1)",
+  "createdAt": "2026-11-09T15:11:38.150Z",
+  "source": {
+    "v": 1,
+    "app": "claude-design",
+    "url": "https://claude.ai/design/p/a43c5936-dd6d-40cb-ab21-1d6a018192cc",
+    "projectId": "a43c5936-dd6d-40cb-ab21-1d6a018192cc",
+    "exportedAt": "2026-11-09T15:11:38.150Z"
+  },
+  "report": {
+    "itemsVersion": 2,
+    "pages": {
+      "total": 50,
+      "ok": 47,
+      "partial": 3,
+      "notMigrated": 0
+    },
+    "items": [
+      {
+        "kind": "external_blocked",
+        "path": "kontakty.dc.html",
+        "text": "https://www.google.cz/maps/dir//VAPP+-+přívěsy+a+příslušenství,+251+01+Popovičky/@49.9695313,14.6010162,13z"
+      },
+      {
+        "kind": "external_blocked",
+        "path": "pujcovna.dc.html",
+        "text": "https://www.google.cz/maps/dir//VAPP+-+p%C5%99%C3%ADv%C4%9Bsy,+p%C5%99%C3%ADslu%C5%A1enstv%C3%AD,+n%C3%A1hradn%C3%AD+d%C3%ADly+a+servis,+38,+251+01+Popovi%C4%8Dky/@49.9695313,14.6010162,13z\nhttps://www.openstreetmap.org/export/embed.html?bbox=14.5855%2C49.9525%2C14.6155%2C49.9675&amp;layer=mapnik&amp;marker=49.95996%2C14.60056"
+      },
+      {
+        "kind": "external_blocked",
+        "path": "servis.dc.html",
+        "text": "https://www.google.cz/maps/dir//VAPP+-+p%C5%99%C3%ADv%C4%9Bsy,+p%C5%99%C3%ADslu%C5%A1enstv%C3%AD,+n%C3%A1hradn%C3%AD+d%C3%ADly+a+servis,+38,+251+01+Popovi%C4%8Dky/@49.9695313,14.6010162,13z\nhttps://www.openstreetmap.org/export/embed.html?bbox=14.5855%2C49.9525%2C14.6155%2C49.9675&amp;layer=mapnik&amp;marker=49.95996%2C14.60056"
+      }
+    ],
+    "truncated": 0,
+    "truncatedLeftOut": 0
+  }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0!important;padding:0!important;}
+  #dc-root{margin:0!important;padding:0!important;width:100%!important;
+           max-width:none!important;border:0!important;}
+  #dc-root>.sc-host{margin:0!important;padding:0!important;width:100%!important;}
+</style>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#F7F9FB;font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;}
+  .qb{transition:background .12s;border:none;margin:0;appearance:none;-webkit-appearance:none;font-family:inherit;background:transparent;}
+  .qb:not(:disabled):hover{background:#E4E7EB;}
+  .qb:focus-visible{outline:2px solid #1E5AA8;outline-offset:-2px;}
+  .qb:disabled{color:#91959B;cursor:not-allowed;}
+</style>
+</helmet>
+<sc-if value="{{ single }}" hint-placeholder-val="">
+  <div style="{{ boxStyle }}">
+    <button type="button" class="qb" onClick="{{ onMinus }}" disabled="{{ minusOff }}" aria-label="Snížit počet" style="{{ btnStyle }}">−</button>
+    <span role="status" aria-live="polite" aria-label="Počet kusů" style="{{ valStyle }}">{{ qty }}</span>
+    <button type="button" class="qb" onClick="{{ onPlus }}" disabled="{{ plusOff }}" aria-label="Zvýšit počet" style="{{ btnStyle }}">+</button>
+  </div>
+</sc-if>
+<sc-if value="{{ gallery }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:16px;max-width:720px;">
+  <div style="background:#fff;border-radius:8px;padding:28px;display:flex;gap:36px;flex-wrap:wrap;align-items:center;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="display:flex;align-items:stretch;height:44px;border-radius:6px;overflow:hidden;background:#F2F4F7;">
+        <button type="button" class="qb" onClick="{{ onMinusA }}" disabled="{{ aMin }}" aria-label="Snížit počet" style="width:36px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#5A626C;cursor:pointer;">−</button>
+        <span style="min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:#fff;border-top:1px solid #F2F4F7;border-bottom:1px solid #F2F4F7;">{{ qtyA }}</span>
+        <button type="button" class="qb" onClick="{{ onPlusA }}" aria-label="Zvýšit počet" style="width:36px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#5A626C;cursor:pointer;">+</button>
+      </div>
+      <span style="font-size:13px;color:#666E78;">Standard · 44 px — karta, detail</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="display:flex;align-items:stretch;height:36px;border-radius:6px;overflow:hidden;background:#F2F4F7;">
+        <button type="button" class="qb" onClick="{{ onMinusB }}" disabled="{{ bMin }}" aria-label="Snížit počet" style="width:30px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#5A626C;cursor:pointer;">−</button>
+        <span style="min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:#fff;border-top:1px solid #F2F4F7;border-bottom:1px solid #F2F4F7;">{{ qtyB }}</span>
+        <button type="button" class="qb" onClick="{{ onPlusB }}" aria-label="Zvýšit počet" style="width:30px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#5A626C;cursor:pointer;">+</button>
+      </div>
+      <span style="font-size:13px;color:#666E78;">Compact · 36 px — košík, seznamy</span>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:5px;padding:2px 4px;">
+    <div style="font-size:13px;line-height:1.5;color:#0B6937;"><strong>Kdy:</strong> Standard u karty a detailu, Compact v košíku a seznamech. Pozadí #F2F4F7, radius 6, střední pole bílé (min 28 px, pojme 3 číslice). Řízený přes value + onChange, jinak drží vlastní stav.</div>
+    <div style="font-size:13px;line-height:1.5;color:#C5232B;"><strong>Kdy ne:</strong> nezmenšovat pod 36 px; nepoužívat jiné pozadí ani radius; na min/max se tlačítko zablokuje, ne že tiše nedělá nic.</div>
+  </div>
+</div>
+</sc-if>
+<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;},&quot;$preview&quot;:{&quot;width&quot;:720,&quot;height&quot;:220},&quot;size&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;standard&quot;,&quot;compact&quot;],&quot;default&quot;:&quot;standard&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;value&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;},&quot;min&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;},&quot;max&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:99,&quot;tsType&quot;:&quot;number&quot;},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;function&quot;,&quot;default&quot;:null}}">
+class Component extends DCLogic {
+  state = { q:1, a:1, b:1 };
+  renderVals(){
+    const P = this.props;
+    const controlled = P.value !== undefined && typeof P.onChange === 'function';
+    const single = !!P.size || P.value !== undefined || typeof P.onChange === 'function';
+    const min = (P.min !== undefined) ? P.min : 1;
+    const max = (P.max !== undefined) ? P.max : 99;
+    if (single){
+      const compact = P.size==='compact';
+      const h = compact?36:44, w = compact?30:36, fs = compact?15:17, vfs = compact?14:15;
+      const val = controlled ? P.value : this.state.q;
+      const set = (n)=>{ const c = Math.max(min, Math.min(max, n)); if (controlled) P.onChange(c); else this.setState({ q:c }); };
+      return { single:true, gallery:false, qty:val,
+        minusOff: val<=min, plusOff: val>=max,
+        boxStyle:'display:inline-flex;align-items:stretch;height:'+h+'px;border-radius:6px;overflow:hidden;background:#F2F4F7;',
+        btnStyle:'width:'+w+'px;display:flex;align-items:center;justify-content:center;font-size:'+fs+'px;color:#5A626C;cursor:pointer;',
+        valStyle:'min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:'+vfs+'px;font-weight:700;background:#fff;border-top:1px solid #F2F4F7;border-bottom:1px solid #F2F4F7;',
+        onMinus:()=>set(val-1), onPlus:()=>set(val+1) };
+    }
+    const clamp = (n)=>Math.max(1,n);
+    return { single:false, gallery:true, qtyA:this.state.a, qtyB:this.state.b,
+      aMin:this.state.a<=1, bMin:this.state.b<=1,
+      onMinusA:()=>this.setState(s=>({a:clamp(s.a-1)})), onPlusA:()=>this.setState(s=>({a:s.a+1})),
+      onMinusB:()=>this.setState(s=>({b:clamp(s.b-1)})), onPlusB:()=>this.setState(s=>({b:s.b+1})) };
+  }
+}
+
+
+// DebugBar: prop debug -> šablona
+(function(){ const rv = Component.prototype.renderVals;
+  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; if (v.debug === undefined) v.debug = this.props.debug ?? true; return v; }; })();
+</script>
+</body>
+</html>
