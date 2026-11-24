@@ -142,9 +142,8 @@
     </sc-if>
   </div>
 </div>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showCompare&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;},&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:560},&quot;p&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;,&quot;default&quot;:null},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dil&quot;,&quot;prives&quot;,&quot;pujcovna&quot;],&quot;default&quot;:&quot;dil&quot;,&quot;tsType&quot;:&quot;'dil'|'prives'|'pujcovna'&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;available&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;buyLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;K1&quot;,&quot;K2&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;'K1'|'K2'|''&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;onDetail&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;,&quot;default&quot;:null}}">class Component extends DCLogic {
+<script type="text/x-dc" data-dc-script data-props="{&quot;showCompare&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:560},&quot;p&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;,&quot;default&quot;:null},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dil&quot;,&quot;prives&quot;,&quot;pujcovna&quot;],&quot;default&quot;:&quot;dil&quot;,&quot;tsType&quot;:&quot;'dil'|'prives'|'pujcovna'&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;available&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;buyLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;K1&quot;,&quot;K2&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;'K1'|'K2'|''&quot;,&quot;section&quot;:&quot;Varianty&quot;},&quot;onDetail&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;,&quot;default&quot;:null}}">class Component extends DCLogic {
   state = { qty:1, cmp:false, inCartDemo:0 };
   // čítač v košíku: stejný vzhled jako u Porovnat a Košíku v hlavičce
   CART_BADGE = 'position:absolute;top:-6px;right:-6px;min-width:16px;width:16px;height:16px;border-radius:999px;background:#C5232B;color:#fff;font-size:10px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;pointer-events:none;';
@@ -232,9 +231,8 @@
   }
 }
 
-// DebugBar: prop debug -> šablona
 (function(){ const rv = Component.prototype.renderVals;
-  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; if (v.debug === undefined) v.debug = this.props.debug ?? true; 
+  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; 
     // K1/K2: explicitní prop vyhrává; jinak karta přívěsu (má specs) čte volbu z localStorage 'vapp-card' (default K2), díl zůstává K1
     let lay = this.props.buyLayout;
     if (!lay) { let st = null; try{ st = localStorage.getItem('vapp-card'); }catch(e){} lay = (v.p && v.p.hasSpecs) ? 'K2' : 'K1'; } // K2 u přívěsu rozhodnuto 15. 10. 2026 — localStorage už neovlivňuje

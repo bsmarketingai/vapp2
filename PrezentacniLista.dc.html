@@ -19,73 +19,189 @@
   .pl-i:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px;}
   .pl-btn{transition:background .12s,color .12s;}
   .pl-btn:hover{background:#1E5AA8 !important;color:#FFFFFF !important;}
-  @media (max-width:419px){ .pl-label{display:none !important;} .pl-btn{padding:0 10px !important;} }
-  /* pill drž\u00ed jen na desktopu; na mobilu se blok zalamuje do v\u00edc \u0159\u00e1dk\u016f a 999 vypad\u00e1 rozbit\u011b */
-  .pl-shell{border-radius:999px;}
-  @media (max-width:819px){ .pl-shell{border-radius:8px;} }
+  .pl-sw{flex:none;position:relative;width:44px;height:26px;border-radius:999px;transition:background .15s,border-color .15s;}
+  .pl-sw span{transition:left .15s,background .15s;}
+  .pl-sw:hover{filter:brightness(1.08);}
+  @media (prefers-reduced-motion:reduce){ .pl-sw,.pl-sw span{transition:none !important;} }
+  .pl-fab{transition:background .12s,transform .12s;} .pl-fab:hover{background:#1E5AA8;} .pl-fab:active{transform:translateY(1px);}
+  .pl-fab:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  .pl-panel{transition:opacity .16s ease, transform .16s ease;transform-origin:bottom left;}
+  .pl-panel[data-shown="false"]{opacity:0;transform:translateY(8px);pointer-events:none;}
+  @media (prefers-reduced-motion:reduce){ .pl-panel,.pl-fab{transition:none !important;} }
 </style>
 </helmet>
-<div style="position:fixed;left:16px;right:16px;bottom:16px;z-index:96;display:flex;justify-content:center;pointer-events:none;">
-<sc-if value="{{ closed }}" hint-placeholder-val="">
-<button type="button" class="pl-i pl-btn pl-shell" onClick="{{ onToggleOpen }}" aria-expanded="false" style="pointer-events:auto;min-height:36px;padding:0 14px;background:#142F56;color:#FFFFFF;font-size:13px;font-weight:700;box-shadow:0 10px 30px rgba(20,30,45,.14);">Varianty</button>
-</sc-if>
-<sc-if value="{{ open }}" hint-placeholder-val="{{ true }}">
-<div class="pl-shell" style="pointer-events:auto;display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:8px;padding:6px;background:#142F56;box-shadow:0 10px 30px rgba(20,30,45,.14);">
-  <sc-if value="{{ hasGroup1 }}" hint-placeholder-val="{{ true }}">
-  <span class="pl-label" style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px 0 10px;">{{ label }}</span>
-  <sc-for list="{{ items }}" as="it" hint-placeholder-count="2">
-    <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
-  </sc-for>
+<div ref="{{ rootRef }}" style="position:fixed;left:16px;bottom:16px;z-index:96;display:flex;flex-direction:column;align-items:flex-start;gap:8px;">
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ true }}">
+  <div class="pl-panel" id="pl-panel" data-shown="{{ shown }}" role="dialog" aria-label="Varianty prezentace" style="width:min(300px,calc(100vw - 32px));max-height:calc(100vh - 96px);overflow-y:auto;padding:8px 10px 10px;background:#142F56;border-radius:8px;box-shadow:0 10px 30px rgba(20,30,45,.14);">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 4px 8px;">
+      <span style="font-size:14px;font-weight:700;color:#FFFFFF;">Varianty prezentace</span>
+      <button type="button" class="pl-i pl-btn" onClick="{{ onClose }}" aria-label="Zavřít nabídku variant" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:999px;color:#B4CEEC;"><dc-import name="Ikony" icon-name="x" size="20" hint-size="20px,20px"></dc-import></button>
+    </div>
+    <sc-if value="{{ hasGroup1 }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ tg1.is }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 4px;">
+            <span style="font-size:13px;font-weight:700;color:#B4CEEC;">{{ tg1.title }}</span>
+            <span style="font-size:14px;font-weight:700;color:#FFFFFF;">{{ tg1.state }}</span>
+          </span>
+          <button type="button" class="pl-i pl-sw" role="switch" aria-checked="{{ tg1.checked }}" aria-label="{{ tg1.aria }}" onClick="{{ tg1.onToggle }}" style="{{ tg1.track }}"><span aria-hidden="true" style="{{ tg1.knob }}"></span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ tg1.not }}" hint-placeholder-val="">
+      <div role="group" aria-label="{{ label }}" style="display:flex;flex-direction:column;gap:6px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+        <span style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px;">{{ label }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="2">
+            <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{ hasGroup2 }}" hint-placeholder-val="">
+      <sc-if value="{{ tg2.is }}" hint-placeholder-val="">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 4px;">
+            <span style="font-size:13px;font-weight:700;color:#B4CEEC;">{{ tg2.title }}</span>
+            <span style="font-size:14px;font-weight:700;color:#FFFFFF;">{{ tg2.state }}</span>
+          </span>
+          <button type="button" class="pl-i pl-sw" role="switch" aria-checked="{{ tg2.checked }}" aria-label="{{ tg2.aria }}" onClick="{{ tg2.onToggle }}" style="{{ tg2.track }}"><span aria-hidden="true" style="{{ tg2.knob }}"></span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ tg2.not }}" hint-placeholder-val="">
+      <div role="group" aria-label="{{ label2 }}" style="display:flex;flex-direction:column;gap:6px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+        <span style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px;">{{ label2 }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <sc-for list="{{ items2 }}" as="it" hint-placeholder-count="2">
+            <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{ hasGroup3 }}" hint-placeholder-val="">
+      <sc-if value="{{ tg3.is }}" hint-placeholder-val="">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 4px;">
+            <span style="font-size:13px;font-weight:700;color:#B4CEEC;">{{ tg3.title }}</span>
+            <span style="font-size:14px;font-weight:700;color:#FFFFFF;">{{ tg3.state }}</span>
+          </span>
+          <button type="button" class="pl-i pl-sw" role="switch" aria-checked="{{ tg3.checked }}" aria-label="{{ tg3.aria }}" onClick="{{ tg3.onToggle }}" style="{{ tg3.track }}"><span aria-hidden="true" style="{{ tg3.knob }}"></span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ tg3.not }}" hint-placeholder-val="">
+      <div role="group" aria-label="{{ label3 }}" style="display:flex;flex-direction:column;gap:6px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+        <span style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px;">{{ label3 }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <sc-for list="{{ items3 }}" as="it" hint-placeholder-count="2">
+            <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{ hasGroup4 }}" hint-placeholder-val="">
+      <sc-if value="{{ tg4.is }}" hint-placeholder-val="">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 4px;">
+            <span style="font-size:13px;font-weight:700;color:#B4CEEC;">{{ tg4.title }}</span>
+            <span style="font-size:14px;font-weight:700;color:#FFFFFF;">{{ tg4.state }}</span>
+          </span>
+          <button type="button" class="pl-i pl-sw" role="switch" aria-checked="{{ tg4.checked }}" aria-label="{{ tg4.aria }}" onClick="{{ tg4.onToggle }}" style="{{ tg4.track }}"><span aria-hidden="true" style="{{ tg4.knob }}"></span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ tg4.not }}" hint-placeholder-val="">
+      <div role="group" aria-label="{{ label4 }}" style="display:flex;flex-direction:column;gap:6px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+        <span style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px;">{{ label4 }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <sc-for list="{{ items4 }}" as="it" hint-placeholder-count="2">
+            <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{ hasGroup5 }}" hint-placeholder-val="">
+      <sc-if value="{{ tg5.is }}" hint-placeholder-val="">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 4px;">
+            <span style="font-size:13px;font-weight:700;color:#B4CEEC;">{{ tg5.title }}</span>
+            <span style="font-size:14px;font-weight:700;color:#FFFFFF;">{{ tg5.state }}</span>
+          </span>
+          <button type="button" class="pl-i pl-sw" role="switch" aria-checked="{{ tg5.checked }}" aria-label="{{ tg5.aria }}" onClick="{{ tg5.onToggle }}" style="{{ tg5.track }}"><span aria-hidden="true" style="{{ tg5.knob }}"></span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ tg5.not }}" hint-placeholder-val="">
+      <div role="group" aria-label="{{ label5 }}" style="display:flex;flex-direction:column;gap:6px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+        <span style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px;">{{ label5 }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <sc-for list="{{ items5 }}" as="it" hint-placeholder-count="2">
+            <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{ hasGroup6 }}" hint-placeholder-val="">
+      <sc-if value="{{ tg6.is }}" hint-placeholder-val="">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 4px;">
+            <span style="font-size:13px;font-weight:700;color:#B4CEEC;">{{ tg6.title }}</span>
+            <span style="font-size:14px;font-weight:700;color:#FFFFFF;">{{ tg6.state }}</span>
+          </span>
+          <button type="button" class="pl-i pl-sw" role="switch" aria-checked="{{ tg6.checked }}" aria-label="{{ tg6.aria }}" onClick="{{ tg6.onToggle }}" style="{{ tg6.track }}"><span aria-hidden="true" style="{{ tg6.knob }}"></span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ tg6.not }}" hint-placeholder-val="">
+      <div role="group" aria-label="{{ label6 }}" style="display:flex;flex-direction:column;gap:6px;padding:10px 4px;border-top:1px solid #1E3F6E;">
+        <span style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px;">{{ label6 }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <sc-for list="{{ items6 }}" as="it" hint-placeholder-count="2">
+            <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </sc-if>
+  </div>
   </sc-if>
-  <sc-if value="{{ hasGroup2 }}" hint-placeholder-val="">
-    <span style="width:1px;height:20px;background:#1E5AA8;margin:0 2px;"></span>
-    <span class="pl-label" style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px 0 4px;">{{ label2 }}</span>
-    <sc-for list="{{ items2 }}" as="it" hint-placeholder-count="2">
-      <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
-    </sc-for>
-  </sc-if>
-  <sc-if value="{{ hasGroup3 }}" hint-placeholder-val="">
-    <span style="width:1px;height:20px;background:#1E5AA8;margin:0 2px;"></span>
-    <span class="pl-label" style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px 0 4px;">{{ label3 }}</span>
-    <sc-for list="{{ items3 }}" as="it" hint-placeholder-count="2">
-      <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
-    </sc-for>
-  </sc-if>
-  <sc-if value="{{ hasGroup4 }}" hint-placeholder-val="">
-    <span style="width:1px;height:20px;background:#1E5AA8;margin:0 2px;"></span>
-    <span class="pl-label" style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px 0 4px;">{{ label4 }}</span>
-    <sc-for list="{{ items4 }}" as="it" hint-placeholder-count="2">
-      <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
-    </sc-for>
-  </sc-if>
-  <sc-if value="{{ hasGroup5 }}" hint-placeholder-val="">
-    <span style="width:1px;height:20px;background:#1E5AA8;margin:0 2px;"></span>
-    <span class="pl-label" style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px 0 4px;">{{ label5 }}</span>
-    <sc-for list="{{ items5 }}" as="it" hint-placeholder-count="2">
-      <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
-    </sc-for>
-  </sc-if>
-  <sc-if value="{{ hasGroup6 }}" hint-placeholder-val="">
-    <span style="width:1px;height:20px;background:#1E6AA8;margin:0 2px;"></span>
-    <span class="pl-label" style="font-size:13px;font-weight:700;color:#B4CEEC;padding:0 4px 0 4px;">{{ label6 }}</span>
-    <sc-for list="{{ items6 }}" as="it" hint-placeholder-count="2">
-      <button type="button" class="pl-i pl-btn" onClick="{{ it.onClick }}" aria-pressed="{{ it.pressed }}" style="{{ it.style }}">{{ it.label }}</button>
-    </sc-for>
-  </sc-if>
-  <span style="width:1px;height:20px;background:#1E5AA8;margin:0 2px;"></span>
-  <button type="button" class="pl-i pl-btn" onClick="{{ onToggleDebug }}" aria-pressed="{{ debugPressed }}" style="{{ debugStyle }}">Debug</button>
-  <span style="width:1px;height:20px;background:#1E5AA8;margin:0 2px;"></span>
-  <button type="button" class="pl-i pl-btn" onClick="{{ onToggleOpen }}" aria-label="Skrýt lištu variant" aria-expanded="true" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:999px;color:#B4CEEC;font-size:16px;font-weight:700;line-height:1;">✕</button>
-</div>
-</sc-if>
+  <button type="button" class="pl-i pl-fab" onClick="{{ onToggleOpen }}" aria-expanded="{{ expanded }}" aria-controls="pl-panel" aria-label="{{ fabAria }}" title="Varianty prezentace" style="width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:#142F56;color:#FFFFFF;box-shadow:0 10px 30px rgba(20,30,45,.14);"><dc-import name="Ikony" icon-name="{{ fabIcon }}" size="24" hint-size="24px,24px"></dc-import></button>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:120},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kategorie:&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;v1&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label2&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants2&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active2&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect2&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label3&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants3&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active3&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect3&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label4&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants4&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active4&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect4&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label5&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants5&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active5&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect5&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label6&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants6&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active6&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect6&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;debugOn&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;onToggleDebug&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:360,&quot;height&quot;:520},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kategorie:&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;v1&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label2&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants2&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active2&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect2&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label3&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants3&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active3&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect3&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label4&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants4&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active4&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect4&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label5&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants5&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active5&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect5&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;label6&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variants6&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{id:string,label:string}[]&quot;,&quot;default&quot;:null},&quot;active6&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSelect6&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null}}">
 class Component extends DCLogic {
-  state = { open: true };
+  state = { open: false };
+  rootRef = React.createRef();
+  // plynulé otevření i zavření panelu
+  fade(open, ms){ ms = ms || 160; const f = this._f || (this._f = { m:false, s:false, t:null, w:false, r:false }); f.w = !!open;
+    if (open){ if (f.t){ clearTimeout(f.t); f.t = null; } if (!f.m){ f.m = true; f.s = false; }
+      if (!f.s && !f.r){ f.r = true; requestAnimationFrame(()=>requestAnimationFrame(()=>{ f.r = false; if (f.w && !f.s){ f.s = true; this.forceUpdate(); } })); } }
+    else if (f.m){ f.s = false; if (!f.t) f.t = setTimeout(()=>{ f.t = null; if (!f.w){ f.m = false; this.forceUpdate(); } }, ms); }
+    return { mounted: f.m, shown: f.s ? 'true' : 'false' }; }
+  componentDidMount(){
+    // zavření klávesou Escape a kliknutím mimo nabídku
+    this._key = (e)=>{ if (e.key === 'Escape' && this.state.open){ this.setState({ open:false }); } };
+    this._down = (e)=>{ const r = this.rootRef.current; if (this.state.open && r && !r.contains(e.target)) this.setState({ open:false }); };
+    document.addEventListener('keydown', this._key);
+    document.addEventListener('pointerdown', this._down, true);
+  }
+  componentWillUnmount(){ document.removeEventListener('keydown', this._key); document.removeEventListener('pointerdown', this._down, true); }
   BASE = 'min-height:32px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:700;';
   ON = 'background:#FFFFFF;color:#142F56;';
   OFF = 'background:transparent;color:#B4CEEC;';
+  // dvoustavová skupina se kreslí jako přepínač; zapnuto = varianta s id 'on', jinak druhá varianta
+  TRACK_ON = 'background:#FFFFFF;border:2px solid #FFFFFF;';
+  TRACK_OFF = 'background:transparent;border:2px solid #B4CEEC;';
+  sw(on){ return { track: 'width:44px;height:26px;' + (on ? this.TRACK_ON : this.TRACK_OFF),
+    knob: 'position:absolute;top:2px;left:' + (on ? '20px' : '2px') + ';width:18px;height:18px;border-radius:999px;background:' + (on ? '#142F56' : '#B4CEEC') + ';' }; }
+  tg(src, active, onSelect, label){
+    if (!Array.isArray(src) || src.length !== 2) return { is:false, not:true };
+    const onIx = src.findIndex(v=>String(v.id).toLowerCase() === 'on'); const iOn = onIx >= 0 ? onIx : 1;
+    const vOn = src[iOn], vOff = src[1 - iOn]; const on = String(active) === String(vOn.id);
+    const cur = on ? vOn : vOff; const title = String(label || '').replace(/:\s*$/, '');
+    return Object.assign({ is:true, not:false, title, state: cur.label, checked: on ? 'true' : 'false',
+      aria: title + ': ' + vOn.label, onToggle: ()=>onSelect(String(on ? vOff.id : vOn.id)) }, this.sw(on));
+  }
   DEFAULT_VARIANTS = [{ id:'v1', label:'Varianta 1' }, { id:'v2', label:'Varianta 2' }];
   renderVals(){
     const P = this.props;
@@ -138,20 +254,25 @@ class Component extends DCLogic {
       style: this.BASE + (v.id === active4 ? this.ON : this.OFF),
       onClick: ()=>onSelect4(String(v.id))
     })) : [];
-    const dOn = (P.debugOn ?? true) !== false;
     return {
-      // noGroup1: stránka bez otevřených variant — lišta drží jen Debug, výchozí skupina se nevykreslí
+      // noGroup1: stránka bez otevřených variant — výchozí skupina se nevykreslí
       label: P.noGroup1 ? '' : (P.label || 'Kategorie:'), items: P.noGroup1 ? [] : items, hasGroup1: !P.noGroup1,
       hasGroup2: !!src2, label2: P.label2 || '', items2,
       hasGroup3: !!src3, label3: P.label3 || '', items3,
       hasGroup4: !!src4, label4: P.label4 || '', items4,
       hasGroup5: !!src5, label5: P.label5 || '', items5,
       hasGroup6: !!src6, label6: P.label6 || '', items6,
-      open: this.state.open !== false, closed: this.state.open === false,
-      onToggleOpen: ()=>this.setState(s=>({ open: s.open === false })),
-      debugPressed: dOn ? 'true' : 'false',
-      debugStyle: this.BASE + (dOn ? this.ON : this.OFF),
-      onToggleDebug: P.onToggleDebug || (()=>{})
+      tg1: P.noGroup1 ? { is:false, not:false } : this.tg(src, active, onSelect, P.label || 'Kategorie:'),
+      tg2: this.tg(src2, active2, onSelect2, P.label2), tg3: this.tg(src3, active3, onSelect3, P.label3),
+      tg4: this.tg(src4, active4, onSelect4, P.label4), tg5: this.tg(src5, active5, onSelect5, P.label5),
+      tg6: this.tg(src6, active6, onSelect6, P.label6),
+      ...(()=>{ const x = this.fade(this.state.open === true); return { open: x.mounted, shown: x.shown }; })(),
+      expanded: this.state.open ? 'true' : 'false',
+      fabIcon: this.state.open ? 'x' : 'adjustments-horizontal',
+      fabAria: this.state.open ? 'Zavřít nabídku variant' : 'Otevřít nabídku variant',
+      rootRef: this.rootRef,
+      onToggleOpen: ()=>this.setState(s=>({ open: !s.open })),
+      onClose: ()=>this.setState({ open:false }),
     };
   }
 }

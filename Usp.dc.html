@@ -90,9 +90,8 @@
     <div style="font-size:13px;line-height:1.5;color:#C5232B;"><strong>Kdy ne:</strong> nepoužívat obě varianty se stejným obsahem na jedné stránce; pás nemá nést odkazy ani CTA — je to sdělení, ne navigace.</div>
   </div>
 </sc-if>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:320},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mrizka&quot;,&quot;sloupce&quot;,&quot;pas&quot;]},&quot;tone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;svetly&quot;,&quot;tmavy&quot;],&quot;default&quot;:&quot;svetly&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;default&quot;:&quot;mrizka&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;docs&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;items&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{icon:string,title:string,text:string}[]&quot;},&quot;autoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Pás&quot;},&quot;interval&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5000,&quot;min&quot;:2000,&quot;max&quot;:12000,&quot;step&quot;:500,&quot;unit&quot;:&quot;ms&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pás&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:320},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mrizka&quot;,&quot;sloupce&quot;,&quot;pas&quot;]},&quot;tone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;svetly&quot;,&quot;tmavy&quot;],&quot;default&quot;:&quot;mrizka&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;docs&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;items&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{icon:string,title:string,text:string}[]&quot;},&quot;autoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Pás&quot;},&quot;interval&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5000,&quot;min&quot;:2000,&quot;max&quot;:12000,&quot;step&quot;:500,&quot;unit&quot;:&quot;ms&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pás&quot;}}">
 class Component extends DCLogic {
   DEFAULT = [
     { icon:'award', title:'35 let zkušeností', text:'35 let výroby přívěsů a zkušeností' },
@@ -169,7 +168,6 @@ class Component extends DCLogic {
       onRelease: ()=>this.hold(false),
       onPrev: ()=>this.step(-1),
       onNext: ()=>this.step(1),
-      debug: P.debug ?? true
     };
   }
 }

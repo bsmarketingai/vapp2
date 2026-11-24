@@ -115,8 +115,8 @@
 </helmet>
 <div data-screen-label="Děkujeme za objednávku" lang="cs" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;display:flex;flex-direction:column;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
-  <dc-import name="Hlavicka" active="" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Hlavicka" active="" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" hint-size="100%,150px"></dc-import>
 
   <main class="vp-in" style="width:100%;padding-top:32px;padding-bottom:56px;flex:1;display:flex;flex-direction:column;gap:32px;">
     <h1 class="ck-h1" style="margin:0;color:#142F56;">Děkujeme za objednávku</h1>
@@ -184,11 +184,10 @@
     </section>
   </main>
 
-  <dc-import name="Paticka" bare="true" debug="{{ debug }}" hint-size="100%,600px"></dc-import>
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+  <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   state = { sum:null, f:null };
   componentDidMount(){
@@ -210,7 +209,6 @@ class Component extends DCLogic {
       : isOnline ? 'Platba proběhla úspěšně. Doklad o zaplacení najdete v potvrzení objednávky.'
       : 'Objednávku zaplatíte při převzetí.';
     return {
-      debug: P.debug ?? true,
       orderNo: '8880381516', email: f.email, total: sum.total,
       isTransfer, isOther: !isTransfer, payLabel, payText,
       payHead: isTransfer ? 'Pokyny k platbě' : (isOnline ? 'Zaplaceno' : 'Platba'),

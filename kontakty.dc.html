@@ -45,12 +45,12 @@
 </helmet>
 <div data-screen-label="Kontakty" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
-  <dc-import name="Hlavicka" active="" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Hlavicka" active="" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" hint-size="100%,150px"></dc-import>
 
   <main class="vp-in" style="padding-top:14px;padding-bottom:48px;">
     <div style="margin:4px 0 6px;">
-      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" debug="{{ debug }}" hint-size="100%,20px"></dc-import>
+      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" hint-size="100%,20px"></dc-import>
     </div>
     <h1 class="kt-h1" style="margin:0;color:#142F56;">Kontakty</h1>
     <p style="margin:10px 0 0;max-width:760px;font-size:16px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Zavolejte přímo na oddělení, které potřebujete. V pracovní dny jsme k zastižení od 8:30, servis a půjčovna do 16:00, ostatní do 16:30.</p>
@@ -200,7 +200,7 @@
     </section>
 
     <section aria-label="Poradenství" style="margin-top:48px;">
-      <dc-import name="PoradenskyBlok" variant="standard" debug="{{ debug }}" hint-size="100%,80px"></dc-import>
+      <dc-import name="PoradenskyBlok" variant="standard" hint-size="100%,80px"></dc-import>
     </section>
   </main>
 
@@ -208,17 +208,15 @@
     <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   state = { name:'', email:'', phone:'', message:'', sent:false };
   renderVals(){
     const s = this.state;
     const send = (e)=>{ if (e && e.preventDefault) e.preventDefault(); this.setState({ sent:true }); };
     return {
-      debug: this.props.debug ?? true,
       crumbItems: [{ name:'Úvod', href:'index.dc.html' }, { name:'Kontakty', href:'#' }],
       name:s.name, email:s.email, phone:s.phone, message:s.message,
       onName:(e)=>this.setState({ name:e.target.value }),

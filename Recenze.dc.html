@@ -46,9 +46,8 @@
     <a class="rc-all" href="{{ allHref }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;background:transparent;border:0;font-size:14px;font-weight:700;color:#1E5AA8;text-decoration:none;transition:background 120ms ease;" style-hover="text-decoration:underline;text-underline-offset:3px;" style-active="transform:translateY(1px);">Všechna hodnocení<dc-import name="Ikony" icon-name="chevron-right" size="{{ 24 }}" hint-size="24px,24px"></dc-import></a>
   </div>
 </section>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:320},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Co říkají zákazníci&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;scoreText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;4,8 z 5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sourceText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ověřeno zákazníky · Heureka&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;reviews&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{value:number,count:number,text:string,author:string,meta:string}[]&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:320},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Co říkají zákazníci&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;scoreText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;4,8 z 5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sourceText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ověřeno zákazníky · Heureka&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;reviews&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{value:number,count:number,text:string,author:string,meta:string}[]&quot;}}">
 class Component extends DCLogic {
   DEFAULT = [
     { value:5, count:1, author:'Petr H.', meta:'nájezdová brzda KNOTT',
@@ -68,7 +67,6 @@ class Component extends DCLogic {
       sourceText: P.sourceText ?? 'Ověřeno zákazníky · Heureka',
       reviews: src,
       allHref: P.allHref ?? 'https://obchody.heureka.cz/vapp-cz/recenze/',
-      debug: P.debug ?? true
     };
   }
 }

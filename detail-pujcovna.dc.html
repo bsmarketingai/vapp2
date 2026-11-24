@@ -44,13 +44,13 @@
 </helmet>
 <div data-screen-label="Detail přívěsu — půjčovna" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
-  <dc-import name="Hlavicka" active="Půjčovna" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Hlavicka" active="Půjčovna" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" hint-size="100%,150px"></dc-import>
 
   <main class="vp-in" style="padding-top:14px;padding-bottom:48px;">
 
     <div style="margin:4px 0 10px;">
-      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" debug="{{ debug }}" hint-size="100%,20px"></dc-import>
+      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" hint-size="100%,20px"></dc-import>
     </div>
 
     <h1 class="pd-h1" style="margin:0;font-size:36px;font-weight:700;letter-spacing:-0.02em;line-height:1.15;color:#142F56;text-wrap:pretty;">Valník nebrzděný 750 kg</h1>
@@ -148,10 +148,9 @@
     <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   state = { img:0 };
   IMAGES = [
@@ -171,7 +170,6 @@ class Component extends DCLogic {
     const s = this.state, N = this.IMAGES.length;
     const zebra = (i)=>'display:flex;gap:12px;padding:10px 14px;background:'+(i%2?'#FFFFFF':'#F7F9FB')+';';
     return {
-      debug: this.props.debug ?? true,
       noop: ()=>{},
       crumbItems: [{ name:'Úvod', href:'index.dc.html' }, { name:'Půjčovna', href:'pujcovna.dc.html' }, { name:'Valník nebrzděný 750 kg', href:'#' }],
       thumbs: this.IMAGES.map((src,i)=>({

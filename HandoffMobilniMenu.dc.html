@@ -123,28 +123,28 @@ aria-expanded: "true" / "false"</div>
               <div style="font-size:16px;font-weight:700;">320 px <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1E5AA8;">XXS</span></div>
               <div style="font-size:13px;color:#666E78;">iPhone SE — nejužší podporovaná šířka</div>
             </div>
-            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" debug="{{ off }}" on-select="{{ noop }}" on-info-select="{{ noop }}" hint-size="100%,540px"></dc-import></div>
+            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" on-select="{{ noop }}" on-info-select="{{ noop }}" hint-size="100%,540px"></dc-import></div>
           </div>
           <div class="hf-frame" style="width:392px;">
             <div style="display:flex;flex-direction:column;gap:2px;">
               <div style="font-size:16px;font-weight:700;">392 px <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1E5AA8;">XXS</span></div>
               <div style="font-size:13px;color:#666E78;">Pixel 7 / iPhone 14 — nejčastější mobil, pásmo XXS (≤ 419)</div>
             </div>
-            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" debug="{{ off }}" on-select="{{ noop }}" on-info-select="{{ noop }}" show-account-buttons="{{ on }}" hint-size="100%,540px"></dc-import></div>
+            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" on-select="{{ noop }}" on-info-select="{{ noop }}" show-account-buttons="{{ on }}" hint-size="100%,540px"></dc-import></div>
           </div>
           <div class="hf-frame" style="width:768px;">
             <div style="display:flex;flex-direction:column;gap:2px;">
               <div style="font-size:16px;font-weight:700;">768 px <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1E5AA8;">S</span></div>
               <div style="font-size:13px;color:#666E78;">iPad na výšku — panel jde přes celou šířku, sloupce se nezavádějí</div>
             </div>
-            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" debug="{{ off }}" on-select="{{ noop }}" on-info-select="{{ noop }}" hint-size="100%,540px"></dc-import></div>
+            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" on-select="{{ noop }}" on-info-select="{{ noop }}" hint-size="100%,540px"></dc-import></div>
           </div>
           <div class="hf-frame" style="width:999px;">
             <div style="display:flex;flex-direction:column;gap:2px;">
               <div style="font-size:16px;font-weight:700;">999 px <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1E5AA8;">M</span></div>
               <div style="font-size:13px;color:#666E78;">Poslední pixel, kde menu existuje — od 1000 px ho nahradí desktopová navigace</div>
             </div>
-            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" debug="{{ off }}" on-select="{{ noop }}" on-info-select="{{ noop }}" open="{{ off }}" hint-size="100%,540px"></dc-import></div>
+            <div class="hf-screen"><dc-import name="MobilniMenu" panel-open="{{ on }}" on-select="{{ noop }}" on-info-select="{{ noop }}" open="{{ off }}" hint-size="100%,540px"></dc-import></div>
           </div>
         </div>
         <div style="background:#EFF4FB;border-radius:8px;padding:16px 18px;font-size:13px;line-height:1.6;color:#173C70;"><strong>Poznámka k šířkám:</strong> komponenta sama žádnou media query nemá — vždy zabírá 100 % šířky obalu a řádky se natahují. Zlom 999/1000 px řeší <span style="font-family:'JetBrains Mono',monospace;">Hlavicka</span> tím, že panel vůbec nevykreslí. Rám 999 px navíc ukazuje stav <strong>zavřeno</strong> (červená LED), rám 392 px stav <strong>s tlačítky účtu</strong>.</div>

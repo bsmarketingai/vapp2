@@ -36,23 +36,23 @@
 </helmet>
 <div data-screen-label="Homepage" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;width:100%;margin:0;padding:0;min-height:100vh;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" items="{{ uspPas }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" items="{{ uspPas }}" hint-size="100%,48px"></dc-import>
 
-  <dc-import name="Hlavicka" active="" logged-in="{{ loggedIn }}" on-logout="{{ onLogout }}" contact-open="{{ contactOpen }}" lang-variant="{{ langVer }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Hlavicka" active="" logged-in="{{ loggedIn }}" on-logout="{{ onLogout }}" contact-open="{{ contactOpen }}" lang-variant="{{ langVer }}" hint-size="100%,150px"></dc-import>
 
   <main>
-    <dc-import name="HeroHomepage" variant="{{ heroVer }}" debug="{{ debug }}" hint-size="100%,420px"></dc-import>
+    <dc-import name="HeroHomepage" variant="{{ heroVer }}" hint-size="100%,420px"></dc-import>
 
     <section aria-label="Karusely produktů" class="hp-sec hp-cars" style="background:#EFF4FB;margin-bottom:0;">
       <div class="vp-in" style="display:flex;flex-direction:column;gap:40px;">
-        <dc-import name="ProduktovyKarusel" title="Přívěsy" items="{{ privesyItems }}" all-label="Zobrazit všechny přívěsy" all-href="privesy-V1.dc.html" detail-href="detail-prives-V1.dc.html" debug="{{ debug }}" hint-size="100%,620px"></dc-import>
-        <dc-import name="ProduktovyKarusel" title="Náhradní díly" items="{{ dilyItems }}" all-label="Zobrazit vše" all-href="nahradnidily.dc.html" detail-href="detail-nahradnidil-V1.dc.html" debug="{{ debug }}" hint-size="100%,620px"></dc-import>
+        <dc-import name="ProduktovyKarusel" title="Přívěsy" items="{{ privesyItems }}" all-label="Zobrazit všechny přívěsy" all-href="privesy-V1.dc.html" detail-href="detail-prives-V1.dc.html" hint-size="100%,620px"></dc-import>
+        <dc-import name="ProduktovyKarusel" title="Náhradní díly" items="{{ dilyItems }}" all-label="Zobrazit vše" all-href="nahradnidily.dc.html" detail-href="detail-nahradnidil-V1.dc.html" hint-size="100%,620px"></dc-import>
       </div>
     </section>
 
     <section aria-label="Servis a půjčovna" style="background:linear-gradient(rgba(20,47,86,.40),rgba(20,47,86,.58)),#142F56 url('./sekce-servis.png') center/cover no-repeat;padding:56px 0;">
       <div class="vp-in">
-        <dc-import name="SluzbyBloky" tone="dark" debug="{{ debug }}" hint-size="100%,360px"></dc-import>
+        <dc-import name="SluzbyBloky" tone="dark" hint-size="100%,360px"></dc-import>
       </div>
     </section>
 
@@ -62,36 +62,35 @@
           <h2 id="hp-cats" class="hp-h2" style="margin:0;font-weight:700;color:#15181C;">Co u nás hledáte?</h2>
           <span style="font-size:16px;font-weight:400;color:#666E78;">Rozcestník hlavních sekcí e-shopu</span>
         </div>
-        <dc-import name="RozcestnikSekci" items="{{ categories }}" debug="{{ debug }}" hint-size="100%,760px"></dc-import>
+        <dc-import name="RozcestnikSekci" items="{{ categories }}" hint-size="100%,760px"></dc-import>
       </div>
     </section>
 
     <section aria-label="Poradna" class="hp-sec" style="padding-bottom:64px;">
       <div class="vp-in">
-        <dc-import name="PoradnaBlok" variant="{{ pbVer }}" debug="{{ debug }}" hint-size="100%,560px"></dc-import>
+        <dc-import name="PoradnaBlok" variant="{{ pbVer }}" hint-size="100%,560px"></dc-import>
       </div>
     </section>
 
     <section aria-label="Poradenství" style="padding-bottom:40px;">
       <div class="vp-in">
-        <dc-import name="PoradenskyBlok" open="{{ contactOpen }}" variant="standard" debug="{{ debug }}" hint-size="100%,80px"></dc-import>
+        <dc-import name="PoradenskyBlok" open="{{ contactOpen }}" variant="standard" hint-size="100%,80px"></dc-import>
       </div>
     </section>
 
     <section aria-label="O firmě a recenze zákazníků" style="background:#EFF4FB;padding:56px 0;">
       <div class="vp-in" style="display:flex;flex-direction:column;gap:48px;">
-        <dc-import name="PribehFirmy" debug="{{ debug }}" hint-size="100%,330px"></dc-import>
-        <dc-import name="Recenze" debug="{{ debug }}" hint-size="100%,320px"></dc-import>
+        <dc-import name="PribehFirmy" hint-size="100%,330px"></dc-import>
+        <dc-import name="Recenze" hint-size="100%,320px"></dc-import>
       </div>
     </section>
   </main>
 
-  <dc-import name="Paticka" usp-tone="tint" open="{{ contactOpen }}" bare="true" debug="{{ debug }}" hint-size="100%,520px"></dc-import>
+  <dc-import name="Paticka" usp-tone="tint" open="{{ contactOpen }}" bare="true" hint-size="100%,520px"></dc-import>
 </div>
-<dc-import name="PrezentacniLista" label="Ot. doba:" variants="{{ openVariants }}" active="{{ openState }}" on-select="{{ onOpenState }}" label5="Poradna:" variants5="{{ pbVariants }}" active5="{{ pbVer }}" on-select5="{{ onPbVer }}" label6="Účet:" variants6="{{ loginVariants }}" active6="{{ loginState }}" on-select6="{{ onLoginState }}" debug-on="{{ debugOn }}" on-toggle-debug="{{ onToggleDebug }}" hint-size="320px,56px"></dc-import>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+<dc-import name="PrezentacniLista" label="Ot. doba:" variants="{{ openVariants }}" active="{{ openState }}" on-select="{{ onOpenState }}" label6="Účet:" variants6="{{ loginVariants }}" active6="{{ loginState }}" on-select6="{{ onLoginState }}" hint-size="320px,56px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   CATS = [
     { key:'privesy', name:'Přívěsy', href:'privesy-V1.dc.html', image:'./sekce-privesy.png', count:186, countText:'186 modelů přívěsů',
@@ -161,7 +160,7 @@ class Component extends DCLogic {
     if (c.key === 'poradna') return 'poradna.dc.html';
     return '#/' + c.key + '/' + this.slug(s) + '/';
   }
-  state = Object.assign({}, this.state, { heroVer: (typeof localStorage !== 'undefined' && localStorage.getItem('vapp-hero-variant')) || 'V2', langVer: 'J2', xsCols: 'C1', debugOverride: null });
+  state = Object.assign({}, this.state, { heroVer: (typeof localStorage !== 'undefined' && localStorage.getItem('vapp-hero-variant')) || 'V2', langVer: 'J2', xsCols: 'C1' });
   XS_COLS = { C1:'1', C2:'2' };
   applyXsCols(v){ try{ document.documentElement.style.setProperty('--vp-xs-cols', this.XS_COLS[v] || '1'); }catch(e){} }
   componentDidMount(){ this.applyXsCols(this.state.xsCols); }
@@ -174,7 +173,6 @@ class Component extends DCLogic {
     const P = this.props;
     const heroVer = 'V2S'; // rozhodnuto 15. 10. 2026 — Hero V2 Small
     const contactOpen = this.state.contactOpen !== false;
-    const debugOn = this.state.debugOverride === null ? (P.debug ?? true) : this.state.debugOverride;
     // rozcestník nese jen produktové sekce; servis, půjčovna, poradna a akce jsou skryté (data zůstávají)
     const HIDDEN = ['servis','pujcovna','poradna','akce'];
     const categories = this.CATS.filter(c=>!HIDDEN.includes(c.key)).map(c=>({
@@ -189,8 +187,7 @@ class Component extends DCLogic {
       loggedIn: this.state.loginState === 'on',
       onLoginState: (id)=>this.setState({ loginState:id }),
       onLogout: ()=>this.setState({ loginState:'off' }),
-      pbVer: this.state.pbVer || 'P2',
-      onPbVer: (id)=>this.setState({ pbVer:id }),
+      pbVer: 'P2', // rozhodnuto 24. 11. 2026 — Poradna P2, přepínač odebrán z lišty
       ppVariants: [{ id:'PP1', label:'PP1' }, { id:'PP2', label:'PP2' }, { id:'PP3', label:'PP3' }],
       ppVer: this.state.ppVer || (()=>{ try{ return localStorage.getItem('vapp-pp') || 'PP1'; }catch(e){ return 'PP1'; } })(),
       onPpVer: (id)=>{ try{ localStorage.setItem('vapp-pp', id); }catch(e){} window.dispatchEvent(new CustomEvent('vapp-pp', { detail:id })); this.setState({ ppVer:id }); },
@@ -217,9 +214,6 @@ class Component extends DCLogic {
       xsCols: this.XS_COLS[this.state.xsCols] ? this.state.xsCols : 'C1',
       xsVariants: [{ id:'C1', label:'1' }, { id:'C2', label:'2' }],
       onXsCols: (id)=>{ const v = this.XS_COLS[id] ? id : 'C1'; this.applyXsCols(v); this.setState({ xsCols:v }); },
-      debugOn,
-      onToggleDebug: ()=>this.setState({ debugOverride: !debugOn }),
-      debug: debugOn
     };
   }
 }

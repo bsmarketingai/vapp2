@@ -53,12 +53,12 @@
 </helmet>
 <div data-screen-label="Článek — Tachograf" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
-  <dc-import name="Hlavicka" active="Poradna" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Hlavicka" active="Poradna" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" hint-size="100%,150px"></dc-import>
 
   <main class="vp-in" style="padding-top:14px;padding-bottom:40px;">
     <div style="margin:4px 0 6px;">
-      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" debug="{{ debug }}" hint-size="100%,20px"></dc-import>
+      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" hint-size="100%,20px"></dc-import>
     </div>
 
     <div class="ar-cols" style="margin-top:32px;">
@@ -67,7 +67,7 @@
         <header style="display:flex;flex-direction:column;gap:14px;">
           <h1 class="ar-h1" style="margin:0;color:#142F56;text-wrap:pretty;">Tachograf od 1. 7. 2026: koho se povinnost týká</h1>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <dc-import name="Chip" kind="guide" size="small" label="Předpisy" icon-name="book" href="poradna.dc.html" debug="{{ debug }}" hint-size="130px,32px"></dc-import>
+            <dc-import name="Chip" kind="guide" size="small" label="Předpisy" icon-name="book" href="poradna.dc.html" hint-size="130px,32px"></dc-import>
           </div>
           <p style="margin:0;font-size:18px;font-weight:400;line-height:1.6;color:#5A626C;text-wrap:pretty;">Od 1. července 2026 musí být některé automobily a soupravy s přívěsem o hmotnosti od 2,5 t do 3,5 t vybaveny chytrým tachografem. Shrnuli jsme, koho se povinnost týká, jaké jsou výjimky a co udělat, abyste pokutu nedostali hned první den.</p>
           <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px;font-weight:500;color:#666E78;">
@@ -151,7 +151,7 @@
         </section>
 
         <div style="margin-top:8px;">
-          <dc-import name="PoradenskyBlok" variant="compact" debug="{{ debug }}" hint-size="100%,90px"></dc-import>
+          <dc-import name="PoradenskyBlok" variant="compact" hint-size="100%,90px"></dc-import>
         </div>
       </article>
 
@@ -180,7 +180,7 @@
       <h2 id="ar-rel-h" class="ar-h2" style="margin:0;color:#15181C;">Další články z rubriky Předpisy</h2>
       <div class="ar-rel">
         <sc-for list="{{ related }}" as="a" hint-placeholder-count="3">
-          <dc-import name="KartaClanku" a="{{ a }}" debug="{{ debug }}" hint-size="100%,400px"></dc-import>
+          <dc-import name="KartaClanku" a="{{ a }}" hint-size="100%,400px"></dc-import>
         </sc-for>
       </div>
     </section>
@@ -190,10 +190,9 @@
     <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   ROWS = [
     { name:'Skupiny řidičského průkazu a přívěs', image:'uploads/clanek-ridicsky-prukaz.png', href:'#' },
@@ -223,7 +222,6 @@ class Component extends DCLogic {
       ],
       rows: this.ROWS.map(r=>({ ...r, href:'clanek-tachograf.dc.html' })),
       related: this.RELATED.map(r=>({ ...r, href:'clanek-tachograf.dc.html' })),
-      debug: this.props.debug ?? true
     };
   }
 }

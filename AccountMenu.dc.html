@@ -78,9 +78,8 @@
     <div style="font-size:13px;line-height:1.5;color:#C5232B;"><strong>Kdy ne:</strong> nepřihlášený stav — tam hlavička otevírá LoginPopup. Iniciály ani avatar se nezobrazují. Položkové callbacky se nepředávají v poli dat, komponenta si je vyrábí z <code>onSelect(id)</code>.</div>
   </div>
 </sc-if>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:560},&quot;open&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null},&quot;userName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Andrea Zelená&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;priceGroup&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Prodejní&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onLogout&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null},&quot;onSelect&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;anchor&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#hd-login&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:560},&quot;open&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null},&quot;userName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Andrea Zelená&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;priceGroup&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Prodejní&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onLogout&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null},&quot;onSelect&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;anchor&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#hd-login&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   // plynulé otevření i zavření: prvek zůstane v DOM po dobu odjezdu (ms), data-shown řídí CSS přechod
   fade(key, open, ms){ ms = ms || 200; const F = this._fx || (this._fx = {}); const f = F[key] || (F[key] = { m:false, s:false, t:null, r:false, w:false });
@@ -204,7 +203,6 @@ class Component extends DCLogic {
       onLogoutClick: ()=>{ const f = P.onLogout; this.close(); if (typeof f === 'function') f(); },
       panelPos: this.state.pos ? ('top:' + this.state.pos.top + 'px;right:' + this.state.pos.right + 'px;') : '',
       panelRef: (el)=>{ this._panel = el; },
-      debug: P.debug ?? true
     };
   }
 }

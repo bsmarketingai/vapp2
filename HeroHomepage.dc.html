@@ -127,9 +127,8 @@
     </button>
   </div>
 </section>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:520},&quot;onPrimary&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;},&quot;onSecondary&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;V1&quot;,&quot;V2&quot;,&quot;V2S&quot;],&quot;default&quot;:&quot;V2&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:520},&quot;onPrimary&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;},&quot;onSecondary&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;V1&quot;,&quot;V2&quot;,&quot;V2S&quot;],&quot;default&quot;:&quot;V2&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { i: 0 };
   SLIDES = [
@@ -175,7 +174,6 @@ class Component extends DCLogic {
       salePartsHref: P.salePartsHref ?? 'nahradnidily.dc.html#/nahradni-dily/akce/',
       onPrimary: P.onPrimary || (()=>{}),
       onSecondary: P.onSecondary || (()=>{}),
-      debug: P.debug ?? true
     };
   }
 }

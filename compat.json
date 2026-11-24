@@ -456,11 +456,6 @@
       "kind": "component"
     },
     {
-      "path": "DebugBar.dc.html",
-      "title": "DebugBar",
-      "kind": "component"
-    },
-    {
       "path": "ControlBar.dc.html",
       "title": "ControlBar",
       "kind": "component"

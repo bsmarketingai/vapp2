@@ -44,9 +44,8 @@
     <div style="font-size:13px;line-height:1.5;color:#C5232B;"><strong>Kdy ne:</strong> nepoužívat pro jednu hodnotu ani pro nespojité volby — na ty jsou checkboxy. Needitovat tu formát ceny; přichází z propů.</div>
   </div>
 </sc-if>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:384,&quot;height&quot;:260},&quot;min&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2000,&quot;tsType&quot;:&quot;number&quot;},&quot;max&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:150000,&quot;tsType&quot;:&quot;number&quot;},&quot;step&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:100,&quot;tsType&quot;:&quot;number&quot;},&quot;valueFrom&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;},&quot;valueTo&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:8000,&quot;tsType&quot;:&quot;number&quot;},&quot;fromLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Cena od&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;toLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Cena do&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;function&quot;,&quot;default&quot;:null},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:384,&quot;height&quot;:260},&quot;min&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2000,&quot;tsType&quot;:&quot;number&quot;},&quot;max&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:150000,&quot;tsType&quot;:&quot;number&quot;},&quot;step&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:100,&quot;tsType&quot;:&quot;number&quot;},&quot;valueFrom&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;},&quot;valueTo&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:8000,&quot;tsType&quot;:&quot;number&quot;},&quot;fromLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Cena od&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;toLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Cena do&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;function&quot;,&quot;default&quot;:null}}">
 const fmt = (n)=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0');
 
 class Component extends DCLogic {
@@ -71,7 +70,7 @@ class Component extends DCLogic {
     const pct = (v)=>((v - min) / (max - min || 1)) * 100;
     const num = (s)=>{ const n = parseInt(String(s).replace(/[^\d]/g,''),10); return isNaN(n) ? null : n; };
     return {
-      standalone: !embedded, debug: P.debug ?? true,
+      standalone: !embedded,
       min, max, step, lo, hi,
       fromLabel: P.fromLabel || 'Cena od', toLabel: P.toLabel || 'Cena do',
       minText: fmt(cvt(lo)), maxText: fmt(cvt(hi)),

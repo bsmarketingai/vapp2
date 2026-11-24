@@ -76,7 +76,7 @@
     <div class="pb-nav" style="flex:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <sc-for list="{{ rubriky }}" as="r" hint-placeholder-count="4">
-          <dc-import name="Chip" kind="secondary" size="small" label="{{ r.name }}" href="{{ r.href }}" debug="{{ debug }}" hint-size="140px,32px"></dc-import>
+          <dc-import name="Chip" kind="secondary" size="small" label="{{ r.name }}" href="{{ r.href }}" hint-size="140px,32px"></dc-import>
         </sc-for>
       </div>
       <a class="pb-a pb-cta pb-all" href="{{ allHref }}" style="margin-left:auto;min-height:44px;padding:0 16px;border-radius:8px;background:transparent;border:0;color:#1E5AA8;transition:background 120ms ease;" style-hover="text-decoration:underline;text-underline-offset:3px;" style-active="transform:translateY(1px);">{{ allLabel }}
@@ -88,7 +88,7 @@
   <div class="pb-cols">
     <div class="pb-cards">
       <sc-for list="{{ featured }}" as="f" hint-placeholder-count="2">
-        <dc-import name="KartaClanku" a="{{ f }}" debug="{{ debug }}" hint-size="100%,400px"></dc-import>
+        <dc-import name="KartaClanku" a="{{ f }}" hint-size="100%,400px"></dc-import>
       </sc-for>
     </div>
 
@@ -118,9 +118,8 @@
     </ul>
   </div>
 </section>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:560},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Poradna&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Zobrazit vše&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#/poradna/&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;rowCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:7,&quot;min&quot;:3,&quot;max&quot;:10,&quot;tsType&quot;:&quot;number&quot;},&quot;featured&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;rows&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;rubriky&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;P1&quot;,&quot;P2&quot;],&quot;default&quot;:&quot;P2&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:560},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Poradna&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Zobrazit vše&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#/poradna/&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;rowCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:7,&quot;min&quot;:3,&quot;max&quot;:10,&quot;tsType&quot;:&quot;number&quot;},&quot;featured&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;rows&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;rubriky&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;P1&quot;,&quot;P2&quot;],&quot;default&quot;:&quot;P2&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   RUBRIKY = [
     { name:'Technický rádce', href:'#/poradna/technicky-radce/' },
@@ -169,7 +168,6 @@ class Component extends DCLogic {
       featuredRest: (Array.isArray(P.featured) && P.featured.length ? P.featured : this.FEATURED).slice(1,2).map(f=>({ name:f.name, image:f.image, href:'clanek-tachograf.dc.html' })),
       // prototyp: všechny články vedou na jediný hotový detail
       rows: (Array.isArray(P.rows) && P.rows.length ? P.rows : this.ROWS).slice(0, Math.max(1, Number(P.rowCount) || 5)).map(r=>({ ...r, href:'clanek-tachograf.dc.html' })),
-      debug: P.debug ?? true
     };
   }
 }

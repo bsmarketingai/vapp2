@@ -46,9 +46,8 @@
     </a>
   </div>
 </article>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:420},&quot;a&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{name,typ,rubrika,image,perex,href}&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:420},&quot;a&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{name,typ,rubrika,image,perex,href}&quot;}}">
 class Component extends DCLogic {
   DEMO = { name:'Tachograf od 1. 7. 2026', typ:'Legislativa', rubrika:'Předpisy', image:'uploads/clanek-tachograf.png',
     perex:'Od 1. července 2026 musí být některé automobily a soupravy s přívěsem s hmotností od 2,5 t do 3,5 t vybaveny chytrým tachografem. Koho se povinnost týká a jak ji splnit.',
@@ -59,7 +58,6 @@ class Component extends DCLogic {
     return {
       name: a.name, typ: a.typ, rubrika: a.rubrika, image: a.image, perex: a.perex,
       href: a.href || '#',
-      debug: P.debug ?? true
     };
   }
 }

@@ -24,7 +24,7 @@
   .pkr-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:8px 16px 28px;margin:-8px -16px -24px;scroll-padding-inline:16px;}
   .pkr-track::-webkit-scrollbar{display:none;}
   .pkr-item{flex:0 0 calc((100% - 80px)/5);min-width:0;scroll-snap-align:start;display:flex;}
-  /* mount komponenty karty nedědí flex — roztáhne se blokově, ne flexem (host má i mount DebugBaru) */
+  /* mount komponenty karty nedědí flex — roztáhne se blokově, ne flexem */
   .pkr-item>.sc-host{display:block;width:100%;min-width:0;}
   .pkr-item .h-card{width:100%;}
   @media (max-width:1559px){ .pkr-item{flex-basis:calc((100% - 60px)/4);} }
@@ -84,9 +84,8 @@
   
   </div>
 </section>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:600},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Nejprodávanější náhradní díly&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Zobrazit celou kategorii&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;detailHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;currency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;CZK&quot;,&quot;EUR&quot;],&quot;default&quot;:&quot;CZK&quot;,&quot;tsType&quot;:&quot;'CZK'|'EUR'&quot;},&quot;items&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:600},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Nejprodávanější náhradní díly&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Zobrazit celou kategorii&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;allHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;detailHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;currency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;CZK&quot;,&quot;EUR&quot;],&quot;default&quot;:&quot;CZK&quot;,&quot;tsType&quot;:&quot;'CZK'|'EUR'&quot;},&quot;items&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;}}">
 class Component extends DCLogic {
   NAV = 'width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#FFFFFF;border:1px solid #B4CEEC;color:#1E5AA8;transition:background 120ms ease,opacity 120ms ease;';
   NAV_OFF = 'opacity:.4;cursor:not-allowed;';
@@ -185,7 +184,6 @@ class Component extends DCLogic {
       nextStyle: this.NAV + (this.state.atEnd ? this.NAV_OFF : ''),
       onPrev: ()=>this.scroll(-1),
       onNext: ()=>this.scroll(1),
-      debug: P.debug ?? true
     };
   }
 }

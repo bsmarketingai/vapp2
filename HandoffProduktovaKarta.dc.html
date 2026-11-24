@@ -71,7 +71,7 @@
         </div>
         <div class="hf-2col" style="display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start;">
           <div style="width:300px;">
-            <dc-import name="ProduktovaKarta" p="{{ pDil }}" show-compare="{{ on }}" debug="{{ off }}" hint-size="300px,520px"></dc-import>
+            <dc-import name="ProduktovaKarta" p="{{ pDil }}" show-compare="{{ on }}" hint-size="300px,520px"></dc-import>
           </div>
           <div style="display:flex;flex-direction:column;gap:10px;">
             <sc-for list="{{ anatomy }}" as="a" hint-placeholder-count="8">
@@ -100,7 +100,7 @@
                 <div style="font-size:16px;font-weight:700;">{{ c.title }}</div>
                 <div style="font-size:13px;line-height:1.4;color:#666E78;">{{ c.note }}</div>
               </div>
-              <dc-import name="ProduktovaKarta" p="{{ c.p }}" show-compare="{{ c.compare }}" debug="{{ off }}" hint-size="300px,520px"></dc-import>
+              <dc-import name="ProduktovaKarta" p="{{ c.p }}" show-compare="{{ c.compare }}" hint-size="300px,520px"></dc-import>
             </div>
           </sc-for>
         </div>
@@ -142,10 +142,10 @@
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666E78;">Živý grid — zužuj okno, počet sloupců se přepíná na hranicích 1000 · 820 · 550</div>
           <div class="hf-grid">
-            <dc-import name="ProduktovaKarta" p="{{ pG1 }}" debug="{{ off }}" hint-size="100%,500px"></dc-import>
-            <dc-import name="ProduktovaKarta" p="{{ pG2 }}" debug="{{ off }}" hint-size="100%,500px"></dc-import>
-            <dc-import name="ProduktovaKarta" p="{{ pG3 }}" debug="{{ off }}" hint-size="100%,500px"></dc-import>
-            <dc-import name="ProduktovaKarta" p="{{ pG4 }}" debug="{{ off }}" hint-size="100%,500px"></dc-import>
+            <dc-import name="ProduktovaKarta" p="{{ pG1 }}" hint-size="100%,500px"></dc-import>
+            <dc-import name="ProduktovaKarta" p="{{ pG2 }}" hint-size="100%,500px"></dc-import>
+            <dc-import name="ProduktovaKarta" p="{{ pG3 }}" hint-size="100%,500px"></dc-import>
+            <dc-import name="ProduktovaKarta" p="{{ pG4 }}" hint-size="100%,500px"></dc-import>
           </div>
         </div>
         <div style="background:#EFF4FB;border-radius:8px;padding:16px 18px;font-size:13px;line-height:1.6;color:#173C70;"><strong>Container query, ne viewport:</strong> karta měří <em>svou</em> šířku (<span style="font-family:'JetBrains Mono',monospace;">container-type:inline-size</span>). Pod 270 px šířky karty se tlačítko Koupit přepne na icon-only 44 px a kvantifikátor dorovná zbytek řádku — řádek se nikdy nezalomí do dvou. To je jediná výjimka z pásmové škály v celém projektu.</div>

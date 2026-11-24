@@ -84,7 +84,7 @@
 </helmet>
 <div data-screen-label="Přívěsy V2" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
 
   <dc-import name="Hlavicka" active="Přívěsy" currency="{{ currency }}" on-currency-change="{{ onCurrency }}" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" menu-tree="{{ menuTree }}" search-value="{{ headerSearch }}" on-search-change="{{ onHeaderSearch }}" compare-count="{{ cmpCountNum }}" on-compare="{{ openCompare }}" hint-size="100%,150px"></dc-import>
 
@@ -93,7 +93,7 @@
 
     <!-- breadcrumb + title -->
     <div style="margin:4px 0 6px;">
-      <dc-import name="Breadcrumb" items="{{ crumbItems }}" on-navigate="{{ onCrumbNav }}" bare="{{ true }}" debug="{{ debug }}" hint-size="100%,20px"></dc-import>
+      <dc-import name="Breadcrumb" items="{{ crumbItems }}" on-navigate="{{ onCrumbNav }}" bare="{{ true }}" hint-size="100%,20px"></dc-import>
     </div>
     <h1 class="pg-h1" style="margin:0;font-size:36px;font-weight:700;letter-spacing:-0.02em;color:#142F56;">{{ pageTitle }}</h1>
     <sc-if value="{{ inLeaf }}" hint-placeholder-val="">
@@ -109,7 +109,7 @@
         <a class="a11y-i hvx2" href="{{ backFromLeafHref }}" onClick="{{ backFromLeaf }}" style="display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:14px;font-weight:700;color:#1E5AA8;cursor:pointer;"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>{{ backFromLeafLabel }}</a>
       </sc-if>
       <sc-if value="{{ inGroups }}" hint-placeholder-val="{{ true }}">
-      <dc-import name="VypisKategorii" layout="{{ categoryLayout }}" nejhledanejsi="{{ false }}" categories="{{ categoriesData }}" brand-categories="{{ brandCategories }}" on-open-brand="{{ onOpenBrand }}" on-open-category="{{ onOpenCategory }}" on-pick-sub="{{ onPickSub }}" debug="{{ debug }}" hint-size="100%,500px"></dc-import>
+      <dc-import name="VypisKategorii" layout="{{ categoryLayout }}" nejhledanejsi="{{ false }}" categories="{{ categoriesData }}" brand-categories="{{ brandCategories }}" on-open-brand="{{ onOpenBrand }}" on-open-category="{{ onOpenCategory }}" on-pick-sub="{{ onPickSub }}" hint-size="100%,500px"></dc-import>
       </sc-if>
       <sc-if value="{{ inSubcatsCompact }}" hint-placeholder-val="">
         <div style="display:flex;flex-direction:column;gap:12px;">
@@ -117,7 +117,7 @@
             <button type="button" class="a11y-i" onClick="{{ backToGroups }}" style="display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:14px;font-weight:700;color:#1E5AA8;cursor:pointer;padding:0 10px 0 4px;"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>{{ backToGroupsLabel }}</button>
             <span style="font-size:13px;color:#666E78;margin-left:auto;">{{ activeGroupCount }} modelů</span>
           </div>
-          <dc-import name="VypisKategorii" layout="kompaktni" nejhledanejsi="{{ false }}" categories="{{ subcatCategories }}" on-open-category="{{ onOpenSubcat }}" debug="{{ debug }}" hint-size="100%,300px"></dc-import>
+          <dc-import name="VypisKategorii" layout="kompaktni" nejhledanejsi="{{ false }}" categories="{{ subcatCategories }}" on-open-category="{{ onOpenSubcat }}" hint-size="100%,300px"></dc-import>
         </div>
       </sc-if>
       <sc-if value="{{ inSubcatsTiles }}" hint-placeholder-val="">
@@ -206,7 +206,7 @@
 
     <!-- stránkování + načíst další -->
     <div style="padding:22px 0 6px;">
-      <dc-import name="Paginace" page="{{ pgPage }}" page-count="{{ pgCount }}" shown-count="{{ shownCount }}" total-count="{{ pgTotal }}" next-batch="{{ nextBatch }}" on-page="{{ onPageChange }}" on-load-more="{{ loadMore }}" debug="{{ debug }}" hint-size="100%,180px"></dc-import>
+      <dc-import name="Paginace" page="{{ pgPage }}" page-count="{{ pgCount }}" shown-count="{{ shownCount }}" total-count="{{ pgTotal }}" next-batch="{{ nextBatch }}" on-page="{{ onPageChange }}" on-load-more="{{ loadMore }}" hint-size="100%,180px"></dc-import>
     </div>
 
     <!-- support -->
@@ -222,12 +222,11 @@
     <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="FiltrDrawer" open="{{ filterOpen }}" currency="{{ currency }}" price-from="{{ priceFrom }}" price-to="{{ priceTo }}" on-price-change="{{ onPriceChange }}" flags="{{ filterFlags }}" on-toggle-flag="{{ onToggleFlag }}" only-stock="{{ onlyStock }}" on-toggle-stock="{{ toggleStock }}" groups="{{ filterGroups }}" result-count="{{ resultCount }}" on-toggle-option="{{ onFilterOption }}" on-clear="{{ clearFilters }}" on-close="{{ closeFilter }}" debug="{{ debug }}" hint-size="0px,0px"></dc-import>
+  <dc-import name="FiltrDrawer" open="{{ filterOpen }}" currency="{{ currency }}" price-from="{{ priceFrom }}" price-to="{{ priceTo }}" on-price-change="{{ onPriceChange }}" flags="{{ filterFlags }}" on-toggle-flag="{{ onToggleFlag }}" only-stock="{{ onlyStock }}" on-toggle-stock="{{ toggleStock }}" groups="{{ filterGroups }}" result-count="{{ resultCount }}" on-toggle-option="{{ onFilterOption }}" on-clear="{{ clearFilters }}" on-close="{{ closeFilter }}" hint-size="0px,0px"></dc-import>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;categoryLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;podle komponenty&quot;,&quot;dlazdice&quot;,&quot;kompaktni&quot;,&quot;kompaktni-akordeon&quot;],&quot;default&quot;:&quot;podle komponenty&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;},&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;freeShippingThreshold&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:5000,&quot;step&quot;:100,&quot;unit&quot;:&quot;Kč&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultOnlyStock&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultSort&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pop&quot;,&quot;cheap&quot;,&quot;exp&quot;,&quot;az&quot;],&quot;default&quot;:&quot;pop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;showConsultancy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;categoryLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;podle komponenty&quot;,&quot;dlazdice&quot;,&quot;kompaktni&quot;,&quot;kompaktni-akordeon&quot;],&quot;default&quot;:&quot;podle komponenty&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;freeShippingThreshold&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:5000,&quot;step&quot;:100,&quot;unit&quot;:&quot;Kč&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultOnlyStock&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultSort&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pop&quot;,&quot;cheap&quot;,&quot;exp&quot;,&quot;az&quot;],&quot;default&quot;:&quot;pop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;showConsultancy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;}}">
 class Component extends DCLogic {
   FLAGS = [{t:'Sleva',on:false},{t:'Doprava zdarma',on:false},{t:'Skladem',on:false},{t:'Skladem u dodavatele',on:false}];
   closePanel(){ if(this.state.filterOpen) this.setState({ filterOpen:false }); }
@@ -246,7 +245,7 @@ class Component extends DCLogic {
       menuOpen:false, descOpen:false, filterOpen:false, sortOpen:false,
       priceFrom:0, priceTo:300000, flags:null,
       view:'groups', path:[], leafPath:null, subcat:null, onlyStock: props.defaultOnlyStock ?? false, sort: props.defaultSort ?? 'pop',
-      cart:{}, brands:{}, params:{}, accOpen:{ 'Výrobce':true }, compare:{}, qty:{}, pageFrom:1, pageTo:1, catLayout:null, debugOverride:null, hoverCard:null,
+      cart:{}, brands:{}, params:{}, accOpen:{ 'Výrobce':true }, compare:{}, qty:{}, pageFrom:1, pageTo:1, catLayout:null, hoverCard:null,
       searchQ:'', searchFocus:false, loading:false, macro:null, brandFocus:null, saleOnly:false,
       currency:'CZK',
       headerVariant:'V3'
@@ -550,7 +549,6 @@ class Component extends DCLogic {
     const propLayout = LAYOUTS.indexOf(this.props.categoryLayout) >= 0
       ? this.props.categoryLayout : this.DEFAULT_CATEGORY_LAYOUT;
     const effLayout = s.catLayout || propLayout;
-    const effDebug  = s.debugOverride === null ? (this.props.debug ?? true) : s.debugOverride;
     const filteredAll = this.filtered();
     const freeShip = this.props.freeShippingThreshold ?? 1500;
     const factor = 1;
@@ -836,12 +834,9 @@ class Component extends DCLogic {
       categoryLayout: effLayout,
       brandCategories: [],
       onOpenBrand: (b)=>openBrand(b),
-      debug: effDebug,
       plActive: effLayout === 'dlazdice' ? 'v2' : (effLayout === 'kompaktni-akordeon' ? 'v1b' : 'v1'),
       plVariants: [{ id:'v1', label:'Varianta 1' }, { id:'v1b', label:'Varianta 1b' }, { id:'v2', label:'Varianta 2' }],
       plSelect: (id)=>this.setState({ catLayout: id === 'v2' ? 'dlazdice' : (id === 'v1b' ? 'kompaktni-akordeon' : 'kompaktni') }),
-      plDebugOn: effDebug,
-      plToggleDebug: ()=>this.setState({ debugOverride: !effDebug }),
       headerVariant: s.headerVariant,
       headerVariantOptions: [{ id:'classic', label:'V1 topbar' }, { id:'kontakt', label:'V2 kontakt' }],
       onHeaderVariant: (v)=>this.setState({ headerVariant: v }),
@@ -902,9 +897,8 @@ class Component extends DCLogic {
 }
 
 
-// DebugBar: prop debug -> šablona
 (function(){ const rv = Component.prototype.renderVals;
-  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; if (v.debug === undefined) v.debug = this.props.debug ?? true; return v; }; })();
+  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; return v; }; })();
 </script>
 </body>
 </html>

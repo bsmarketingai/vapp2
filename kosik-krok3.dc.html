@@ -260,10 +260,9 @@
       </div>
     </div>
   </footer>
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   DEMO_SUM = { rows:[
       { label:'Zboží (4 ks) bez DPH', value:'7 083\u00a0Kč' }, { label:'DPH 21 %', value:'1 487\u00a0Kč' },
@@ -303,7 +302,6 @@ class Component extends DCLogic {
     else { placeHead = 'Doručovací adresa'; placeLines = [ f.street || '', [f.zip, f.city].filter(Boolean).join(' '), countryName ].filter(Boolean); }
     const rowVal = (free)=> 'white-space:nowrap;font-weight:500;color:' + (free ? '#0B6937' : '#15181C') + ';';
     return {
-      debug: P.debug ?? true,
       steps,
       items: sum.items || this.DEMO_SUM.items,
       name: [f.first, f.last].filter(Boolean).join(' '),

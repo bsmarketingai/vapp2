@@ -68,12 +68,12 @@
 </helmet>
 <div data-screen-label="Poptat produkt" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
-  <dc-import name="Hlavicka" active="" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Hlavicka" active="" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" hint-size="100%,150px"></dc-import>
 
   <main class="vp-in" style="padding-top:14px;padding-bottom:48px;">
     <div style="margin:4px 0 10px;">
-      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" debug="{{ debug }}" hint-size="100%,20px"></dc-import>
+      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" hint-size="100%,20px"></dc-import>
     </div>
 
     <h1 class="pq-h1" style="margin:0;color:#142F56;">Poptat produkt</h1>
@@ -102,7 +102,7 @@
           <label class="pq-lbl" for="pq-phone">Telefon <span class="pq-req" aria-hidden="true">*</span></label>
           <div class="pq-tel">
             <div class="pq-telpfx">
-              <dc-import name="Select" options="{{ prefixes }}" value="{{ prefix }}" on-change="{{ onPrefix }}" aria-label="Předvolba" debug="{{ debug }}" hint-size="100%,44px"></dc-import>
+              <dc-import name="Select" options="{{ prefixes }}" value="{{ prefix }}" on-change="{{ onPrefix }}" aria-label="Předvolba" hint-size="100%,44px"></dc-import>
             </div>
             <input class="pq-inp" id="pq-phone" name="phone" type="tel" required="{{ true }}" autocomplete="tel-national" inputmode="tel" aria-describedby="pq-phone-err" placeholder="Např. 602 123 456" value="{{ phone }}" onChange="{{ onPhone }}">
           </div>
@@ -143,7 +143,7 @@
         <div>
           <span class="pq-lbl">Fotografie <span style="font-weight:400;color:#666E78;">(nepovinné)</span></span>
           <div class="pq-drop">
-            <dc-import name="Tlacitko" variant="ontint" size="medium" label="Vybrat nebo vyfotit" icon="photo" on-click="{{ onPickFiles }}" debug="{{ false }}" hint-size="220px,44px"></dc-import>
+            <dc-import name="Tlacitko" variant="ontint" size="medium" label="Vybrat nebo vyfotit" icon="photo" on-click="{{ onPickFiles }}" hint-size="220px,44px"></dc-import>
             <span class="pq-note" style="max-width:420px;text-wrap:pretty;">Fotka štítku nebo dílu nám pomůže. Až 5 fotek, každá do 10 MB.</span>
           </div>
           <input id="pq-files" type="file" accept="image/*" multiple="{{ true }}" onChange="{{ onFiles }}" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);">
@@ -154,7 +154,7 @@
                   <span aria-hidden="true" style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="photo" size="{{ 24 }}" hint-size="24px,24px"></dc-import></span>
                   <span style="flex:1;min-width:0;font-size:15px;font-weight:500;color:#15181C;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ f.name }}</span>
                   <span class="pq-note" style="flex:none;">{{ f.size }}</span>
-                  <dc-import name="Tlacitko" variant="ghost" size="standard" icon-only="{{ true }}" icon="trash" aria-label="{{ f.removeLabel }}" on-click="{{ f.onRemove }}" debug="{{ false }}" hint-size="36px,36px"></dc-import>
+                  <dc-import name="Tlacitko" variant="ghost" size="standard" icon-only="{{ true }}" icon="trash" aria-label="{{ f.removeLabel }}" on-click="{{ f.onRemove }}" hint-size="36px,36px"></dc-import>
                 </div>
               </sc-for>
             </div>
@@ -163,7 +163,7 @@
 
         <div style="display:flex;flex-direction:column;gap:12px;">
           <div style="display:flex;">
-            <dc-import name="Tlacitko" variant="primary" size="large" label="Odeslat poptávku" icon-trailing="chevron-right" on-click="{{ onSubmitClick }}" debug="{{ false }}" hint-size="240px,52px"></dc-import>
+            <dc-import name="Tlacitko" variant="primary" size="large" label="Odeslat poptávku" icon-trailing="chevron-right" on-click="{{ onSubmitClick }}" hint-size="240px,52px"></dc-import>
           </div>
           <p class="pq-note" style="margin:0;text-wrap:pretty;">Odesláním souhlasíte se <a href="#">zpracováním osobních údajů</a>. Údaje použijeme jen k odpovědi na tuto poptávku.</p>
         </div>
@@ -176,7 +176,7 @@
           <span aria-hidden="true" style="display:inline-flex;width:44px;height:44px;border-radius:999px;background:#E9F8EF;color:#0E7F43;align-items:center;justify-content:center;"><dc-import name="Ikony" icon-name="circle-check" size="{{ 24 }}" hint-size="24px,24px"></dc-import></span>
           <h2 style="margin:0;font-size:28px;font-weight:700;line-height:1.2;letter-spacing:-0.01em;">Poptávku máme</h2>
           <p style="margin:0;font-size:16px;line-height:1.6;color:#5A626C;max-width:560px;text-wrap:pretty;">Ozveme se na <strong style="color:#15181C;">{{ sentEmail }}</strong> v pracovní dny do 24 hodin. Pokud to spěchá, zavolejte na 323 605 314.</p>
-          <dc-import name="Tlacitko" variant="secondary" size="medium" label="Poslat další poptávku" on-click="{{ onReset }}" debug="{{ false }}" hint-size="220px,44px"></dc-import>
+          <dc-import name="Tlacitko" variant="secondary" size="medium" label="Poslat další poptávku" on-click="{{ onReset }}" hint-size="220px,44px"></dc-import>
         </div>
       </sc-if>
 
@@ -199,10 +199,9 @@
     <dc-import name="Paticka" bare="true" hide-promo="{{ true }}" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   state = { name:'', company:'', ptype:'', email:'', phone:'', prefix:'+420', text:'', files:[], sent:false, touched:false };
   TYPES = [{ value:'prives', label:'Přívěs' }, { value:'dil', label:'Náhradní díl' }];
@@ -242,7 +241,6 @@ class Component extends DCLogic {
     const len = s.text.trim().length;
     const ok = len >= 25;
     return {
-      debug: this.props.debug ?? true,
       crumbItems: [{ name:'Domů', href:'index.dc.html' }, { name:'Poptat produkt', href:'#' }],
       formOpen: !s.sent, sent: s.sent, sentEmail: s.email,
       name: s.name, email: s.email, phone: s.phone, text: s.text,

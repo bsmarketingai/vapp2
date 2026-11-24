@@ -48,9 +48,8 @@
     </div>
   </div>
 </section>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:360},&quot;overline&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Náš příběh&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rodinná tradice od roku 1991&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;text&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;stats&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{value:string,label:string}[]&quot;},&quot;cta&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Přečíst příběh VAPP&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onRead&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:360},&quot;overline&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Náš příběh&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rodinná tradice od roku 1991&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;text&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;stats&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{value:string,label:string}[]&quot;},&quot;cta&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Přečíst příběh VAPP&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onRead&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;}}">
 class Component extends DCLogic {
   DEFAULT_STATS = [
     { value:'35 let', label:'výroby přívěsů' },
@@ -67,7 +66,6 @@ class Component extends DCLogic {
       cta: P.cta ?? 'Přečíst příběh VAPP',
       ctaHref: P.ctaHref ?? 'onas.dc.html',
       onRead: P.onRead || (()=>{}),
-      debug: P.debug ?? true
     };
   }
 }

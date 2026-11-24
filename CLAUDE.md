@@ -182,7 +182,7 @@ Mezihodnoty mimo tuto řadu nepoužívat.
 - **Motion:** 60 ms stisk · 120 ms barvy a pozadí · 150 ms stíny · `motion.panel` **400 ms** posun panelů (drill-down menu, drawer filtrů) · easing `ease`.
 - **Rozměry:** `size.control` 44 px — input, Kvantifikátor Standard, ikonové tlačítko, Tlačítko Medium. `size.row` 48 px — řádek seznamu a navigace.
 - **Jen světlý režim.** Dark mode se nedělá.
-- **Z-index (zápis dnešního stavu, nic se nepřečísluje):** `z.stickyBar` 60 · `z.header` 70 · `z.drawerOverlay` 80 · `z.drawerPanel` 90 · `z.toast` 95 · `z.presenter` 96 · `z.debug` 99. Panel mobilního menu má z-index 60 uvnitř stohovacího kontextu hlavičky — není to globální hodnota. **Každá nová hodnota se sem zapíše.**
+- **Z-index (zápis dnešního stavu, nic se nepřečísluje):** `z.stickyBar` 60 · `z.header` 70 · `z.drawerOverlay` 80 · `z.drawerPanel` 90 · `z.toast` 95 · `z.presenter` 96. Panel mobilního menu má z-index 60 uvnitř stohovacího kontextu hlavičky — není to globální hodnota. **Každá nová hodnota se sem zapíše.**
 
 ---
 
@@ -320,16 +320,9 @@ Systém prošel auditem a splňuje AA. Nové komponenty i změny musí tuto úro
 
 ---
 
-## 10. DebugBar — vývojářský nástroj
+## 10. DebugBar — odstraněno (24. 11. 2026)
 
-`DebugBar.dc.html` **stojí mimo design systém.** Tokeny, minimum písma ani kontrast se na něj nevztahují a neposuzuje se v auditech.
-
-- Pruh **v toku dokumentu jako první prvek `body`** (netlačí se přes obsah webu, obsah se o jeho výšku posune dolů), výška 10 px (prop `height`), pozadí `#15181C`, bílý monospace text, `pointer-events:none`, sbalovací úchyt „▼" vpravo nahoře.
-- Obsah: `pásmo · rozsah · šířka XXXpx`, měřeno z `document.documentElement.clientWidth` (na tu reagují media queries).
-- Vykresluje se jako DOM uzel připojený přímo k `document.body` — kvůli `container-type` na kartě, který by fixní pozici zlomil. Uklízí osiřelé uzly po hot-reloadu.
-- Sdílený registr `window.__vappDebugBar` s počítadlem referencí `count` a potlačením `suppress`. Bar je vidět, právě když `count > 0 && suppress === 0`. Jedno odškrtnutí kdekoli ho zhasne na celé stránce.
-- **Prop `debug`** (boolean, default `true`) má každá komponenta i stránka a předává ho dolů. Výjimky bez baru: `Tlacitko` (kořen `<button>`) a `Ikony`.
-- Bar má `aria-hidden="true"`.
+Debug režim sloužil jen při vývoji. **Z návrhu je odstraněný:** komponenta `DebugBar` už neexistuje, stránky ani komponenty nemají prop `debug`, `debugOn` ani `onToggleDebug` a prezentační lišta nemá přepínač Debug. Pro kodéra nemá žádný význam a nic z něj se neimplementuje.
 
 ---
 
@@ -337,12 +330,12 @@ Systém prošel auditem a splňuje AA. Nové komponenty i změny musí tuto úro
 
 `PrezentacniLista.dc.html` **stojí mimo design systém.** Tokeny, minimum písma ani kontrast se na ni nevztahují a neposuzuje se v auditech. Do produkčního návrhu e-shopu nepatří.
 
-- Účel: klient u prezentace nevidí panel tweaks, proto si varianty zobrazení kategorií přepíná přímo na stránce. Součástí je i přepínač DebugBaru.
-- Fixní pill u **spodní** hrany okna, vodorovně centrovaný, `z-index` `z.presenter` 96. Horní hranu obsazuje sticky hlavička a DebugBar. Nezaměňovat s **topbarem** — tak se říká tmavému pruhu s otevírací dobou uvnitř `Hlavicky`.
-- Barvy jen `#142F56`, `#1E5AA8`, `#B4CEEC`, `#FFFFFF`. Jediná media query je `max-width:419px` (skryje popisek, zúží tlačítka), aby se lišta vešla na 320 px. Rádius bloku (`.pl-shell`) je 999 px, na `max-width:819px` 8 px — zalomený víceřádkový pill vypadá rozbitě.
-- Lišta se dá sbalit tlačítkem `✕` na konci; ve sbaleném stavu zůstane jen tlačítko „Varianty“. Stav drží komponenta (`state.open`), stránky ho neřeší.
+- Účel: klient u prezentace nevidí panel tweaks, proto si otevřené varianty přepíná přímo na stránce.
+- **Podoba od 24. 11. 2026:** kulaté plovoucí tlačítko 48 × 48 px **vlevo dole** (ikona `adjustments-horizontal`, otevřeno `x`), `z-index` `z.presenter` 96. Ve výchozím stavu zavřené. Klik otevře nad tlačítkem panel „Varianty prezentace“ (šířka `min(300px, 100vw − 32px)`), skupiny jsou pod sebou. Zavírá se křížkem v panelu, znovu tlačítkem, klávesou Escape nebo kliknutím mimo. Stav drží komponenta (`state.open`).
+- Skupina se **dvěma** variantami se kreslí jako přepínač (`role="switch"`): nahoře název skupiny, pod ním aktuální stav. Zapnuto = varianta s id `on`, jinak druhá varianta. Skupiny se třemi a více variantami zůstávají jako tlačítka.
+- Barvy jen `#142F56`, `#1E5AA8`, `#B4CEEC`, `#FFFFFF`.
 - Skupin přepínačů umí šest (`label`/`variants`/`active`/`onSelect` + číslované varianty 2–6); skupina se vykreslí, jen když dostane neprázdná data.
-- Props: `label`, `variants` (data, prázdné = vlastní default), `active`, `onSelect(id)`, `debugOn`, `onToggleDebug()`. Pole `variants` nese **jen data** — per-položkové `onClick` si komponenta vyrábí sama.
+- Props: `label`, `variants` (data, prázdné = vlastní default), `active`, `onSelect(id)`. Pole `variants` nese **jen data** — per-položkové `onClick` si komponenta vyrábí sama.
 - **Závazné mapování, nikdy se nepřečísluje:** `v1` = `kompaktni` (dnešní stav webu, výchozí volba), `v2` = `dlazdice` (návrh redukce). V UI lišty jsou vidět jen čísla, ne názvy variant. Druhá skupina na Náhradních dílech je `Sticky:` `S1` / `S2` / `S3` (chování sticky lišty vůči hlavičce, viz §5), třetí `Fotka:` (poměr stran produktové fotky, `--vp-photo-ar`: `V1` 16:10, `V2` 4:3, `V3` 1:1; výchozí `V2` 4:3 — shodný s defaultem karty na celém webu) — **rozhodnuto 15. 10. 2026: V2 4:3 na celém webu, přepínač odstraněný, vodítka v `ProduktovaKarta` smazaná** a čtvrtá `XS sloupce:` (`--vp-xs-cols`, 1 nebo 2 sloupce výpisu v pásmech XS i XXS od 320 px; pod 320 px vždy 1 — hranice 320 je výjimka mimo škálu, jen pro tento přepínač).
 - **Poptat produkt — otevřené varianty PP1 / PP2 / PP3** (skupina `Poptat:` v liště na homepage; volba se ukládá do `localStorage` `vapp-pp` a platí na všech stránkách, `Hlavicka` ji čte a posílá `MobilniMenu` jako `inquiryMode`; default `PP1`): `PP1` = primární tlačítko vpravo v navigačním řádku, v mobilním menu tlačítko jako poslední položka pod Poradnou · `PP2` = na stejném místě vpravo jako standardní záložka bez ikony, v mobilním menu standardní poslední položka s ikonou · `PP3` = poslední záložka hned za Poradnou bez ikony, v mobilním menu standardní poslední položka bez ikony.
 - **Nejhledanější na výpisu přívěsů — rozhodnuto 15. 10. 2026: řádek se na `privesy-V1` nezobrazuje** (na žádné úrovni), zůstává jen na Náhradních dílech. Přepínač `Nejhledanější:` je z lišty odstraněný. Kód NEJ1–NEJ3 (`nejVer`, `topLogos`) zatím zůstává — smazat po finálním potvrzení. Původní popis — varianty NEJ1 / NEJ2 / NEJ3 (skupina `Nejhledanější:` v liště na `privesy-V1`, stav `nejVer`, default `NEJ1`; platí jen na hlavní úrovni výpisu): `NEJ1` = chipy kategorií (dnešní stav) · `NEJ2` = chipy 4 prodávaných značek (VAPP, Agados, STEMA, UNSINN) · `NEJ3` = loga těchže značek v pillu výšky chipu Small (32 px, bílá, linka `#B4CEEC`, hover `#5189CC`, logo výška 16) — prop `topLogos` ve `VypisKategorii`; chybějící logo nahrazuje název značky.
@@ -353,7 +346,7 @@ Systém prošel auditem a splňuje AA. Nové komponenty i změny musí tuto úro
 - **Poptat produkt — rozhodnuto 15. 10. 2026: PP1** (primární tlačítko vpravo v navigačním řádku, v mobilním menu tlačítko jako poslední položka). Přepínač `Poptat:` je z lišty odstraněný, `Hlavicka` používá pevně `PP1` a `localStorage` `vapp-pp` už neovlivňuje výsledek. Kód PP2/PP3 zatím zůstává — smazat po finálním potvrzení.
 - **Výběr jazyka v hlavičce — rozhodnuto 15. 10. 2026: J2** (samostatná vlajka s popiskem vedle Přihlásit). Přepínač `Jazyk:` je z lišty na homepage odstraněný, `langVer` je pevně `J2`. Kód varianty J1 (jazyk v boxu košíku) zatím zůstává — smazat po finálním potvrzení.
 - **Struktura Náhradních dílů — rozhodnuto 15. 10. 2026: V1 (8 kategorií).** `hubList()` používá pevně `v1`. Na `nahradnidily` ani `privesy-V1` už nejsou otevřené varianty, proto je `PrezentacniLista` z obou stránek **odstraněná úplně** (lišta zůstává jen na homepage). Data V2 v `HUBS` zatím zůstávají — smazat po finálním potvrzení. Původní popis: **Výjimka `nahradnidily.dc.html`:** tam lišta nepřepíná layout dlaždic, ale **strukturu sdružovacích kategorií** — `v1` = 8 kategorií, `v2` = 6 kategorií (viz §12). Layout dlaždic zůstává na tweaku `categoryLayout`.
-- Na stránce je zdrojem pravdy stav (`catLayout`, `debugOverride`); prop `categoryLayout` zůstává výchozí hodnotou pro tweak, stav ho přebíjí. `DEFAULT_CATEGORY_LAYOUT` zůstává `kompaktni`.
+- Na stránce je zdrojem pravdy stav (`catLayout`); prop `categoryLayout` zůstává výchozí hodnotou pro tweak, stav ho přebíjí. `DEFAULT_CATEGORY_LAYOUT` zůstává `kompaktni`.
 
 ---
 

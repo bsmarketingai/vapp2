@@ -88,8 +88,8 @@
 </helmet>
 <div data-screen-label="Půjčovna" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
-  <dc-import name="Hlavicka" active="Půjčovna" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Hlavicka" active="Půjčovna" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" hint-size="100%,150px"></dc-import>
 
   <main style="margin:0;padding:0;">
     <section aria-label="Úvod půjčovny" style="background:#FFFFFF;">
@@ -97,7 +97,7 @@
     <div class="pj-hero">
       <div style="min-width:0;display:flex;flex-direction:column;">
         <div style="margin:4px 0 6px;">
-          <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" debug="{{ debug }}" hint-size="100%,20px"></dc-import>
+          <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" hint-size="100%,20px"></dc-import>
         </div>
         <h1 class="pj-h1" style="margin:0;color:#142F56;text-wrap:balance;">Půjčovna přívěsů v Popovičkách u Prahy</h1>
         <p class="pj-lead" style="margin:12px 0 0;max-width:760px;color:#5A626C;text-wrap:pretty;">Spolehlivé řešení pro každého, kdo potřebuje rychle a bez starostí zajistit přepravu nákladu, ať jste jednotlivec, nebo firma. Vybírejte z 21 přívěsů na stěhování, stavbu, auto, motorku i koně. Platíte za každých započatých 24 hodin, za víkend v pronájmu jeden den odečteme.</p>
@@ -154,7 +154,7 @@
       </div>
       <p style="margin:16px 0 0;font-size:14px;line-height:1.5;color:#5A626C;text-wrap:pretty;">Všechny ceny jsou včetně DPH za každých započatých 24 hodin. Ke každému přívěsu si můžete půjčit i příslušenství – naviják nebo upínací popruhy za 150 Kč.</p>
       <div style="padding:22px 0 6px;">
-        <dc-import name="Paginace" page="{{ pgPage }}" page-count="{{ pgCount }}" shown-count="{{ shownCount }}" total-count="{{ pgTotal }}" next-batch="{{ nextBatch }}" on-page="{{ onPageChange }}" on-load-more="{{ loadMore }}" debug="{{ debug }}" hint-size="100%,180px"></dc-import>
+        <dc-import name="Paginace" page="{{ pgPage }}" page-count="{{ pgCount }}" shown-count="{{ shownCount }}" total-count="{{ pgTotal }}" next-batch="{{ nextBatch }}" on-page="{{ onPageChange }}" on-load-more="{{ loadMore }}" hint-size="100%,180px"></dc-import>
       </div>
     </section>
 
@@ -239,10 +239,9 @@
     <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
   state = { pageFrom:1, pageTo:1, wideXXL:false, mobile:false, hoverCard:null, sort:'vychozi', typ:'vse', onlyB:false };
   TYPES = [['vse','Všechny typy'],['valnik','Nebrzděné valníky'],['brzdeny','Brzděné valníky'],['sklapec','Sklápěče'],['moto','Přepravníky motocyklů'],['auto','Přepravníky automobilů'],['kone','Přepravníky koní']];
@@ -319,7 +318,6 @@ class Component extends DCLogic {
     const n = all.length;
     return {
       pjOpenNow: (()=>{ const d = new Date(); const wd = d.getDay(); const m = d.getHours()*60 + d.getMinutes(); return wd>=1 && wd<=5 && m>=510 && m<960; })(),
-      debug: this.props.debug ?? true,
       crumbItems: [{ name:'Úvod', href:'index.dc.html' }, { name:'Půjčovna', href:'#' }],
       products,
       sortOptions: [{ value:'vychozi', label:'Doporučené' }, { value:'dostupnost', label:'Dle dostupnosti' }],

@@ -44,7 +44,7 @@
     </div>
     <sc-if value="{{ formClosed }}" hint-placeholder-val="{{ true }}">
       <div style="flex:none;">
-        <dc-import name="Tlacitko" variant="primary" size="medium" label="Položit dotaz" icon="message-plus" on-click="{{ openForm }}" debug="{{ false }}" hint-size="170px,44px"></dc-import>
+        <dc-import name="Tlacitko" variant="primary" size="medium" label="Položit dotaz" icon="message-plus" on-click="{{ openForm }}" hint-size="170px,44px"></dc-import>
       </div>
     </sc-if>
   </div>
@@ -53,7 +53,7 @@
     <form style="background:#F7F9FB;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px;max-width:840px;" onSubmit="{{ onSubmit }}">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
         <h4 style="margin:0;display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;line-height:1.35;"><span aria-hidden="true" style="display:flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="messages" size="24" hint-size="24px,24px"></dc-import></span>Nový dotaz</h4>
-        <dc-import name="Tlacitko" variant="text" size="standard" label="Zrušit" on-click="{{ closeForm }}" debug="{{ false }}" hint-size="80px,36px"></dc-import>
+        <dc-import name="Tlacitko" variant="text" size="standard" label="Zrušit" on-click="{{ closeForm }}" hint-size="80px,36px"></dc-import>
       </div>
 
       <div class="dq-row">
@@ -96,7 +96,7 @@
       </div>
 
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <dc-import name="Tlacitko" variant="primary" size="medium" label="Zeptat se" type="submit" on-click="{{ onSubmitClick }}" debug="{{ false }}" hint-size="140px,44px"></dc-import>
+        <dc-import name="Tlacitko" variant="primary" size="medium" label="Zeptat se" type="submit" on-click="{{ onSubmitClick }}" hint-size="140px,44px"></dc-import>
         <span style="font-size:13px;font-weight:500;color:#666E78;">Dotaz se zveřejní po odpovědi našeho technika.</span>
       </div>
     </form></div></div>
@@ -139,7 +139,7 @@
             <div style="margin:12px 0 0 28px;font-size:13px;font-weight:700;color:#666E78;">Čeká na odpověď našeho technika.</div>
           </sc-if>
           <div style="margin-top:12px;margin-left:28px;">
-            <dc-import name="Tlacitko" variant="text" size="standard" label="Reagovat" on-click="{{ q.onReply }}" debug="{{ false }}" hint-size="100px,36px"></dc-import>
+            <dc-import name="Tlacitko" variant="text" size="standard" label="Reagovat" on-click="{{ q.onReply }}" hint-size="100px,36px"></dc-import>
           </div>
         </div>
       </sc-for>
@@ -149,10 +149,9 @@
     <div style="background:#F2F4F7;border-radius:8px;padding:16px 18px;font-size:15px;font-weight:500;color:#666E78;">K tomuto produktu ještě nikdo nediskutoval. Buďte první, kdo se zeptá.</div>
   </sc-if>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </section>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:900},&quot;questions&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{author?:string,date?:string,text:string,answer?:string,answerDate?:string}[]&quot;,&quot;default&quot;:null},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:900},&quot;questions&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{author?:string,date?:string,text:string,answer?:string,answerDate?:string}[]&quot;,&quot;default&quot;:null}}">
 class Component extends DCLogic {
   // plynulé otevření i zavření: prvek zůstane v DOM po dobu odjezdu (ms), data-shown řídí CSS přechod
   fade(key, open, ms){ ms = ms || 200; const F = this._fx || (this._fx = {}); const f = F[key] || (F[key] = { m:false, s:false, t:null, r:false, w:false });
@@ -205,7 +204,6 @@ class Component extends DCLogic {
       onTel: (e)=>this.setState({ tel:e.target.value }),
       onText: (e)=>this.setState({ text:e.target.value }),
       onGdpr: (e)=>this.setState({ gdpr:e.target.checked }),
-      debug: P.debug ?? true
     };
   }
 }

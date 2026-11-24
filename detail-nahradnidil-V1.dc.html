@@ -55,13 +55,13 @@
 </helmet>
 <div data-screen-label="Detail náhradního dílu V1" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
 
-  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
+  <dc-import name="Usp" variant="pas" tone="tmavy" docs="{{ false }}" hint-size="100%,48px"></dc-import>
   <dc-import name="Hlavicka" active="Náhradní díly" currency="{{ currency }}" on-currency-change="{{ onCurrency }}" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" menu-tree="{{ menuTree }}" hint-size="100%,150px"></dc-import>
 
   <main class="vp-in" style="padding-top:14px;padding-bottom:48px;">
 
     <div style="margin:4px 0 10px;">
-      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" debug="{{ debug }}" hint-size="100%,20px"></dc-import>
+      <dc-import name="Breadcrumb" items="{{ crumbItems }}" bare="{{ true }}" hint-size="100%,20px"></dc-import>
     </div>
 
     <h1 class="pd-h1" style="margin:0;font-size:36px;font-weight:700;letter-spacing:-0.02em;line-height:1.15;color:#142F56;text-wrap:pretty;">Čelisti brzdové KNOTT 200×50 sada na 2 kola</h1>
@@ -110,7 +110,7 @@
 
         <sc-if value="{{ secDostupnost }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <dc-import name="Skladovost" state="in" text="{{ stockText }}" debug="{{ debug }}" hint-size="160px,18px"></dc-import>
+            <dc-import name="Skladovost" state="in" text="{{ stockText }}" hint-size="160px,18px"></dc-import>
             <div style="display:flex;gap:8px;font-size:14px;color:#5A626C;"><span style="flex:1;">Osobně v prodejně Popovičky</span><span style="font-weight:700;color:#15181C;">ještě dnes</span></div>
             <div style="display:flex;gap:8px;font-size:14px;color:#5A626C;"><span style="flex:1;">Přepravci předáme</span><span style="font-weight:700;color:#15181C;">ještě dnes</span></div>
           </div>
@@ -118,7 +118,7 @@
         </sc-if>
 
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <dc-import name="Cena" price-net="{{ netNum }}" price-gross="{{ grossNum }}" size="large" currency="{{ currency }}" debug="{{ debug }}" hint-size="140px,50px"></dc-import>
+          <dc-import name="Cena" price-net="{{ netNum }}" price-gross="{{ grossNum }}" size="large" currency="{{ currency }}" hint-size="140px,50px"></dc-import>
           <span style="font-size:14px;font-weight:500;color:#5A626C;">ceny za 1 ks</span>
         </div>
 
@@ -140,7 +140,7 @@
         </sc-if>
 
         <div style="display:flex;align-items:stretch;gap:12px;flex-wrap:wrap;">
-          <dc-import name="Kvantifikator" size="standard" value="{{ qty }}" on-change="{{ onQty }}" debug="{{ debug }}" hint-size="116px,44px"></dc-import>
+          <dc-import name="Kvantifikator" size="standard" value="{{ qty }}" on-change="{{ onQty }}" hint-size="116px,44px"></dc-import>
           <div style="flex:1;min-width:160px;display:flex;">
             <dc-import name="Tlacitko" variant="buy" size="medium" label="Koupit" icon="shopping-cart" full-width="{{ true }}" on-click="{{ onBuy }}" hint-size="100%,44px"></dc-import>
           </div>
@@ -286,18 +286,18 @@
                 <dc-import name="Tlacitko" variant="primary" size="medium" label="Přidat hodnocení" on-click="{{ noop }}" hint-size="190px,44px"></dc-import>
               </div>
             </div>
-            <dc-import name="Recenze" title="Recenze produktu" score-text="4,5 z 5" source-text="Ověřeno zákazníky · Heureka" reviews="{{ reviews }}" debug="{{ debug }}" hint-size="100%,320px"></dc-import>
+            <dc-import name="Recenze" title="Recenze produktu" score-text="4,5 z 5" source-text="Ověřeno zákazníky · Heureka" reviews="{{ reviews }}" hint-size="100%,320px"></dc-import>
           </div>
         </sc-if>
 
         <sc-if value="{{ tabDiskuze }}" hint-placeholder-val="">
-          <dc-import name="Diskuze" debug="{{ debug }}" hint-size="100%,520px"></dc-import>
+          <dc-import name="Diskuze" hint-size="100%,520px"></dc-import>
         </sc-if>
 
         <sc-if value="{{ tabSouvisejici }}" hint-placeholder-val="">
           <div class="pd-rel">
             <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
-              <dc-import name="ProduktovaKarta" p="{{ p }}" currency="{{ currency }}" debug="{{ debug }}" hint-size="100%,440px"></dc-import>
+              <dc-import name="ProduktovaKarta" p="{{ p }}" currency="{{ currency }}" hint-size="100%,440px"></dc-import>
             </sc-for>
           </div>
         </sc-if>
@@ -310,13 +310,12 @@
     <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="DotazModal" open="{{ askOpen }}" product-name="{{ askProduct }}" on-close="{{ askClose }}" debug="{{ debug }}" hint-size="0px,0px"></dc-import>
-  <dc-import name="ControlBar" groups="{{ cbGroups }}" on-toggle="{{ cbToggle }}" on-select="{{ cbSelect }}" debug-on="{{ debug }}" on-toggle-debug="{{ cbDebug }}" hint-size="0px,0px"></dc-import>
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
+  <dc-import name="DotazModal" open="{{ askOpen }}" product-name="{{ askProduct }}" on-close="{{ askClose }}" hint-size="0px,0px"></dc-import>
+  <dc-import name="ControlBar" groups="{{ cbGroups }}" on-toggle="{{ cbToggle }}" on-select="{{ cbSelect }}" hint-size="0px,0px"></dc-import>
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000}}">
 class Component extends DCLogic {
   SECTIONS = [
     ['varianty','Výběr variant'], ['slevy','Množstevní slevy']
@@ -365,7 +364,7 @@ class Component extends DCLogic {
   ];
 
   state = {
-    variant:0, qty:1, tab:'popis', img:0, currency:'CZK', varStyle:0, varCount:0, actStyle:0, askOpen:false, debugOverride:null, cart:0, relQty:{}, relCart:{},
+    variant:0, qty:1, tab:'popis', img:0, currency:'CZK', varStyle:0, varCount:0, actStyle:0, askOpen:false, cart:0, relQty:{}, relCart:{},
     sec:{ varianty:true, slevy:true, dostupnost:true, heureka:true, stazeni:true, souvisejici:true, akce:true }
   };
 
@@ -400,7 +399,6 @@ class Component extends DCLogic {
 
   renderVals(){
     const s = this.state;
-    const debug = s.debugOverride === null ? (this.props.debug ?? true) : s.debugOverride;
     // varianty jdou do komponenty VyberVariant: čistá data + skalární onPick(index)
     // přes 6 variant se karty mění na dropdown — 50 balení se do karet nevejde
     const varSrc = s.varCount === 1 ? this.manyVariants() : this.VARIANTS;
@@ -459,7 +457,7 @@ class Component extends DCLogic {
     }));
 
     return {
-      debug, currency: s.currency, onCurrency:(c)=>this.setState({ currency:c }),
+      currency: s.currency, onCurrency:(c)=>this.setState({ currency:c }),
       menuTree:[{ name:'Přívěsy', href:'#' }, { name:'Náhradní díly', href:'./nahradnidily.dc.html' }, { name:'Příslušenství', href:'#' }, { name:'Servis', href:'servis.dc.html', children:[{ name:'AL-KO servis', href:'servis.dc.html' },{ name:'BPW servis', href:'servis.dc.html' },{ name:'KNOTT servis', href:'servis.dc.html' },{ name:'Garanční prohlídky', href:'servis.dc.html' },{ name:'Pneuservis', href:'servis.dc.html' }] }, { name:'Půjčovna', href:'#' }],
       crumbItems:[{ name:'Úvod', href:'./index.dc.html' }, { name:'Náhradní díly', href:'./nahradnidily.dc.html' }, { name:'Díly náprav', href:'./nahradnidily.dc.html' }, { name:'Brzdové čelisti', href:'./nahradnidily.dc.html' }, { name:'Čelisti brzdové KNOTT 200×50', href:'#' }],
 
@@ -510,7 +508,6 @@ class Component extends DCLogic {
       ],
       cbToggle:(gi,oi)=>{ if (gi===0){ const k = this.SECTIONS[oi] && this.SECTIONS[oi][0]; if (k) this.setSec(k); } },
       cbSelect:(gi,oi)=>{ if (gi===1) this.setState({ varStyle:oi }); else if (gi===2) this.setState({ actStyle:oi }); else if (gi===3) this.setState({ varCount:oi, variant:0 }); },
-      cbDebug:()=>this.setState({ debugOverride: !debug })
     };
   }
 }

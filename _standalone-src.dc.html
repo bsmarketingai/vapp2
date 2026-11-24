@@ -207,7 +207,7 @@
         <a class="a11y-i hvx2" href="{{ backFromLeafHref }}" onClick="{{ backFromLeaf }}" style="display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:14px;font-weight:700;color:#1E5AA8;cursor:pointer;"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>{{ backFromLeafLabel }}</a>
       </sc-if>
       <sc-if value="{{ inGroups }}" hint-placeholder-val="{{ true }}">
-      <dc-import name="VypisKategorii" layout="{{ categoryLayout }}" categories="{{ categoriesData }}" brand-categories="{{ brandCategories }}" on-open-brand="{{ onOpenBrand }}" on-open-category="{{ onOpenCategory }}" on-pick-sub="{{ onPickSub }}" debug="{{ debug }}" hint-size="100%,500px"></dc-import>
+      <dc-import name="VypisKategorii" layout="{{ categoryLayout }}" categories="{{ categoriesData }}" brand-categories="{{ brandCategories }}" on-open-brand="{{ onOpenBrand }}" on-open-category="{{ onOpenCategory }}" on-pick-sub="{{ onPickSub }}" hint-size="100%,500px"></dc-import>
       </sc-if>
       <sc-if value="{{ inSubcatsCompact }}" hint-placeholder-val="">
         <div style="display:flex;flex-direction:column;gap:12px;">
@@ -215,7 +215,7 @@
             <button type="button" class="a11y-i" onClick="{{ backToGroups }}" style="display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:14px;font-weight:700;color:#1E5AA8;cursor:pointer;padding:0 10px 0 4px;"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>{{ backToGroupsLabel }}</button>
             <span style="font-size:13px;color:#666E78;margin-left:auto;">{{ activeGroupCount }} produktů</span>
           </div>
-          <dc-import name="VypisKategorii" layout="kompaktni" nejhledanejsi="{{ false }}" categories="{{ subcatCategories }}" on-open-category="{{ onOpenSubcat }}" debug="{{ debug }}" hint-size="100%,300px"></dc-import>
+          <dc-import name="VypisKategorii" layout="kompaktni" nejhledanejsi="{{ false }}" categories="{{ subcatCategories }}" on-open-category="{{ onOpenSubcat }}" hint-size="100%,300px"></dc-import>
         </div>
       </sc-if>
       <sc-if value="{{ inSubcatsTiles }}" hint-placeholder-val="">
@@ -304,7 +304,7 @@
 
     <!-- stránkování + načíst další -->
     <div style="padding:22px 0 6px;">
-      <dc-import name="Paginace" page="{{ pgPage }}" page-count="{{ pgCount }}" shown-count="{{ shownCount }}" total-count="{{ pgTotal }}" next-batch="{{ nextBatch }}" on-page="{{ onPageChange }}" on-load-more="{{ loadMore }}" debug="{{ debug }}" hint-size="100%,180px"></dc-import>
+      <dc-import name="Paginace" page="{{ pgPage }}" page-count="{{ pgCount }}" shown-count="{{ shownCount }}" total-count="{{ pgTotal }}" next-batch="{{ nextBatch }}" on-page="{{ onPageChange }}" on-load-more="{{ loadMore }}" hint-size="100%,180px"></dc-import>
     </div>
 
     <!-- support -->
@@ -317,18 +317,17 @@
 
   </main>
 
-  <dc-import name="PrezentacniLista" variants="{{ plVariants }}" active="{{ plActive }}" on-select="{{ plSelect }}" label2="Hlavička:" variants2="{{ headerVariantOptions }}" active2="{{ headerVariant }}" on-select2="{{ onHeaderVariant }}" debug-on="{{ plDebugOn }}" on-toggle-debug="{{ plToggleDebug }}" hint-size="0px,0px"></dc-import>
+  <dc-import name="PrezentacniLista" variants="{{ plVariants }}" active="{{ plActive }}" on-select="{{ plSelect }}" label2="Hlavička:" variants2="{{ headerVariantOptions }}" active2="{{ headerVariant }}" on-select2="{{ onHeaderVariant }}" hint-size="0px,0px"></dc-import>
 
   <div style="margin-top:10px;">
     <dc-import name="Paticka" bare="true" hint-size="100%,600px"></dc-import>
   </div>
 
-  <dc-import name="FiltrDrawer" open="{{ filterOpen }}" price-from="{{ priceFrom }}" price-to="{{ priceTo }}" on-price-change="{{ onPriceChange }}" flags="{{ filterFlags }}" on-toggle-flag="{{ onToggleFlag }}" only-stock="{{ onlyStock }}" on-toggle-stock="{{ toggleStock }}" groups="{{ filterGroups }}" result-count="{{ resultCount }}" on-toggle-option="{{ onFilterOption }}" on-clear="{{ clearFilters }}" on-close="{{ closeFilter }}" debug="{{ debug }}" hint-size="0px,0px"></dc-import>
+  <dc-import name="FiltrDrawer" open="{{ filterOpen }}" price-from="{{ priceFrom }}" price-to="{{ priceTo }}" on-price-change="{{ onPriceChange }}" flags="{{ filterFlags }}" on-toggle-flag="{{ onToggleFlag }}" only-stock="{{ onlyStock }}" on-toggle-stock="{{ toggleStock }}" groups="{{ filterGroups }}" result-count="{{ resultCount }}" on-toggle-option="{{ onFilterOption }}" on-clear="{{ clearFilters }}" on-close="{{ closeFilter }}" hint-size="0px,0px"></dc-import>
 
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;categoryLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;podle komponenty&quot;,&quot;dlazdice&quot;,&quot;kompaktni&quot;,&quot;kompaktni-akordeon&quot;],&quot;default&quot;:&quot;podle komponenty&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;},&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;freeShippingThreshold&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:5000,&quot;step&quot;:100,&quot;unit&quot;:&quot;Kč&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultOnlyStock&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultSort&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pop&quot;,&quot;cheap&quot;,&quot;exp&quot;,&quot;az&quot;],&quot;default&quot;:&quot;pop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;showConsultancy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;categoryLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;podle komponenty&quot;,&quot;dlazdice&quot;,&quot;kompaktni&quot;,&quot;kompaktni-akordeon&quot;],&quot;default&quot;:&quot;podle komponenty&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Zobrazení&quot;},&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;freeShippingThreshold&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:5000,&quot;step&quot;:100,&quot;unit&quot;:&quot;Kč&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultOnlyStock&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;defaultSort&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pop&quot;,&quot;cheap&quot;,&quot;exp&quot;,&quot;az&quot;],&quot;default&quot;:&quot;pop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Chování&quot;},&quot;showConsultancy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chování&quot;}}">
 class Component extends DCLogic {
   FLAGS = [{t:'Sleva',on:false},{t:'Doprava zdarma',on:false},{t:'Skladem',on:false},{t:'Skladem u dodavatele',on:false}];
   closePanel(){ if(this.state.filterOpen) this.setState({ filterOpen:false }); }

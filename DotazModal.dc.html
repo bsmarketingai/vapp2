@@ -77,9 +77,8 @@
     </div>
   </div>
 </sc-if>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:660},&quot;open&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;productName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Čelisti brzdové KNOTT 200×50 — malá sada na 2 kola&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSend&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(data:object)=&gt;void&quot;,&quot;default&quot;:null},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:660},&quot;open&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;productName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Čelisti brzdové KNOTT 200×50 — malá sada na 2 kola&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onSend&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(data:object)=&gt;void&quot;,&quot;default&quot;:null},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null}}">
 class Component extends DCLogic {
   // plynulé otevření i zavření: prvek zůstane v DOM po dobu odjezdu (ms), data-shown řídí CSS přechod
   fade(key, open, ms){ ms = ms || 200; const F = this._fx || (this._fx = {}); const f = F[key] || (F[key] = { m:false, s:false, t:null, r:false, w:false });
@@ -122,7 +121,6 @@ class Component extends DCLogic {
     const focusables = (root)=>Array.from(root.querySelectorAll('a[href],button:not([disabled]),textarea,input,select,[tabindex]:not([tabindex="-1"])'))
       .filter(el=>el.offsetParent !== null || el === document.activeElement);
     return {
-      debug: P.debug ?? true,
       isOpen: P.open === true,
       ...(()=>{ const x = this.fade('m', P.open === true, 250); return { fxMounted: x.mounted, fxShown: x.shown }; })(),
       email:s.email, phone:s.phone, message:s.message,

@@ -72,9 +72,8 @@
   </div>
 </div>
 </sc-if>
-<dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:420},&quot;p&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;,&quot;default&quot;:null},&quot;currency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;CZK&quot;,&quot;EUR&quot;],&quot;default&quot;:&quot;CZK&quot;,&quot;tsType&quot;:&quot;'CZK'|'EUR'&quot;},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;karta&quot;,&quot;radek&quot;],&quot;default&quot;:&quot;karta&quot;,&quot;tsType&quot;:&quot;'karta'|'radek'&quot;},&quot;ctaLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Objednat termín&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onOrder&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:420},&quot;p&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;,&quot;default&quot;:null},&quot;currency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;CZK&quot;,&quot;EUR&quot;],&quot;default&quot;:&quot;CZK&quot;,&quot;tsType&quot;:&quot;'CZK'|'EUR'&quot;},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;karta&quot;,&quot;radek&quot;],&quot;default&quot;:&quot;karta&quot;,&quot;tsType&quot;:&quot;'karta'|'radek'&quot;},&quot;ctaLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Objednat termín&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onOrder&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;()=&gt;void&quot;,&quot;default&quot;:null}}">
 class Component extends DCLogic {
   renderVals(){
     const P = this.props;
@@ -94,7 +93,6 @@ class Component extends DCLogic {
       imgStyle: 'aspect-ratio:16/10;background:#fff url("' + img + '") center/contain no-repeat;background-origin:content-box;padding:16px 12px;',
       ctaLabel: P.ctaLabel || 'Objednat termín',
       onOrder: s.onOrder || P.onOrder || (()=>{}),
-      debug: P.debug ?? true
     };
   }
 }

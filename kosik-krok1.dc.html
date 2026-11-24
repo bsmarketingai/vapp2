@@ -156,10 +156,10 @@
               <div style="grid-area:info;min-width:0;display:flex;flex-direction:column;gap:6px;">
                 <a class="ck-lnk ck-title" href="{{ it.href }}" style="text-wrap:pretty;">{{ it.name }}</a>
                 <span style="font-size:13px;font-weight:400;line-height:1.4;color:#666E78;">Obj. č. {{ it.code }}</span>
-                <dc-import name="Skladovost" state="in" text="{{ it.stock }}" debug="{{ debug }}" hint-size="120px,18px"></dc-import>
+                <dc-import name="Skladovost" state="in" text="{{ it.stock }}" hint-size="120px,18px"></dc-import>
               </div>
               <div class="ck-qty" style="grid-area:qty;">
-                <dc-import name="Kvantifikator" size="standard" value="{{ it.qty }}" min="{{ 1 }}" max="{{ it.max }}" on-change="{{ it.onQty }}" debug="{{ debug }}" hint-size="108px,44px"></dc-import>
+                <dc-import name="Kvantifikator" size="standard" value="{{ it.qty }}" min="{{ 1 }}" max="{{ it.max }}" on-change="{{ it.onQty }}" hint-size="108px,44px"></dc-import>
               </div>
               <div class="ck-price" style="grid-area:price;justify-self:end;text-align:right;display:flex;flex-direction:column;gap:2px;">
                 <span style="font-size:17px;font-weight:700;line-height:1.3;white-space:nowrap;">{{ it.lineTotal }}</span>
@@ -209,7 +209,7 @@
         <section class="ck-card ck-opthd" aria-labelledby="ck-country-l" style="justify-content:flex-start;">
           <h2 id="ck-country-l" class="ck-h2" style="margin:0;color:#142F56;">Země dodání</h2>
           <div style="width:240px;max-width:100%;min-width:0;">
-            <dc-import name="Select" variant="outline" options="{{ countries }}" value="{{ country }}" on-change="{{ onCountry }}" aria-label="Země dodání" debug="{{ debug }}" hint-size="100%,44px"></dc-import>
+            <dc-import name="Select" variant="outline" options="{{ countries }}" value="{{ country }}" on-change="{{ onCountry }}" aria-label="Země dodání" hint-size="100%,44px"></dc-import>
           </div>
         </section>
         <div class="ck-sp">
@@ -350,10 +350,9 @@
       </div>
     </div>
   </footer>
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;step&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hlavička — ukázka stavu kroků&quot;},&quot;freeShippingThreshold&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5000,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:20000,&quot;step&quot;:500,&quot;unit&quot;:&quot;Kč&quot;},&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;step&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hlavička — ukázka stavu kroků&quot;},&quot;freeShippingThreshold&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5000,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:20000,&quot;step&quot;:500,&quot;unit&quot;:&quot;Kč&quot;}}">
 class Component extends DCLogic {
   CART = [
     { id:'901301', name:'Nájezdová brzda KNOTT KF13', img:'uploads/najezdova-brzda-knott-kf13-c-gf.jpg', price:5900, qty:1, stock:'Skladem 12 ks', max:12 },
@@ -492,7 +491,6 @@ class Component extends DCLogic {
     const applyCode = ()=>{ const c = (S.codeDraft||'').trim().toUpperCase(); if (c) this.setState({ code:c, codeDraft:'' }); };
 
     return {
-      debug: P.debug ?? true,
       steps, items, isEmpty: cart.length===0, hasItems: cart.length>0,
       shipOpts, payOpts, sumRows, upsell, hasUpsell: upsell.length>0,
       freeReached, freeMissing: !freeReached, freeRemain: this.fmt(threshold - goodsAfter), freePct: pct,

@@ -313,7 +313,7 @@
       <div style="display:flex;flex-direction:column;gap:12px;">
         <span style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666E78;">Desktop</span>
         <div style="background:#fff;overflow:hidden;width:100vw;margin-left:calc(50% - 50vw);">
-          <dc-import name="Hlavicka" active="Náhradní díly" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" debug="{{ debug }}" hint-size="100%,190px"></dc-import>
+          <dc-import name="Hlavicka" active="Náhradní díly" contact-phone="323 605 314" contact-phone-href="tel:+420323605314" contact-hours="8:30–16:30" contact-open="{{ true }}" hint-size="100%,190px"></dc-import>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;margin-top:28px;">
@@ -343,11 +343,10 @@
   <sc-if value="{{ toast }}" hint-placeholder-val="">
     <div style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#15181C;color:#fff;font-size:14px;font-weight:700;border-radius:8px;padding:12px 20px;z-index:99;">{{ toast }}</div>
   </sc-if>
-  <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
 
-<script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;},&quot;$preview&quot;:{&quot;width&quot;:1140,&quot;height&quot;:1200}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1140,&quot;height&quot;:1200}}">
 class Component extends DCLogic {
   state = { toast:null };
 
@@ -539,7 +538,6 @@ class Component extends DCLogic {
       ['z.drawerOverlay','80','Ztmavení pod drawerem'],
       ['z.drawerPanel','90','Panel draweru (filtry)'],
       ['z.toast','95','Toast a potvrzovací hlášky'],
-      ['z.debug','99','Debug lišta katalogu'],
     ].map(([name,value,use])=>({ name, value, use }));
 
     const sizes = [
@@ -669,9 +667,8 @@ class Component extends DCLogic {
 }
 
 
-// DebugBar: prop debug -> šablona
 (function(){ const rv = Component.prototype.renderVals;
-  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; if (v.debug === undefined) v.debug = this.props.debug ?? true; return v; }; })();
+  Component.prototype.renderVals = function(){ const v = rv ? (rv.call(this) || {}) : {}; return v; }; })();
 </script>
 </body>
 </html>
