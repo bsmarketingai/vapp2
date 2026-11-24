@@ -38,7 +38,7 @@
 
   <dc-import name="Usp" variant="pas" tone="tmavy" items="{{ uspPas }}" debug="{{ debug }}" hint-size="100%,48px"></dc-import>
 
-  <dc-import name="Hlavicka" active="" contact-open="{{ contactOpen }}" lang-variant="{{ langVer }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
+  <dc-import name="Hlavicka" active="" logged-in="{{ loggedIn }}" on-logout="{{ onLogout }}" contact-open="{{ contactOpen }}" lang-variant="{{ langVer }}" debug="{{ debug }}" hint-size="100%,150px"></dc-import>
 
   <main>
     <dc-import name="HeroHomepage" variant="{{ heroVer }}" debug="{{ debug }}" hint-size="100%,420px"></dc-import>
@@ -88,7 +88,7 @@
 
   <dc-import name="Paticka" usp-tone="tint" open="{{ contactOpen }}" bare="true" debug="{{ debug }}" hint-size="100%,520px"></dc-import>
 </div>
-<dc-import name="PrezentacniLista" label="Ot. doba:" variants="{{ openVariants }}" active="{{ openState }}" on-select="{{ onOpenState }}" label5="Poradna:" variants5="{{ pbVariants }}" active5="{{ pbVer }}" on-select5="{{ onPbVer }}" debug-on="{{ debugOn }}" on-toggle-debug="{{ onToggleDebug }}" hint-size="320px,56px"></dc-import>
+<dc-import name="PrezentacniLista" label="Ot. doba:" variants="{{ openVariants }}" active="{{ openState }}" on-select="{{ onOpenState }}" label5="Poradna:" variants5="{{ pbVariants }}" active5="{{ pbVer }}" on-select5="{{ onPbVer }}" label6="Účet:" variants6="{{ loginVariants }}" active6="{{ loginState }}" on-select6="{{ onLoginState }}" debug-on="{{ debugOn }}" on-toggle-debug="{{ onToggleDebug }}" hint-size="320px,56px"></dc-import>
 <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;debug&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Debug&quot;}}">
@@ -184,6 +184,11 @@ class Component extends DCLogic {
     }));
     return {
       pbVariants: [{ id:'P1', label:'P1' }, { id:'P2', label:'P2' }],
+      loginVariants: [{ id:'off', label:'Nepřihlášen' }, { id:'on', label:'Přihlášen' }],
+      loginState: this.state.loginState || 'off',
+      loggedIn: this.state.loginState === 'on',
+      onLoginState: (id)=>this.setState({ loginState:id }),
+      onLogout: ()=>this.setState({ loginState:'off' }),
       pbVer: this.state.pbVer || 'P2',
       onPbVer: (id)=>this.setState({ pbVer:id }),
       ppVariants: [{ id:'PP1', label:'PP1' }, { id:'PP2', label:'PP2' }, { id:'PP3', label:'PP3' }],

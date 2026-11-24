@@ -111,7 +111,7 @@
         <sc-if value="{{ showSearchAct }}" hint-placeholder-val="">
           <button type="button" class="hd-act hd-i hd-mb" id="hd-search-toggle" aria-label="Hledat" aria-expanded="{{ searchExpanded }}" aria-controls="hd-search-panel" onClick="{{ toggleSearch }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:44px;padding:0 8px;cursor:pointer;"><div style="display:flex;align-items:center;justify-content:center;"><dc-import name="Ikony" icon-name="search" size="24" hint-size="24px,24px"></dc-import></div><span class="hd-actlbl" style="font-size:13px;font-weight:600;">Hledat</span></button>
         </sc-if>
-        <button type="button" class="hd-act hd-i" id="hd-login" aria-label="Přihlásit" onClick="{{ openLogin }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:44px;padding:0 8px;cursor:pointer;"><div style="display:flex;align-items:center;justify-content:center;"><dc-import name="Ikony" icon-name="user" size="24" hint-size="24px,24px"></dc-import></div><span class="hd-actlbl" style="font-size:13px;font-weight:600;">Přihlásit</span></button>
+        <button type="button" class="hd-act hd-i" id="hd-login" aria-label="{{ userAria }}" aria-haspopup="{{ userHaspopup }}" aria-expanded="{{ accountExpanded }}" onClick="{{ openLogin }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:44px;padding:0 8px;cursor:pointer;"><div style="display:flex;align-items:center;justify-content:center;"><dc-import name="Ikony" icon-name="{{ userIcon }}" size="24" hint-size="24px,24px"></dc-import></div><span class="hd-actlbl" style="font-size:13px;font-weight:600;">{{ userLabel }}</span></button>
         <sc-if value="{{ langJ2 }}" hint-placeholder-val="">
           <div class="hd-langwrap hd-dt" style="position:relative;flex:none;">
             <button type="button" class="hd-act hd-i" id="hd-lang" aria-haspopup="listbox" aria-expanded="{{ langExpanded }}" aria-label="{{ langAria }}" onClick="{{ toggleLang }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:44px;padding:0 8px;cursor:pointer;">
@@ -191,6 +191,7 @@
   </div>
 </sc-if>
 <dc-import name="LoginPopup" open="{{ loginOpen }}" on-close="{{ closeLogin }}" debug="{{ debug }}" hint-size="0px,0px"></dc-import>
+<dc-import name="AccountMenu" open="{{ accountOpen }}" user-name="{{ userName }}" price-group="{{ priceGroup }}" on-close="{{ closeAccount }}" on-logout="{{ onLogout }}" anchor="#hd-login" debug="{{ false }}" hint-size="0px,0px"></dc-import>
 <dc-import name="BasketPopup" open="{{ cartOpen }}" items="{{ cartItems }}" currency="{{ currency }}" on-close="{{ closeCart }}" on-remove="{{ onCartRemove }}" on-go-to-cart="{{ onCart }}" on-back-to-shop="{{ closeCart }}" on-panel-enter="{{ onCartEnter }}" on-panel-leave="{{ onCartLeave }}" debug="{{ debug }}" hint-size="0px,0px"></dc-import>
 <dc-import name="DebugBar" visible="{{ debug }}" hint-size="0px,0px"></dc-import>
 <dc-import name="PoptavkaPopup" open="{{ inquiryOpen }}" href="{{ inquiryHref }}" on-close="{{ closeInquiry }}" hint-size="0px,0px"></dc-import>
@@ -223,7 +224,7 @@ class Component extends DCLogic {
     if (!MEGA || !Object.keys(MEGA).length) return null;
     return (labels || []).map(name=>({ name, href: (TAB_HREF && TAB_HREF[name]) || '#' }));
   }
-  state = { menuOpen:false, searchOpen:false, loginOpen:false, cartOpen:false, currency:'CZK', megaTab:null };
+  state = { menuOpen:false, searchOpen:false, loginOpen:false, accountOpen:false, cartOpen:false, currency:'CZK', megaTab:null };
   // plynulé otevření i zavření: prvek zůstane v DOM po dobu odjezdu (ms), data-shown řídí CSS přechod
   fade(key, open, ms){ ms = ms || 200; const F = this._fx || (this._fx = {}); const f = F[key] || (F[key] = { m:false, s:false, t:null, r:false, w:false });
     f.w = !!open;
@@ -375,6 +376,7 @@ class Component extends DCLogic {
   }
   renderVals(){
     const P = this.props;
+    const loggedIn = P.loggedIn === true || P.loggedIn === 'true';
     const active = P.active ?? 'Náhradní díly';
     const labels = P.tabs || ['Přívěsy','Náhradní díly','Servis','Půjčovna','Poradna'];
     const onTab = P.onTabClick;
@@ -490,10 +492,21 @@ class Component extends DCLogic {
       askLangCancel: ()=>this.setState({ askLang:null }),
       stopClick: (e)=>{ if (e && e.stopPropagation) e.stopPropagation(); },
       askLangKey: (e)=>this.trapDialog(e),
-      loginOpen: this.state.loginOpen,
-      openLogin: ()=>{ const f = P.onLogin; if (typeof f === 'function') f(); else this.setState({ loginOpen:true }); },
+      // přihlášený zákazník: ikona user-check, klik otevírá AccountMenu místo LoginPopup
+      loginOpen: this.state.loginOpen && !loggedIn,
+      accountOpen: this.state.accountOpen && loggedIn,
+      userIcon: loggedIn ? 'user-check' : 'user',
+      userLabel: loggedIn ? 'Můj účet' : 'Přihlásit',
+      userAria: loggedIn ? ('Můj účet – ' + (P.userName ?? 'Andrea Zelená')) : 'Přihlásit',
+      userHaspopup: loggedIn ? 'dialog' : undefined,
+      accountExpanded: loggedIn ? (this.state.accountOpen ? 'true' : 'false') : undefined,
+      userName: P.userName ?? 'Andrea Zelená',
+      priceGroup: P.priceGroup ?? 'Prodejní',
+      closeAccount: ()=>{ this.setState({ accountOpen:false }); setTimeout(()=>{ const b=document.getElementById('hd-login'); if(b&&b.offsetParent!==null&&b.focus) b.focus(); },0); },
+      onLogout: ()=>{ this.setState({ accountOpen:false }); if (typeof P.onLogout === 'function') P.onLogout(); },
+      openLogin: ()=>{ if (loggedIn){ this.setState(s=>({ accountOpen: !s.accountOpen, cartOpen:false })); return; } const f = P.onLogin; if (typeof f === 'function') f(); else this.setState({ loginOpen:true }); },
       closeLogin: ()=>{ this.setState({ loginOpen:false }); setTimeout(()=>{ const b=document.getElementById('hd-login'); if(b&&b.offsetParent!==null&&b.focus) b.focus(); },0); },
-      onMenuLogin: ()=>{ const f = P.onLogin; this.setState({ menuOpen:false, loginOpen: typeof f === 'function' ? false : true }); if (typeof f === 'function') f(); },
+      onMenuLogin: ()=>{ if (loggedIn){ this.setState({ menuOpen:false, accountOpen:true }); return; } const f = P.onLogin; this.setState({ menuOpen:false, loginOpen: typeof f === 'function' ? false : true }); if (typeof f === 'function') f(); },
       searchOpen, searchExpanded: searchOpen ? 'true' : 'false',
       // mobil: odchod z pole hledání (blur) hledání zavře; prodleva nechá doběhnout klik do našeptávače
       onSearchFieldBlur: ()=>{ clearTimeout(this._sBlurT); this._sBlurT = setTimeout(()=>{ const p = document.getElementById('hd-search-panel'); if (p && p.contains(document.activeElement)) return; if (this.state.searchOpen) this.setState({ searchOpen:false }); }, 180); },

@@ -30,9 +30,9 @@
   @media (max-width:1559px){ .pkr-item{flex-basis:calc((100% - 60px)/4);} }
   @media (max-width:999px){ .pkr-item{flex-basis:calc((100% - 40px)/3);} }
   @media (max-width:819px){ .pkr-item{flex-basis:calc((100% - 20px)/2);} }
-  /* XS a XXS: vždy právě jedna celá karta, nic nevykukuje */
   /* XS a XXS: poloviční mezera (space-2) kvůli úspoře místa */
-  @media (max-width:549px){ .pkr-track{gap:8px;} .pkr-item{flex-basis:100%;} }
+  /* XXS: karta má 85 % šířky, další karta vykukuje cca 15 % — karta je nižší a je jasné, že jde posouvat (24. 11. 2026) */
+  @media (max-width:549px){ .pkr-track{gap:8px;} .pkr-item{flex-basis:85%;} }
   /* rozhodnuto 15. 10. 2026: XS 2 sloupce, XXS 1 sloupec */
   @media (min-width:420px) and (max-width:549px){ .pkr-item{flex-basis:calc((100% - 8px) / 2);} }
   /* karta v karuselu je tekutá — bez min-width 280 by se dva sloupce v XS nevešly */

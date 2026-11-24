@@ -226,6 +226,11 @@
       "kind": "component"
     },
     {
+      "path": "AccountMenu.dc.html",
+      "title": "AccountMenu",
+      "kind": "component"
+    },
+    {
       "path": "Kosik.dc.html",
       "title": "Kosik",
       "kind": "component"
