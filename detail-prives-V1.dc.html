@@ -50,7 +50,7 @@
   @media (max-width:819px){ .pd-heu{grid-template-columns:minmax(0,1fr);gap:20px;} }
   .pd-tabs{display:flex;gap:4px;overflow-x:auto;}
   .hv-row{transition:background .12s;} .hv-row:hover{background:#F2F4F7 !important;}
-  .hv-lnk{transition:color .12s;} .hv-lnk:hover{color:#1E5AA8 !important;}
+  .hv-act{transition:background .12s;} .hv-act:hover{background:#EFF4FB;} .hv-lnk{transition:color .12s;} .hv-lnk:hover{color:#1E5AA8 !important;}
   .hv-tab{transition:color .12s;} .hv-tab:hover{color:#1E5AA8 !important;}
   .hv-var{transition:background .12s;} .hv-var:hover{background:#EFF4FB !important;}
   .pd-key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
@@ -162,18 +162,18 @@
         </div>
 
         <sc-if value="{{ actT1 }}" hint-placeholder-val="{{ true }}">
-        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:8px;">
           <sc-for list="{{ actions }}" as="a" hint-placeholder-count="2">
-            <button type="button" class="a11y-i hv-lnk" onClick="{{ a.onClick }}" style="display:flex;align-items:center;gap:8px;min-height:32px;font-size:13px;font-weight:500;color:#5A626C;">
-              <span style="display:inline-flex;flex:none;color:#5189CC;"><dc-import name="Ikony" icon-name="{{ a.icon }}" size="18" hint-size="18px,18px"></dc-import></span>{{ a.label }}
+            <button type="button" class="a11y-i hv-act" onClick="{{ a.onClick }}" style="display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 8px;border-radius:8px;font-size:15px;font-weight:700;line-height:1.3;color:#1E5AA8;text-align:center;white-space:nowrap;">
+              <span style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="{{ a.icon }}" size="24" hint-size="24px,24px"></dc-import></span>{{ a.label }}
             </button>
           </sc-for>
         </div>
         </sc-if>
         <sc-if value="{{ actT2 }}" hint-placeholder-val="">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;min-width:0;"><dc-import name="Tlacitko" variant="secondary" size="medium" icon="help" label="Potřebuji poradit" full-width="true" on-click="{{ onHelp }}" style="width:100%;" hint-size="100%,44px"></dc-import></div>
-          <div style="display:flex;min-width:0;"><dc-import name="Tlacitko" variant="secondary" size="medium" icon="arrows-exchange" label="Porovnat" full-width="true" on-click="{{ onCompare }}" style="width:100%;" hint-size="100%,44px"></dc-import></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;flex:1 1 auto;white-space:nowrap;"><dc-import name="Tlacitko" variant="secondary" size="medium" icon="help" label="Potřebuji poradit" full-width="true" on-click="{{ onHelp }}" style="width:100%;" hint-size="100%,44px"></dc-import></div>
+          <div style="display:flex;flex:1 1 auto;white-space:nowrap;"><dc-import name="Tlacitko" variant="secondary" size="medium" icon="arrows-exchange" label="Porovnat" full-width="true" on-click="{{ onCompare }}" style="width:100%;" hint-size="100%,44px"></dc-import></div>
         </div>
         </sc-if>
 

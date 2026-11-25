@@ -40,7 +40,7 @@
     <div style="display:flex;align-items:center;gap:12px;">
       <div style="display:flex;align-items:stretch;height:44px;border-radius:6px;overflow:hidden;background:#F2F4F7;">
         <button type="button" class="qb" onClick="{{ onMinusA }}" disabled="{{ aMin }}" aria-label="Snížit počet" style="width:36px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#5A626C;cursor:pointer;">−</button>
-        <span style="min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:#fff;border-top:1px solid #F2F4F7;border-bottom:1px solid #F2F4F7;">{{ qtyA }}</span>
+        <span style="min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:transparent;">{{ qtyA }}</span>
         <button type="button" class="qb" onClick="{{ onPlusA }}" aria-label="Zvýšit počet" style="width:36px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#5A626C;cursor:pointer;">+</button>
       </div>
       <span style="font-size:13px;color:#666E78;">Standard · 44 px — karta, detail</span>
@@ -48,7 +48,7 @@
     <div style="display:flex;align-items:center;gap:12px;">
       <div style="display:flex;align-items:stretch;height:36px;border-radius:6px;overflow:hidden;background:#F2F4F7;">
         <button type="button" class="qb" onClick="{{ onMinusB }}" disabled="{{ bMin }}" aria-label="Snížit počet" style="width:30px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#5A626C;cursor:pointer;">−</button>
-        <span style="min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:#fff;border-top:1px solid #F2F4F7;border-bottom:1px solid #F2F4F7;">{{ qtyB }}</span>
+        <span style="min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:transparent;">{{ qtyB }}</span>
         <button type="button" class="qb" onClick="{{ onPlusB }}" aria-label="Zvýšit počet" style="width:30px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#5A626C;cursor:pointer;">+</button>
       </div>
       <span style="font-size:13px;color:#666E78;">Compact · 36 px — košík, seznamy</span>
@@ -79,7 +79,7 @@ class Component extends DCLogic {
         minusOff: val<=min, plusOff: val>=max,
         boxStyle:'display:inline-flex;align-items:stretch;height:'+h+'px;border-radius:6px;overflow:hidden;background:#F2F4F7;',
         btnStyle:'width:'+w+'px;display:flex;align-items:center;justify-content:center;font-size:'+fs+'px;color:#5A626C;cursor:pointer;',
-        valStyle:'min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:'+vfs+'px;font-weight:700;background:#fff;border-top:1px solid #F2F4F7;border-bottom:1px solid #F2F4F7;',
+        valStyle:'min-width:28px;padding:0 6px;display:flex;align-items:center;justify-content:center;font-size:'+vfs+'px;font-weight:700;background:transparent;',
         onMinus:()=>set(val-1), onPlus:()=>set(val+1) };
     }
     const clamp = (n)=>Math.max(1,n);

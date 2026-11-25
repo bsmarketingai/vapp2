@@ -175,7 +175,10 @@ class Component extends DCLogic {
       if (iconOnly){
         btnStyle = 'display:inline-flex;align-items:center;justify-content:center;width:'+mh+'px;height:'+mh+'px;font-weight:700;color:'+fg+';background:'+bg+';border-radius:8px;cursor:'+(disabled?'not-allowed':'pointer')+';'+reset+(P.fullWidth?'width:100%;':'');
       } else {
-        btnStyle = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:'+mh+'px;padding:0 '+pad+'px;font-size:'+fs+'px;font-weight:700;color:'+fg+';background:'+bg+';border-radius:8px;cursor:'+(disabled?'not-allowed':'pointer')+';'+reset+(P.fullWidth?'width:100%;':'')+(P.variant==='text'?'text-decoration:underline;padding:0 4px;':'');
+        // optická korekce: ikony 24 px mají vlastní vnitřní okraj (u šipek ~6 px), proto je odsazení na straně s ikonou o čtvrtinu menší
+        const iconPad = pad - Math.round(pad/4);
+        const pl = leadIcon ? iconPad : pad, pr = trailIcon ? iconPad : pad;
+        btnStyle = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:'+mh+'px;padding:0 '+pr+'px 0 '+pl+'px;font-size:'+fs+'px;font-weight:700;color:'+fg+';background:'+bg+';border-radius:8px;cursor:'+(disabled?'not-allowed':'pointer')+';'+reset+(P.fullWidth?'width:100%;':'')+(P.variant==='text'?'text-decoration:underline;padding:0 4px;':'');
       }
       // navigace: s href se vykreslí <a>, jinak <button>
       const asLink = !!P.href && !disabled;
@@ -198,8 +201,8 @@ class Component extends DCLogic {
     }
     const btn = (label,mh,fs,pad)=>({
       label,
-      leadStyle:'display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:'+mh+'px;padding:0 '+pad+'px;font-size:'+fs+'px;font-weight:700;color:#fff;background:#1E5AA8;border-radius:8px;cursor:pointer;'+reset,
-      trailStyle:'display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:'+mh+'px;padding:0 '+pad+'px;font-size:'+fs+'px;font-weight:700;color:#fff;background:#1E5AA8;border-radius:8px;cursor:pointer;'+reset,
+      leadStyle:'display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:'+mh+'px;padding:0 '+pad+'px 0 '+(pad-Math.round(pad/4))+'px;font-size:'+fs+'px;font-weight:700;color:#fff;background:#1E5AA8;border-radius:8px;cursor:pointer;'+reset,
+      trailStyle:'display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:'+mh+'px;padding:0 '+(pad-Math.round(pad/4))+'px 0 '+pad+'px;font-size:'+fs+'px;font-weight:700;color:#fff;background:#1E5AA8;border-radius:8px;cursor:pointer;'+reset,
       iconStyle:'display:inline-flex;align-items:center;justify-content:center;width:'+mh+'px;height:'+mh+'px;color:#fff;background:#1E5AA8;border-radius:8px;cursor:pointer;'+reset,
       ghostStyle:'display:inline-flex;align-items:center;justify-content:center;min-height:'+mh+'px;padding:0 '+pad+'px;font-size:'+fs+'px;font-weight:700;color:#1E5AA8;background:transparent;border-radius:8px;cursor:pointer;'+reset,
       textStyle:'display:inline-flex;align-items:center;justify-content:center;min-height:'+mh+'px;padding:0 4px;font-size:'+fs+'px;font-weight:700;color:#1E5AA8;background:transparent;cursor:pointer;text-decoration:underline;'+reset,

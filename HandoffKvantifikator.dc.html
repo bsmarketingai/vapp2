@@ -31,7 +31,7 @@
 </style>
 <style id="vapp-qty-css">/* === VAPP — Kvantifikátor =============================================
    Standard 44 (karta, detail) · Compact 36 (košík, seznamy).
-   Pozadí #F2F4F7, radius 6, střední pole bílé. Menší než 36 se nezavádí.
+   Pozadí #F2F4F7, radius 6, střední pole stejné barvy jako − a +. Menší než 36 se nezavádí.
    ------------------------------------------------------------------- */
 .vapp-qty{
   display:inline-flex; align-items:stretch;
@@ -56,9 +56,7 @@
   min-width:28px; padding:0 6px;          /* min-width + padding pojme 3 číslice */
   display:flex; align-items:center; justify-content:center;
   font-size:15px; font-weight:700; color:#15181C;
-  background:#FFFFFF;
-  border-top:1px solid #F2F4F7;
-  border-bottom:1px solid #F2F4F7;
+  background:transparent;               /* stejná plocha jako − a + (#F2F4F7), od 25. 11. 2026 */
 }
 
 /* --- Compact 36 ----------------------------------------------------- */
@@ -115,8 +113,7 @@ hodnota: 14 / 700</div>
           <div style="background:#F7F9FB;border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:10px;">
             <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#666E78;">Barvy</div>
             <div class="hf-mono">plocha: #F2F4F7
-střední pole: #FFFFFF
-linky pole: 1px #F2F4F7
+střední pole: bez vlastní barvy (plocha #F2F4F7)
 znaky: #5A626C
 hodnota: #15181C
 hover tlačítka: #E4E7EB
@@ -349,7 +346,7 @@ class Component extends DCLogic {
     const states = [
       { name:'Default', selector:'.vapp-qty', value:'2', boxCls:'vapp-qty',
         minusStyle:btn(false,false,false), plusStyle:btn(false,false,false),
-        css:'bg #F2F4F7 · radius 6\nstřední pole #FFFFFF\nznaky #5A626C', note:'Klidový stav. Obal je jeden pill, střední pole je bílé s linkami 1 px nahoře a dole.' },
+        css:'bg #F2F4F7 · radius 6\nstřední pole bez vlastní barvy\nznaky #5A626C', note:'Klidový stav. Obal je jeden pill, střední pole má stejnou plochu #F2F4F7 jako − a +.' },
       { name:'Hover tlačítka', selector:'.vapp-qty__btn:hover', value:'2', boxCls:'vapp-qty',
         minusStyle:btn(false,true,false), plusStyle:btn(false,false,false),
         css:'background:#E4E7EB;', note:'Podbarví se jen to tlačítko, nad kterým je kurzor — ne celý prvek. Přechod 120 ms.' },
