@@ -37,7 +37,7 @@
     <span aria-hidden="true" style="{{ chevStyle }}"><span style="{{ chevRot }}"><dc-import name="Ikony" icon-name="chevron-down" size="{{ chevSize }}" hint-size="24px,24px"></dc-import></span></span>
   </button>
   <sc-if value="{{ listMounted }}" hint-placeholder-val="">
-    <ul class="se-list" data-shown="{{ listShown }}" id="{{ listId }}" role="listbox" ref="{{ listRef }}" aria-label="{{ btnAria }}" onMouseDown="{{ keepFocus }}" style="position:absolute;left:0;right:0;top:{{ listTop }};z-index:20;margin:0;padding:6px;list-style:none;background:#FFFFFF;border-radius:8px;box-shadow:0 10px 30px rgba(20,30,45,.14);max-height:320px;overflow-y:auto;outline:none;">
+    <ul class="se-list" data-shown="{{ listShown }}" id="{{ listId }}" role="listbox" ref="{{ listRef }}" aria-label="{{ btnAria }}" onMouseDown="{{ keepFocus }}" style="position:absolute;left:0;right:0;min-width:{{ listMinW }};top:{{ listTop }};z-index:20;margin:0;padding:6px;list-style:none;background:#FFFFFF;border-radius:8px;box-shadow:0 10px 30px rgba(20,30,45,.14);max-height:320px;overflow-y:auto;outline:none;">
       <sc-for list="{{ opts }}" as="o" hint-placeholder-count="3">
         <li id="{{ o.id }}" class="{{ o.cls }}" role="option" aria-selected="{{ o.selected }}" aria-disabled="{{ o.disabled }}" onClick="{{ o.onPick }}" onMouseEnter="{{ o.onHover }}" style="{{ o.style }}">
           <sc-if value="{{ o.img }}" hint-placeholder-val=""><img src="{{ o.img }}" alt="" aria-hidden="true" style="flex:none;width:25px;height:16px;border-radius:4px;object-fit:cover;display:block;"></sc-if><span class="se-opt-l" style="{{ o.labelStyle }}">{{ o.label }}</span>
@@ -49,7 +49,7 @@
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:320},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;ariaLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Výbava&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;subtle&quot;,&quot;outline&quot;],&quot;default&quot;:&quot;subtle&quot;,&quot;tsType&quot;:&quot;'subtle'|'outline'&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;standard&quot;,&quot;compact&quot;],&quot;default&quot;:&quot;standard&quot;,&quot;tsType&quot;:&quot;'standard'|'compact'&quot;},&quot;disabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;options&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{value?:string,label:string,note?:string,disabled?:boolean}[]&quot;,&quot;default&quot;:null},&quot;value&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;,&quot;default&quot;:null},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(value:string)=&gt;void&quot;,&quot;default&quot;:null}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:320},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;ariaLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Výbava&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;subtle&quot;,&quot;outline&quot;],&quot;default&quot;:&quot;subtle&quot;,&quot;tsType&quot;:&quot;'subtle'|'outline'&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;standard&quot;,&quot;compact&quot;],&quot;default&quot;:&quot;standard&quot;,&quot;tsType&quot;:&quot;'standard'|'compact'&quot;},&quot;disabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;options&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{value?:string,label:string,note?:string,disabled?:boolean}[]&quot;,&quot;default&quot;:null},&quot;value&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;,&quot;default&quot;:null},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(value:string)=&gt;void&quot;,&quot;default&quot;:null},&quot;listMinWidth&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   DEMO = [{ value:'zakladni', label:'základní výbava (v ceně)' }, { value:'plachta', label:'plachta + rám 1,2 m (+ 14 900 Kč)' }, { value:'rampy', label:'nájezdové rampy (+ 6 200 Kč)' }, { value:'kolo', label:'rezervní kolo', disabled:true }];
   state = { demo:'zakladni', open:false, active:-1 };
@@ -71,7 +71,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount(){ document.removeEventListener('mousedown', this._doc); }
   componentDidUpdate(_, prev){
-    if (this.state.open && this.state.active !== prev.active) {
+    if (this.state.open && this.state.active !== (prev || {}).active) {
       const l = document.getElementById((this._uid||'se') + '-lb');
       const el = l && l.children[this.state.active];
       if (el && l){ if (el.offsetTop < l.scrollTop) l.scrollTop = el.offsetTop - 6; else if (el.offsetTop + el.offsetHeight > l.scrollTop + l.clientHeight) l.scrollTop = el.offsetTop + el.offsetHeight - l.clientHeight + 6; }
@@ -81,7 +81,7 @@ class Component extends DCLogic {
     const P = this.props;
     const controlled = Array.isArray(P.options) && P.options.length;
     const raw = controlled ? P.options : this.DEMO;
-    const opts = raw.map(o=>({ value: String(o.value ?? o.label), label:o.label, note:o.note || '', img:o.img || '', disabled: !!o.disabled }));
+    const opts = raw.map(o=>({ value: String(o.value ?? o.label), label:o.label, note:o.note || '', img:o.img || '', disabled: !!o.disabled, sep: !!o.sep }));
     const value = controlled ? String(P.value ?? '') : this.state.demo;
     const onChange = controlled ? (P.onChange || (()=>{})) : ((v)=>this.setState({ demo:v }));
     return { opts, value, onChange };
@@ -133,7 +133,7 @@ class Component extends DCLogic {
       onBtnKey: (e)=>{ if (open) { keyMove(e); return; } if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){ e.preventDefault(); this.open(); } },
       keepFocus: (e)=>{ e.preventDefault(); },
       activeDesc: (open && this.state.active >= 0) ? uid + '-o' + this.state.active : undefined,
-      listTop: 'calc(100% + 4px)',
+      listTop: 'calc(100% + 4px)', listMinW: this.props.listMinWidth || '0px',
       btnStyle: 'width:100%;min-height:'+size+'px;display:flex;align-items:stretch;padding:0;border-radius:6px;overflow:hidden;background:'+bg+';box-shadow:'+ring+';transition:box-shadow 120ms ease, background 120ms ease;',
       valStyle: 'flex:1;min-width:0;display:flex;align-items:center;padding:0 8px 0 16px;font-size:'+fs+'px;font-weight:700;line-height:1.3;color:'+txt+';overflow:hidden;text-overflow:ellipsis;white-space:nowrap;',
       chevSize: size === 36 ? 18 : 24,
@@ -147,7 +147,7 @@ class Component extends DCLogic {
           id: uid + '-o' + i, img:o.img, label:o.label, note:o.note, hasNote: !!o.note,
           selected: sel ? 'true' : 'false', disabled: o.disabled ? 'true' : undefined,
           cls: 'se-opt' + (i === this.state.active ? ' se-act' : ''),
-          style: 'display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;border-radius:6px;cursor:pointer;',
+          style: 'display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;border-radius:6px;cursor:pointer;' + (o.sep ? 'margin-top:7px;box-shadow:0 -4px 0 -3px #D5DAE0;' : ''),
           labelStyle: 'flex:1;min-width:0;font-size:'+fs+'px;line-height:1.35;font-weight:'+(sel?700:500)+';color:'+(o.disabled?'#9AA1AB':(sel?'#1E5AA8':'#15181C'))+';',
           checkStyle: 'flex:none;display:flex;color:#1E5AA8;' + (sel ? '' : 'visibility:hidden;'),
           onPick: ()=>this.pick(i),

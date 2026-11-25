@@ -27,12 +27,7 @@
   .ck-h2{font-size:22px;font-weight:700;line-height:1.25;}
   @media (max-width:819px){ .ck-h1{font-size:26px;line-height:1.2;} .ck-h2{font-size:18px;line-height:1.3;} }
   .ck-card{background:#FFFFFF;border-radius:8px;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);}
-  .ck-steps{display:flex;align-items:center;gap:12px;list-style:none;margin:0;padding:0;}
-  .ck-step{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;line-height:1.5;white-space:nowrap;}
-  .ck-sep{width:48px;height:2px;border-radius:999px;background:#D5DAE0;flex:none;}
-  @media (max-width:1149px){ .ck-sep{width:24px;} }
-  @media (max-width:819px){ .ck-step[data-active="0"] .ck-steplbl{display:none;} .ck-steps{gap:8px;} .ck-sep{width:16px;} }
-  @media (max-width:419px){ .ck-steplbl{display:none;} .ck-logo{height:24px !important;} }
+  @media (max-width:419px){ .ck-logo{height:24px !important;} }
   .ck-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px 32px;align-items:start;}
   @media (min-width:1560px){ .ck-grid{grid-template-columns:minmax(0,1fr) 400px;} }
   @media (max-width:1149px){ .ck-grid{grid-template-columns:minmax(0,1fr);} }
@@ -51,9 +46,11 @@
   .ck-ta{width:100%;min-width:0;min-height:120px;padding:12px 14px;background:#F2F4F7;border:0;border-radius:6px;font-family:inherit;font-size:15px;line-height:1.6;color:#15181C;resize:vertical;}
   .ck-inp::placeholder,.ck-ta::placeholder{color:#666E78;}
   .ck-inp:focus-visible,.ck-ta:focus-visible{outline:0;box-shadow:inset 0 0 0 2px #1E5AA8;}
-  .ck-inp[data-err="1"]{box-shadow:inset 0 0 0 2px #C5232B;}
+  .ck-inp[data-err="1"]{box-shadow:inset 0 0 0 1px #C5232B;}
+  .ck-lbl[data-err="1"]{color:#C5232B;}
   @media (max-width:549px){ .ck-inp,.ck-ta{font-size:16px;} }
-  .ck-err{margin:6px 0 0;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;line-height:1.4;color:#C5232B;}
+  /* chybový stav podle specifikace: červený popisek + 1px rámeček, text chyby jen pro čtečky (aria-describedby) */
+  .ck-err{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   .ck-tel{display:flex;gap:12px;align-items:flex-start;}
   .ck-telpfx{flex:none;width:136px;}
   @media (max-width:549px){ .ck-tel{gap:8px;} .ck-telpfx{width:120px;} }
@@ -66,7 +63,7 @@
   .ck-firmbox{display:flex;flex-direction:column;gap:20px;padding:24px;border-radius:8px;background:#F7F9FB;}
   .ck-firmbox .ck-inp{background:#FFFFFF;box-shadow:inset 0 0 0 1px #D5DAE0;}
   .ck-firmbox .ck-inp:focus-visible{box-shadow:inset 0 0 0 2px #1E5AA8;}
-  .ck-firmbox .ck-inp[data-err="1"]{box-shadow:inset 0 0 0 2px #C5232B;}
+  .ck-firmbox .ck-inp[data-err="1"]{box-shadow:inset 0 0 0 1px #C5232B;}
   .ck-firmbox .se-btn{background:#FFFFFF !important;box-shadow:inset 0 0 0 1px #D5DAE0 !important;}
   .ck-firmbox .se-btn:focus-visible{box-shadow:inset 0 0 0 2px #1E5AA8 !important;}
   .ck-firmbox .se-btn:not(:disabled):hover{background:#F2F4F7 !important;}
@@ -74,8 +71,8 @@
   .ck-icrow>p{padding-bottom:10px;}
   .ck-w2{max-width:66.666%;} .ck-w1{max-width:50%;}
   @container (max-width:559px){ .ck-icrow{grid-template-columns:minmax(0,1fr);} .ck-icrow>p{padding-bottom:0;} .ck-w2,.ck-w1{max-width:none;} .ck-firmbox{padding:16px;} }
-  .ck-login{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#EFF4FB;box-shadow:inset 0 0 0 1px #B4CEEC;border-radius:8px;padding:16px 24px;}
-  .ck-loginlink{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:16px;font-weight:700;color:#1E5AA8;text-decoration:none;transition:color .12s ease;}
+  .ck-login{display:flex;align-items:flex-start;gap:10px;padding:0;} .ck-login>p{flex:1;min-width:0;}
+  .ck-loginlink{display:inline-flex;align-items:center;gap:4px;margin-left:4px;white-space:nowrap;vertical-align:bottom;font-size:16px;font-weight:700;color:#1E5AA8;text-decoration:none;transition:color .12s ease;}
   .ck-loginlink:hover{color:#1A4A8A;}
   .ck-loginlink:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;border-radius:4px;}
   .ck-foot a{color:#5A626C;text-decoration:none;transition:color .12s ease;}
@@ -84,37 +81,14 @@
   .ck-in{animation:ckIn .3s ease both;}
   @media (prefers-reduced-motion:reduce){ .ck-in{animation:none;} }
 </style>
+<script src="./predvolby.js"></script>
 </helmet>
 <div data-screen-label="Košík — krok 2" lang="cs" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;display:flex;flex-direction:column;">
 
   <header style="position:sticky;top:0;z-index:70;background:#FFFFFF;box-shadow:0 2px 8px rgba(20,47,86,.06);">
     <div class="vp-in" style="display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:80px;padding-top:16px;padding-bottom:16px;">
       <a class="ck-lnk" href="index.dc.html" aria-label="VAPP — domovská stránka" style="display:flex;flex:none;"><img class="ck-logo" src="./vapp-logo.svg" alt="VAPP" style="height:32px;width:auto;display:block;"></a>
-      <nav aria-label="Kroky objednávky">
-        <ol class="ck-steps">
-          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
-            <sc-if value="{{ s.notFirst }}" hint-placeholder-val="">
-              <li aria-hidden="true" class="ck-sep" style="{{ s.sepStyle }}"></li>
-            </sc-if>
-            <li class="ck-step" data-active="{{ s.activeFlag }}" aria-current="{{ s.current }}">
-              <sc-if value="{{ s.isDone }}" hint-placeholder-val="">
-                <a href="{{ s.href }}" class="ck-lnk" style="display:flex;align-items:center;gap:8px;color:#0B6937;">
-                  <span style="width:28px;height:28px;border-radius:999px;background:#0E7F43;color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;"><dc-import name="Ikony" icon-name="check" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span>
-                  <span class="ck-steplbl">{{ s.label }}</span>
-                </a>
-              </sc-if>
-              <sc-if value="{{ s.isActive }}" hint-placeholder-val="{{ true }}">
-                <span style="width:28px;height:28px;border-radius:999px;background:#1E5AA8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;">{{ s.num }}</span>
-                <span class="ck-steplbl" style="color:#15181C;">{{ s.label }}</span>
-              </sc-if>
-              <sc-if value="{{ s.isTodo }}" hint-placeholder-val="">
-                <span style="width:28px;height:28px;border-radius:999px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #91959B;color:#5A626C;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;">{{ s.num }}</span>
-                <span class="ck-steplbl" style="color:#5A626C;">{{ s.label }}</span>
-              </sc-if>
-            </li>
-          </sc-for>
-        </ol>
-      </nav>
+      <dc-import name="Stepper" labels="{{ stpLabels }}" current="{{ stpCur }}" hrefs="{{ stpHrefs }}" aria-label="Kroky objednávky" hint-size="300px,58px"></dc-import>
     </div>
   </header>
 
@@ -125,8 +99,7 @@
 
         <div class="ck-login">
           <span aria-hidden="true" style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="user" size="{{ 24 }}" hint-size="24px,24px"></dc-import></span>
-          <p style="margin:0;flex:1 1 260px;font-size:16px;line-height:1.5;color:#5A626C;text-wrap:pretty;"><strong style="font-weight:700;color:#15181C;">Už u nás máte účet?</strong> Po přihlášení vám údaje vyplníme.</p>
-          <button type="button" class="ck-loginlink" aria-haspopup="dialog" onClick="{{ openLogin }}" style="appearance:none;background:none;border:0;padding:0;font-family:inherit;line-height:inherit;cursor:pointer;">Přihlásit se<span aria-hidden="true" style="display:inline-flex;"><dc-import name="Ikony" icon-name="chevron-right" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span></button>
+          <p style="margin:0;font-size:16px;line-height:1.5;color:#5A626C;text-wrap:pretty;"><span style="color:#15181C;">Už u nás máte účet?</span> Po přihlášení vám údaje vyplníme. <button type="button" class="ck-loginlink" aria-haspopup="dialog" onClick="{{ openLogin }}" style="appearance:none;background:none;border:0;padding:0;font-family:inherit;line-height:inherit;cursor:pointer;">Přihlásit se<span aria-hidden="true" style="display:inline-flex;"><dc-import name="Ikony" icon-name="chevron-right" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span></button></p>
         </div>
 
         <section id="ck-s1" class="ck-card ck-sec" aria-labelledby="ck-h-1">
@@ -135,40 +108,42 @@
             <h2 id="ck-h-1" class="ck-h2" style="margin:0;color:#142F56;flex:1;">Kontaktní údaje</h2>
             <span style="font-size:13px;font-weight:500;line-height:1.4;color:#666E78;"><span class="ck-req" aria-hidden="true">*</span> povinné údaje</span>
           </div>
-          <div>
-            <label class="ck-lbl" for="ck-email">E-mail <span class="ck-req" aria-hidden="true">*</span></label>
-            <input class="ck-inp" id="ck-email" type="email" autocomplete="email" required="{{ true }}" placeholder="jmeno@domena.cz" value="{{ f.email }}" onChange="{{ on.email }}" data-err="{{ ef.email }}" aria-invalid="{{ e.email }}" aria-describedby="ck-email-err">
-            <sc-if value="{{ e.email }}" hint-placeholder-val="">
-              <p class="ck-err" id="ck-email-err">Zadejte e-mail ve formátu jmeno@domena.cz.</p>
-            </sc-if>
+          <div class="ck-row2">
+            <div>
+              <label class="ck-lbl" for="ck-email" data-err="{{ ef.email }}">E-mail <span class="ck-req" aria-hidden="true">*</span></label>
+              <input class="ck-inp" id="ck-email" type="email" autocomplete="email" required="{{ true }}" placeholder="jmeno@domena.cz" value="{{ f.email }}" onChange="{{ on.email }}" data-err="{{ ef.email }}" aria-invalid="{{ e.email }}" aria-describedby="ck-email-err">
+              <sc-if value="{{ e.email }}" hint-placeholder-val="">
+                <p class="ck-err" id="ck-email-err">Zadejte e-mail ve formátu jmeno@domena.cz.</p>
+              </sc-if>
+            </div>
+            <div>
+              <label class="ck-lbl" for="ck-phone" data-err="{{ ef.phone }}">Telefon <span class="ck-req" aria-hidden="true">*</span></label>
+              <div class="ck-tel">
+                <div class="ck-telpfx">
+                  <dc-import name="Select" options="{{ prefixes }}" value="{{ f.prefix }}" on-change="{{ on.prefix }}" aria-label="Předvolba" list-min-width="280px" hint-size="100%,44px"></dc-import>
+                </div>
+                <input class="ck-inp" id="ck-phone" type="tel" inputmode="tel" autocomplete="tel-national" required="{{ true }}" placeholder="777 123 456" value="{{ f.phone }}" onChange="{{ on.phone }}" data-err="{{ ef.phone }}" aria-invalid="{{ e.phone }}" aria-describedby="ck-phone-err" style="flex:1;">
+              </div>
+              <sc-if value="{{ e.phone }}" hint-placeholder-val="">
+                <p class="ck-err" id="ck-phone-err">Zadejte telefonní číslo — devět číslic bez předvolby.</p>
+              </sc-if>
+            </div>
           </div>
           <div class="ck-row2">
             <div>
-              <label class="ck-lbl" for="ck-first">Jméno <span class="ck-req" aria-hidden="true">*</span></label>
+              <label class="ck-lbl" for="ck-first" data-err="{{ ef.first }}">Jméno <span class="ck-req" aria-hidden="true">*</span></label>
               <input class="ck-inp" id="ck-first" type="text" autocomplete="given-name" required="{{ true }}" value="{{ f.first }}" onChange="{{ on.first }}" data-err="{{ ef.first }}" aria-invalid="{{ e.first }}" aria-describedby="ck-first-err">
               <sc-if value="{{ e.first }}" hint-placeholder-val="">
                 <p class="ck-err" id="ck-first-err">Vyplňte jméno.</p>
               </sc-if>
             </div>
             <div>
-              <label class="ck-lbl" for="ck-last">Příjmení <span class="ck-req" aria-hidden="true">*</span></label>
+              <label class="ck-lbl" for="ck-last" data-err="{{ ef.last }}">Příjmení <span class="ck-req" aria-hidden="true">*</span></label>
               <input class="ck-inp" id="ck-last" type="text" autocomplete="family-name" required="{{ true }}" value="{{ f.last }}" onChange="{{ on.last }}" data-err="{{ ef.last }}" aria-invalid="{{ e.last }}" aria-describedby="ck-last-err">
               <sc-if value="{{ e.last }}" hint-placeholder-val="">
                 <p class="ck-err" id="ck-last-err">Vyplňte příjmení.</p>
               </sc-if>
             </div>
-          </div>
-          <div>
-            <label class="ck-lbl" for="ck-phone">Telefon <span class="ck-req" aria-hidden="true">*</span></label>
-            <div class="ck-tel">
-              <div class="ck-telpfx">
-                <dc-import name="Select" options="{{ prefixes }}" value="{{ f.prefix }}" on-change="{{ on.prefix }}" aria-label="Předvolba" hint-size="100%,44px"></dc-import>
-              </div>
-              <input class="ck-inp" id="ck-phone" type="tel" inputmode="tel" autocomplete="tel-national" required="{{ true }}" placeholder="777 123 456" value="{{ f.phone }}" onChange="{{ on.phone }}" data-err="{{ ef.phone }}" aria-invalid="{{ e.phone }}" aria-describedby="ck-phone-err" style="flex:1;">
-            </div>
-            <sc-if value="{{ e.phone }}" hint-placeholder-val="">
-              <p class="ck-err" id="ck-phone-err">Zadejte telefonní číslo — devět číslic bez předvolby.</p>
-            </sc-if>
           </div>
           <div style="display:flex;flex-direction:column;gap:16px;">
             <label class="ck-cb"><input type="checkbox" checked="{{ f.company }}" onChange="{{ onCompany }}"><span>Nakupuji na firmu</span></label>
@@ -177,7 +152,7 @@
                 <div class="ck-icrow">
                   <div class="ck-icinp">
                     <div>
-                  <label class="ck-lbl" for="ck-ico">IČ <span class="ck-req" aria-hidden="true">*</span></label>
+                  <label class="ck-lbl" for="ck-ico" data-err="{{ ef.ico }}">IČ <span class="ck-req" aria-hidden="true">*</span></label>
                   <input class="ck-inp" id="ck-ico" type="text" inputmode="numeric" autocomplete="off" value="{{ f.ico }}" onChange="{{ on.ico }}" data-err="{{ ef.ico }}" aria-invalid="{{ e.ico }}" aria-describedby="ck-ico-err">
                   <sc-if value="{{ e.ico }}" hint-placeholder-val="">
                     <p class="ck-err" id="ck-ico-err">IČ má osm číslic.</p>
@@ -188,7 +163,7 @@
                 </div>
                 <div class="ck-w2">
                   <div>
-                  <label class="ck-lbl" for="ck-firm">Společnost <span class="ck-req" aria-hidden="true">*</span></label>
+                  <label class="ck-lbl" for="ck-firm" data-err="{{ ef.firm }}">Společnost <span class="ck-req" aria-hidden="true">*</span></label>
                   <input class="ck-inp" id="ck-firm" type="text" autocomplete="organization" value="{{ f.firm }}" onChange="{{ on.firm }}" data-err="{{ ef.firm }}" aria-invalid="{{ e.firm }}" aria-describedby="ck-firm-err">
                   <sc-if value="{{ e.firm }}" hint-placeholder-val="">
                     <p class="ck-err" id="ck-firm-err">Vyplňte název společnosti.</p>
@@ -200,7 +175,7 @@
                   <sc-if value="{{ f.vat }}" hint-placeholder-val="">
                     <div class="ck-in ck-w1">
                       <div>
-                  <label class="ck-lbl" for="ck-dic">DIČ <span class="ck-req" aria-hidden="true">*</span></label>
+                  <label class="ck-lbl" for="ck-dic" data-err="{{ ef.dic }}">DIČ <span class="ck-req" aria-hidden="true">*</span></label>
                   <input class="ck-inp" id="ck-dic" type="text" placeholder="CZ12345678" value="{{ f.dic }}" onChange="{{ on.dic }}" data-err="{{ ef.dic }}" aria-invalid="{{ e.dic }}" aria-describedby="ck-dic-err">
                   <sc-if value="{{ e.dic }}" hint-placeholder-val="">
                     <p class="ck-err" id="ck-dic-err">Zadejte DIČ ve formátu CZ12345678.</p>
@@ -218,14 +193,14 @@
                 <p style="margin:0;font-size:16px;font-weight:700;line-height:1.35;">Fakturační adresa</p>
                 <div class="ck-rowA">
                   <div>
-                  <label class="ck-lbl" for="ck-bstreet">Ulice, č. p. <span class="ck-req" aria-hidden="true">*</span></label>
+                  <label class="ck-lbl" for="ck-bstreet" data-err="{{ ef.bstreet }}">Ulice, č. p. <span class="ck-req" aria-hidden="true">*</span></label>
                   <input class="ck-inp" id="ck-bstreet" type="text" autocomplete="billing street-address" value="{{ f.bstreet }}" onChange="{{ on.bstreet }}" data-err="{{ ef.bstreet }}" aria-invalid="{{ e.bstreet }}" aria-describedby="ck-bstreet-err">
                   <sc-if value="{{ e.bstreet }}" hint-placeholder-val="">
                     <p class="ck-err" id="ck-bstreet-err">Vyplňte ulici a číslo popisné.</p>
                   </sc-if>
                 </div>
                   <div>
-                  <label class="ck-lbl" for="ck-bzip">PSČ <span class="ck-req" aria-hidden="true">*</span></label>
+                  <label class="ck-lbl" for="ck-bzip" data-err="{{ ef.bzip }}">PSČ <span class="ck-req" aria-hidden="true">*</span></label>
                   <input class="ck-inp" id="ck-bzip" type="text" inputmode="numeric" autocomplete="billing postal-code" value="{{ f.bzip }}" onChange="{{ on.bzip }}" data-err="{{ ef.bzip }}" aria-invalid="{{ e.bzip }}" aria-describedby="ck-bzip-err">
                   <sc-if value="{{ e.bzip }}" hint-placeholder-val="">
                     <p class="ck-err" id="ck-bzip-err">PSČ má pět číslic.</p>
@@ -234,7 +209,7 @@
                 </div>
                 <div class="ck-rowA">
                   <div>
-                  <label class="ck-lbl" for="ck-bcity">Město <span class="ck-req" aria-hidden="true">*</span></label>
+                  <label class="ck-lbl" for="ck-bcity" data-err="{{ ef.bcity }}">Město <span class="ck-req" aria-hidden="true">*</span></label>
                   <input class="ck-inp" id="ck-bcity" type="text" autocomplete="billing address-level2" value="{{ f.bcity }}" onChange="{{ on.bcity }}" data-err="{{ ef.bcity }}" aria-invalid="{{ e.bcity }}" aria-describedby="ck-bcity-err">
                   <sc-if value="{{ e.bcity }}" hint-placeholder-val="">
                     <p class="ck-err" id="ck-bcity-err">Vyplňte město.</p>
@@ -276,14 +251,14 @@
           <p style="margin:0;font-size:16px;font-weight:700;line-height:1.35;">{{ addrTitle }}</p>
           <div class="ck-rowA">
             <div>
-              <label class="ck-lbl" for="ck-street">Ulice, č. p. <span class="ck-req" aria-hidden="true">*</span></label>
+              <label class="ck-lbl" for="ck-street" data-err="{{ ef.street }}">Ulice, č. p. <span class="ck-req" aria-hidden="true">*</span></label>
               <input class="ck-inp" id="ck-street" type="text" autocomplete="street-address" value="{{ f.street }}" onChange="{{ on.street }}" data-err="{{ ef.street }}" aria-invalid="{{ e.street }}" aria-describedby="ck-street-err">
               <sc-if value="{{ e.street }}" hint-placeholder-val="">
                 <p class="ck-err" id="ck-street-err">Vyplňte ulici a číslo popisné.</p>
               </sc-if>
             </div>
             <div>
-              <label class="ck-lbl" for="ck-zip">PSČ <span class="ck-req" aria-hidden="true">*</span></label>
+              <label class="ck-lbl" for="ck-zip" data-err="{{ ef.zip }}">PSČ <span class="ck-req" aria-hidden="true">*</span></label>
               <input class="ck-inp" id="ck-zip" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="252 41" value="{{ f.zip }}" onChange="{{ on.zip }}" data-err="{{ ef.zip }}" aria-invalid="{{ e.zip }}" aria-describedby="ck-zip-err">
               <sc-if value="{{ e.zip }}" hint-placeholder-val="">
                 <p class="ck-err" id="ck-zip-err">PSČ má pět číslic.</p>
@@ -292,7 +267,7 @@
           </div>
           <div class="ck-rowA">
             <div>
-              <label class="ck-lbl" for="ck-city">Město <span class="ck-req" aria-hidden="true">*</span></label>
+              <label class="ck-lbl" for="ck-city" data-err="{{ ef.city }}">Město <span class="ck-req" aria-hidden="true">*</span></label>
               <input class="ck-inp" id="ck-city" type="text" autocomplete="address-level2" value="{{ f.city }}" onChange="{{ on.city }}" data-err="{{ ef.city }}" aria-invalid="{{ e.city }}" aria-describedby="ck-city-err">
               <sc-if value="{{ e.city }}" hint-placeholder-val="">
                 <p class="ck-err" id="ck-city-err">Vyplňte město.</p>
@@ -334,7 +309,7 @@
             <span style="font-size:28px;font-weight:700;line-height:1.2;letter-spacing:-0.01em;white-space:nowrap;">{{ totalText }}</span>
           </div>
           <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px;">
-            <dc-import name="Tlacitko" variant="buy" size="large" label="Pokračovat ke kontrole údajů" icon="none" icon-trailing="chevron-right" full-width="{{ true }}" on-click="{{ onContinue }}" hint-size="100%,52px"></dc-import>
+            <dc-import name="Tlacitko" variant="buy" size="large" label="Pokračovat ke shrnutí" icon="none" icon-trailing="chevron-right" full-width="{{ true }}" on-click="{{ onContinue }}" hint-size="100%,52px"></dc-import>
             <sc-if value="{{ showMissing }}" hint-placeholder-val="">
               <p role="alert" style="margin:0;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:500;line-height:1.5;color:#C5232B;"><dc-import name="Ikony" icon-name="alert-circle" size="{{ 18 }}" hint-size="18px,18px"></dc-import>Doplňte označené údaje.</p>
             </sc-if>
@@ -370,7 +345,7 @@ class Component extends DCLogic {
   FIELDS = ['email','first','last','prefix','phone','firm','ico','dic','ordno','bstreet','bzip','bcity','bcountry','street','zip','city','note'];
   DEMO_SUM = { rows:[
       { label:'Zboží (4 ks) bez DPH', value:'7 083\u00a0Kč' }, { label:'DPH 21 %', value:'1 487\u00a0Kč' },
-      { label:'Doprava · Zásilkovna – Z-Point / Z-BOX', value:'Zdarma', free:true }, { label:'Platba · Platba kartou online', value:'Zdarma', free:true } ],
+      { label:'Doprava · Zásilkovna – Z-Point / Z-BOX', value:'0\u00a0Kč', free:false }, { label:'Platba · Platba kartou online', value:'0\u00a0Kč', free:false } ],
     total:'8 570\u00a0Kč', country:'CZ', shipId:'zp', shipLabel:'Zásilkovna – Z-Point / Z-BOX', point:'Z-BOX Praha 9 – Vysočany, Kolbenova 942/38', pickup:false };
   state = { f:{ email:'', first:'', last:'', prefix:'+420', phone:'', company:false, firm:'', ico:'', vat:false, dic:'', ordno:'', bstreet:'', bzip:'', bcity:'', bcountry:'CZ', street:'', zip:'', city:'', note:'' }, tried:false, sum:null, loginOpen:false };
 
@@ -401,14 +376,8 @@ class Component extends DCLogic {
   renderVals(){
     const S = this.state, P = this.props, f = S.f;
     const sum = S.sum || this.DEMO_SUM;
-    const labels = ['Nákupní košík','Kontaktní údaje','Kontrola údajů'];
+    const labels = ['Košík','Kontakt','Shrnutí'];
     const step = 2;
-    const steps = labels.map((label,i)=>{
-      const n = i+1, active = n===step;
-      return { num:n, label, isDone:n<step, isActive:active, isTodo:n>step, notFirst:i>0,
-        activeFlag: active ? '1' : '0', current: active ? 'step' : undefined, href:'kosik-krok1.dc.html',
-        sepStyle: 'background:' + (n<=step ? '#0E7F43' : '#D5DAE0') + ';' };
-    });
     const errAll = this.errors(f, !!sum.pickup);
     const e = {}, ef = {};
     Object.keys(errAll).forEach(k=>{ e[k] = S.tried && !!errAll[k]; ef[k] = e[k] ? '1' : '0'; });
@@ -426,8 +395,8 @@ class Component extends DCLogic {
     const hasPlace = !!sum.pickup || !!sum.point;
     const anyErr = Object.values(errAll).some(Boolean);
     return {
-      steps, f, e, ef, on,
-      prefixes: [{ value:'+420', label:'+420', img:'vapp-flag-cz.svg' }, { value:'+421', label:'+421', img:'vapp-flag-sk.svg' }],
+      stpLabels:labels, stpCur:step, stpHrefs:['kosik-krok1.dc.html','kosik-krok2.dc.html','kosik-krok3.dc.html'], f, e, ef, on,
+      prefixes:(window.VappPredvolby ? window.VappPredvolby.options() : [{ value:'+420', label:'+420', img:'vapp-flag-cz.svg' }, { value:'+421', label:'+421', img:'vapp-flag-sk.svg' }]),
       countries: [{ value:'CZ', label:'Česko' }, { value:'SK', label:'Slovensko' }],
       country: sum.country || 'CZ',
       hasPlace, isPickup: !!sum.pickup, hasPoint: !sum.pickup && !!sum.point, needAddr: !sum.pickup && !(f.company && sum.point),
@@ -443,7 +412,7 @@ class Component extends DCLogic {
       onCompany: (ev)=>{ const c = ev.target.checked; this.setState(s=>({ f:{ ...s.f, company:c } })); },
       onContinue: ()=>{
         this.setState({ tried:true });
-        const order = ['email','first','last','phone','ico','firm','dic','bstreet','bzip','bcity','street','zip','city'];
+        const order = ['email','phone','first','last','ico','firm','dic','bstreet','bzip','bcity','street','zip','city'];
         const ids = { email:'ck-email', first:'ck-first', last:'ck-last', phone:'ck-phone', firm:'ck-firm', ico:'ck-ico', dic:'ck-dic', bstreet:'ck-bstreet', bzip:'ck-bzip', bcity:'ck-bcity', street:'ck-street', zip:'ck-zip', city:'ck-city' };
         const bad = order.find(k=>errAll[k]);
         if (bad) {

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0!important;padding:0!important;background:#F7F9FB;}
+  #dc-root{margin:0!important;padding:0!important;width:100%!important;max-width:none!important;border:0!important;}
+  #dc-root>.sc-host{margin:0!important;padding:0!important;width:100%!important;}
+  .uk-in{max-width:1200px;margin:0 auto;padding:0 32px;}
+  @media (max-width:819px){ .uk-in{padding:0 16px;} }
+  .uk-i{appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;}
+  .uk-i:focus-visible,.uk-a:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;border-radius:4px;}
+  .uk-a{color:#1E5AA8;font-weight:700;text-decoration:none;} .uk-a:hover{color:#1A4A8A;text-decoration:underline;text-underline-offset:3px;}
+  .uk-card{background:#FFFFFF;border-radius:8px;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);}
+  .uk-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+  @media (max-width:819px){ .uk-stats{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .uk-chip{min-height:36px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:700;background:#FFFFFF;color:#1E5AA8;box-shadow:inset 0 0 0 1px #B4CEEC;transition:background .12s;}
+  .uk-chip:hover{background:#EFF4FB;}
+  .uk-chip[aria-pressed="true"]{background:#1E5AA8;color:#FFFFFF;box-shadow:none;}
+  .uk-row{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px 24px;padding:16px 24px;border-top:1px solid #F2F4F7;align-items:start;}
+  @media (max-width:649px){ .uk-row{grid-template-columns:minmax(0,1fr);padding:14px 16px;} .uk-row .uk-st{justify-self:start;grid-row:1;} }
+  .uk-st{justify-self:end;display:inline-flex;align-items:center;min-height:26px;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700;line-height:1.4;white-space:nowrap;}
+  .uk-st[data-s="done"]{background:#E9F8EF;color:#0B6937;}
+  .uk-st[data-s="diff"]{background:#EFF4FB;color:#1E5AA8;}
+  .uk-st[data-s="ask"]{background:#FDF1F1;color:#A21B22;}
+  .uk-st[data-s="wait"]{background:#F2F4F7;color:#5A626C;}
+  .uk-idea{margin-top:6px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:10px 14px;border-radius:8px;background:#FFF8E6;font-size:15px;line-height:1.6;color:#15181C;text-wrap:pretty;}
+  .uk-idealbl{display:inline-flex;align-items:center;gap:6px;min-height:24px;padding:2px 10px;border-radius:999px;background:#FCE7B2;color:#7A4B00;font-size:13px;font-weight:700;line-height:1.4;white-space:nowrap;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:#F2F4F7;border-radius:4px;padding:1px 5px;}
+</style>
+</helmet>
+<div data-screen-label="Úkolovník — podklady Pickerly 11/2026" lang="cs" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;padding:40px 0 72px;">
+  <div class="uk-in" style="display:flex;flex-direction:column;gap:24px;">
+
+    <header style="display:flex;flex-direction:column;gap:12px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1E5AA8;">Úkolovník a changelog · stav k 25. 11. 2026</span>
+      <h1 style="margin:0;font-size:36px;font-weight:700;line-height:1.15;letter-spacing:-0.02em;color:#142F56;">Podklady Pickerly 11/2026: servis, rezervace, košík</h1>
+      <p style="margin:0;max-width:820px;font-size:16px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Co vyplývá ze specifikace schválených prototypů (Pickerly, 19. 11. 2026) a z e-mailu UX designérky, co je z toho v projektu hotové a co čeká na rozhodnutí. Z prototypů se přebíral obsah, rozložení a chování; vzhled drží náš design systém (ikony, tlačítka, pole formulářů).</p>
+      <p style="margin:0;font-size:15px;line-height:1.6;">
+        Nové stránky: <a class="uk-a" href="rezervace-servisu.dc.html">Rezervace servisu</a> · <a class="uk-a" href="rezervace-privesu.dc.html">Rezervace přívěsu</a> &nbsp;|&nbsp; Upravené: <a class="uk-a" href="servis.dc.html">Servis</a> · <a class="uk-a" href="kosik-krok1.dc.html">Košík, krok 1</a> · <a class="uk-a" href="pujcovna.dc.html">Půjčovna</a> · <a class="uk-a" href="detail-pujcovna.dc.html">Detail půjčovny</a>
+      </p>
+    </header>
+
+    <div class="uk-stats">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div class="uk-card" style="padding:16px 20px;display:flex;flex-direction:column;gap:6px;">
+          <strong style="font-size:30px;font-weight:700;line-height:1.1;color:#142F56;">{{ s.n }}</strong>
+          <span><span class="uk-st" data-s="{{ s.key }}" style="justify-self:start;">{{ s.label }}</span></span>
+          <span style="font-size:13px;line-height:1.5;color:#5A626C;">{{ s.note }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div role="group" aria-label="Filtr podle stavu" style="display:flex;flex-wrap:wrap;gap:8px;">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+        <button type="button" class="uk-i uk-chip" aria-pressed="{{ f.pressed }}" onClick="{{ f.onClick }}">{{ f.label }}</button>
+      </sc-for>
+    </div>
+
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+      <section class="uk-card" aria-label="{{ g.title }}" style="overflow:hidden;">
+        <div style="padding:20px 24px;display:flex;flex-direction:column;gap:4px;">
+          <h2 style="margin:0;font-size:22px;font-weight:700;line-height:1.25;color:#142F56;">{{ g.title }}</h2>
+          <span style="font-size:14px;line-height:1.5;color:#5A626C;">{{ g.sub }}</span>
+        </div>
+        <sc-for list="{{ g.items }}" as="t" hint-placeholder-count="4">
+          <div class="uk-row">
+            <div style="min-width:0;display:flex;flex-direction:column;gap:4px;">
+              <strong style="font-size:16px;font-weight:700;line-height:1.4;">{{ t.task }}</strong>
+              <span style="font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">{{ t.note }}</span>
+              <sc-if value="{{ t.hasIdea }}" hint-placeholder-val="">
+                <div class="uk-idea"><span class="uk-idealbl"><dc-import name="Ikony" icon-name="rocket" size="{{ 16 }}" hint-size="16px,16px"></dc-import>Nápad na řešení</span><span>{{ t.idea }}</span></div>
+              </sc-if>
+            </div>
+            <span class="uk-st" data-s="{{ t.key }}">{{ t.label }}</span>
+          </div>
+        </sc-for>
+      </section>
+    </sc-for>
+
+    <p style="margin:0;font-size:14px;line-height:1.6;color:#5A626C;">Zdroje: <code>00-navod-a-specifikace.md</code>, PDF <code>01</code>–<code>04</code>, prototypy <code>05</code>–<code>08</code> a e-mail Pickerly. Ceny, služby, přívěsy a termíny na nových stránkách jsou ukázková data z prototypů.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { filter:'all' };
+  ST = { done:'Hotovo', diff:'Hotovo jinak', ask:'K rozhodnutí', wait:'Čeká / neděláno' };
+  // [stav, úkol, poznámka]
+  G = [
+    { title:'Servis (landing)', sub:'servis.dc.html · e-mail bod 1, specifikace kap. 2', items:[
+      ['done','Upravené texty v sekci „Jak servis probíhá“','Všech pět kroků odpovídá finálním textům. Krok 2 jsem přejmenoval z „Přivezte přívěs“ na „Přistavte přívěs“ podle schváleného prototypu.'],
+      ['done','U služeb se nezobrazuje orientační doba úkonů','Řádek „Orientační doba“ je pryč z rozbaleného detailu karet služeb. Doby typu „(1,1 h)“ jsem odstranil i z názvů položek v datech stránky.'],
+      ['done','Odstraněný tip k STK','Dříve byl jen skrytý, teď je z kódu stránky odstraněný úplně.'],
+      ['done','Odstraněná duplicitní věta v bloku rezervace','Věta „Služba, termín a kontakt – zabere to asi minutu.“ byla odebraná už dříve; zůstává „Volný termín si vyberete v online kalendáři. Zabere to pár minut.“'],
+      ['done','CTA „Vybrat termín online“ pod textem, ne u spodního okraje','Tlačítko v tmavém rezervačním bloku teď navazuje hned na text.'],
+      ['done','Rezervace vede na novou stránku místo modálního okna','„Rezervovat termín online“ v hero, „Rezervovat termín“ u ceníku (předvybere službu „Nevím, co přívěs potřebuje“) a „Vybrat termín online“ vedou na Rezervaci servisu. RezervaceModal se na stránce už nepoužívá.'],
+      ['done','Hero: mapa místo fotky','Schválená varianta „obrázek Mapa“: vpravo v hero je mapa s tlačítkem „Navigovat“. Tím je vyřešený i dřívější otevřený dotaz k mapě v hero.'],
+      ['done','Mobil: přilepená lišta s rezervací','Do 819 px vyjede dole lišta „Rezervovat termín“ + tlačítko volat, jakmile odroluje CTA v hero, a schová se u rezervačního bloku (chování „Sticky V1“ z prototypu).'],
+      ['done','Komponenta RezervaceModal zůstává','Rozhodnuto 25. 11. 2026: nemaže se, zůstává v projektu i v rozcestníku. Žádná stránka ji teď neotevírá — rezervace servisu se podle klienta řeší samostatnou stránkou.'],
+      ['diff','Popisek kontaktu v kartě dílny','Rozhodnuto 25. 11. 2026: zůstává jak je — podle místa jednou „Jiří Balzer, vedoucí servisu“ (hero), jindy „Jiří Balzer, objednávky“ (ceník) a „Objednávky (Jiří Balzer)“ (rezervační blok, souhrn Rezervace servisu). Prototyp má všude „Jiří Balzer · 603 924 555“.'],
+      ['diff','Fotky u služeb vs. liniové ikony','Rozhodnuto 25. 11. 2026: zůstávají fotky (prototyp má liniové ikony). Stejné fotky jsou i u služeb v Rezervaci servisu; „Nevím, co přívěs potřebuje“ nemá fotku, má ikonu otazníku v kolečku.'],
+      ['diff','Kategorie „Nápravy a geometrie“ zrušena — rozhodnutí podle textu specifikace, ne podle prototypu','Podklady si odporují. Prototypy (PDF i HTML) geometrii pořád mají: kartu „Nápravy a geometrie“, službu v rezervaci s variantou „Geometrie náprav AL-KO plus“ a položku v ceníku. Textová specifikace (00-navod-a-specifikace.md, kap. 2, odstavec Data) ale výslovně říká: „kategorie Nápravy a geometrie zanikne – geometrii už neposkytují“. ROZHODNUTÍ (25. 11. 2026): řídím se textem specifikace. DŮVOD: jde o věcnou informaci o tom, co servis nabízí, a je novější než vizuál prototypu — nabízet zákazníkovi službu, kterou servis už nedělá, by bylo horší než chybějící karta. Na pokyn BSSHOP: „pokud to klient výslovně popsal, udělej to tak“. CO SE ZMĚNILO: na stránce Servis zmizela karta služby (zůstává 5 služeb), z ceníku položka „Kontrola a seřízení geometrie náprav AL-KO plus“ a z Rezervace servisu služba „Nápravy a geometrie“. Přepouzdření a díly nájezdové brzdy zůstávají v ceníku ve skupině „Brzdy a nápravy“, v rezervaci je pokryje „Montáže a opravy“ nebo „Nevím, co přívěs potřebuje“. POZOR: Pickerly v návodu žádají, aby se rozpory mezi dokumentem a prototypem neřešily odhadem — doporučuji ověřit u Anežky. Vrácení je otázka chvilky.'],
+      ['wait','Nové rozdělení kategorií a texty služeb','Dodá klient. Až přijde, upravím karty služeb, ceník i služby v rezervaci.'],
+      ['ask','Kontrola sbíhavosti bez geometrie?','Sbíhavost je měření geometrie náprav. Specifikace mluví jen o tom, že geometrii už neposkytují — kontrolu sbíhavosti jsem v ceníku nechal. Má zůstat?'],
+      ['done','USP pás na mobilu (ikona vlevo, text vedle)','Rozhodnuto 25. 11. 2026: beze změny. USP pás je sdílená komponenta pro celý web a zůstává v naší současné podobě.']
+    ]},
+    { title:'Rezervace servisu — nová stránka', sub:'rezervace-servisu.dc.html · e-mail bod 2, specifikace kap. 3', items:[
+      ['done','Tři kroky Služba → Termín → Kontakt + potvrzení','Bez e-shopové hlavičky: logo, kroky a „Zpět na servis“. Hotový krok je klikací zpět, v souhrnu je u hotových kroků „Změnit“.'],
+      ['done','Výběr více služeb najednou, orientační cena se sčítá','Řádky se zaškrtávátkem, nic není předvybrané. Pokud některá služba nemá přesnou cenu, součet se ukáže jako „od X Kč“.'],
+      ['done','Varianty služeb a počítadla kusů u pneuservisu','Po zaškrtnutí se rozbalí otázka s přepínači (např. „Jaký máte přívěs?“). Pneuservis má počítadla 0–8 ks u tří položek, lze je kombinovat.'],
+      ['done','Cena vpravo u řádku podle varianty nebo počtu kusů','Neupřesněná služba „od X Kč“, po výběru přesná cena; 2× výměna kola = 238 Kč.'],
+      ['done','Validace kroku 1','„Vyberte prosím alespoň jednu službu.“ a „Upřesněte prosím vybrané služby.“ — text nad kontejnerem, červený obrys, otázka u služby zčervená a stránka se na ni posune.'],
+      ['done','Předvýběr služby z odkazu','rezervace-servisu.dc.html#sluzba=stk (klíče stk, gar, brz, pne, mon, pos).'],
+      ['done','Krok Termín: nejbližší volný termín, kalendář jen s datem, časy po výběru dne','Dny i časy bez rámečků, obsazené přeškrtnuté, legenda, prázdný stav „Časy se ukážou po výběru data.“, chyba „Vyberte prosím den a čas.“'],
+      ['done','Krok Kontakt','E-mail, telefon s předvolbou, jméno a příjmení, SPZ a poznámka nepovinné. Bez volby preferovaného kontaktu, text o zpracování osobních údajů pod CTA.'],
+      ['done','Souhrn vpravo a mobilní lišta','Desktop: přilepený souhrn „Vaše rezervace“ na výšku obsahu s cenou a CTA. Mobil: v krocích 1–2 lišta dole s orientační cenou a CTA, v kroku 3 souhrn pod formulářem. Bez doby práce.'],
+      ['done','Potvrzení „Rezervace je odeslaná“','Fakta (služby, předání, kde) a tři body „Co bude dál“ doslova z prototypu.'],
+      ['diff','Kalendář vychází z dnešního data','Prototyp má pevné datum 21. 10. 2026. U nás se kalendář počítá od dnešního dne, obsazenost je ukázková.'],
+      ['diff','Zlom rozvržení na 1000 px, šířka podle našeho gridu','Prototyp láme na 960 px a na velkém displeji má užší obsah s okraji 180 px. Držím naše pásma (souhrn vpravo od 1000 px, obsah do 1560 px).'],
+      ['diff','Výška hlavního CTA','Rozhodnuto 25. 11. 2026: zůstávají naše definované velikosti tlačítek („large“ 52 px v košíku i rezervacích). 56 px ve specifikaci byl jen návrh, komponenta Tlacitko se nemění.'],
+      ['done','Předvolba telefonu s vlaječkami dalších zemí','Hotovo 25. 11. 2026 podle prototypu: nahoře CZ, SK, DE, AT, PL, ES, pod oddělovačem dalších 26 států EU a Evropy abecedně (32 zemí). Každá má vlaječku (složka vlajky/, zjednodušené SVG — u znaků jako CY, HR, PT, SI jen náznak), v seznamu předvolba + název státu. Platí pro Rezervaci servisu, Rezervaci přívěsu i košík (krok 2). Seznam je sdílený v predvolby.js, komponenta Select umí oddělovač a širší rozbalovací seznam.'],
+      ['diff','Přihlášení v kroku Kontakt přes LoginPopup','Rozhodnuto 25. 11. 2026: zůstává jak je. Prototyp rozbalí Seznam, Google, e-mail + heslo přímo pod řádkem a po přihlášení předvyplní formulář; u nás řádek „Přihlásit se“ (s ikonou uživatele) otevírá existující LoginPopup, stejně jako v košíku. Předvyplnění po přihlášení řeší kódér v ostré verzi.'],
+      ['wait','Reservanto: více služeb v jedné rezervaci','API zakládá rezervaci na jednu službu. Je potřeba rozhodnout: jedna rezervace na součet délek, nebo několik navazujících. Řeší BSSHOP s Pickerly, v návrhu to nic nemění.'],
+      ['wait','Propojení ceníku Pohoda ↔ Reservanto ↔ web','Služby a ceny v rezervaci musí sedět s ceníkem na stránce Servis. Teď jsou to dvě sady ukázkových dat.']
+    ]},
+    { title:'Rezervace přívěsu — nová stránka', sub:'rezervace-privesu.dc.html · e-mail bod 3, specifikace kap. 4', items:[
+      ['done','Tři kroky Termín → Přívěs → Kontakt + potvrzení','Nejdřív termín, pak jen přívěsy pro daný výběr. Stejná hlavička s kroky a „Zpět na půjčovnu“.'],
+      ['done','Rozbalovací kalendář, čas se vybírá hned po dni','Dvě pole (vyzvednutí, vrácení), každé s částí datum a čas. Po kliknutí na den se otevře výběr času, pak se pokračuje na vrácení. Dny bez rámečků, termín jako souvislý pruh, vrátit lze i ve stejný den. Zavře se křížkem, klávesou Escape nebo kliknutím mimo.'],
+      ['done','Délka zápůjčky a pravidlo účtování','„Délka zápůjčky: 5 dní (víkend odečten)“ — každých započatých 24 hodin, za každý víkend jeden den dolů. Informace o výdeji Po–Pá 8:30–16:00.'],
+      ['done','Otázky na řidičský průkaz a náklad už v kroku Termín','Řidičský průkaz je povinný (B / BE) s rozbalovací nápovědou „Který potřebuji?“. „Co potřebujete převézt?“ je nepovinný výběr, filtruje přívěsy v kroku 2.'],
+      ['done','Se skupinou B nejde zvolit Auto','Volba je zašedlá s textem „Auto – jen se skupinou BE“. Kdo měl vybrané auto a přepne na B, tomu se výběr zruší.'],
+      ['done','Krok Přívěs','Volné přívěsy nahoře (č., název, typ · ložná plocha · nosnost, štítek B/BE, cena za den a celkem), pod nadpisem „V tomto termínu obsazené (n)“ obsazené. Prázdný výsledek s radou, chyba „Vyberte prosím přívěs.“'],
+      ['done','Krok Kontakt','E-mail, telefon, jméno a příjmení, Firma a IČO a poznámka nepovinné, povinný souhlas s podmínkami půjčovny, text o nezávazné rezervaci.'],
+      ['done','Souhrn, mobilní lišta, potvrzení','Souhrn s půjčovným („5 dní × 400 Kč“), „Platíte až při převzetí – hotově nebo kartou.“, telefon půjčovny 773 835 329. Na mobilu lišta dole („Vybrat přívěs“ / „Pokračovat“). Potvrzení se třemi body „Co bude dál“.'],
+      ['done','Odkazy z Půjčovny a Detailu půjčovny','„Rezervovat přívěs“ (hero i rezervační blok) a „Rezervovat“ na detailu vedou na Rezervaci přívěsu.'],
+      ['diff','Cena „celkem“ není zelená','V prototypu je zeleně; klient zelenou mimo dokončující CTA nechce, takže je tmavě modrá.'],
+      ['diff','Výběr data a času: desktop popup, mobil v toku stránky','Stav 25. 11. 2026: na desktopu se kalendář i výběr času otevírají jako plovoucí okno přes obsah (čas zarovnaný pod tlačítkem „Čas“), takže obsah pod nimi neposkakuje. Na mobilu se otevřou přímo pod polím a obsah posunou (jako v prototypu); kalendář je kompaktnější (dny 36 px), aby se vešel na obrazovku.','Na mobilu otevírat výběr data a času jako bottom drawer s overlayem: překryje i spodní lištu a kalendář se do něj vejde celý a čistě, bez posouvání stránky.'],
+      ['wait','„Volný od … · Najít volný termín →“ u obsazených přívěsů','Neudělal jsem — bez skutečných dat o obsazenosti by to bylo vymyšlené. U obsazených je jen „V termínu obsazený“ a tlačítko „Změnit termín“.'],
+      ['wait','Fotky přívěsů','Zatím ilustrační: všech 21 přívěsů ve výběru má reálnou produktovou fotku VAPP stejného typu (ne vždy přesně daný model), číslo přívěsu je štítek v rohu. Finální fotky konkrétních přívěsů z půjčovny dodá klient / rezervační systém. Přiřazení je na jednom místě (PHOTO v rezervace-privesu).','Chybí možnost zobrazit si detail přívěsu, aby člověk nemusel hledat, co je to vlastně zač. Např. odkaz „Detail“ u každého přívěsu ve výběru otevře modal (na mobilu bottom drawer) s galerií fotek a parametry: rozměry ložné plochy, celková hmotnost, nosnost, brzdy, řidičák, výbava — a tlačítkem „Vybrat tento přívěs“.'],
+    ]},
+    { title:'Košík', sub:'kosik-krok1.dc.html · e-mail bod 4, specifikace kap. 5', items:[
+      ['done','Mobil: lišta s cenou a tlačítkem se přilepí dole po výběru dopravy i platby','Do 819 px. Dokud není vybraná doprava i platba, zůstává cena a CTA v Souhrnu pod platbou; pak vyjede lišta „Celkem s DPH“ + „Pokračovat“.'],
+      ['done','Tři kroky (doprava a platba v kroku 1)','Košík už byl tříkrokový, beze změny.'],
+      ['done','Desktop, krok 1: tabulka přes celou šířku a lišta s cenou dole','Předěláno podle prototypu 25. 11. 2026. Od 1000 px jsou položky tabulka přes celou šířku (Název · Obj. č. · Dostupnost · Množství · Cena za ks · Celkem s DPH · koš). Od 820 px zmizel Souhrn vpravo; dole je pořád lišta s „Celkem s DPH“, částkou bez DPH a CTA „Pokračovat ke kontaktním údajům“, při chybějící dopravě nebo platbě i hláška. Mobil beze změny. Ze Souhrnu tím na desktopu zmizel rozpis (zboží bez DPH, DPH, doprava, platba), odkaz Zpět a tři výhody pod CTA.'],
+      ['done','Názvy kroků a CTA','Předěláno podle prototypu 25. 11. 2026: kroky „Košík / Kontakt / Shrnutí“, v kroku 2 CTA „Pokračovat ke shrnutí“, nadpis kroku 3 „Shrnutí objednávky“. Upraveno i v rozcestníku.'],
+      ['ask','Dopravné zdarma jako prostý text','U nás je karta se zeleným ukazatelem průběhu. Specifikace: žádné zelené pruhy, v prototypu jen řádek „Máte dopravné zdarma.“'],
+      ['done','„0 Kč“ místo zeleného „Zdarma“','Předěláno podle prototypu 25. 11. 2026: doprava a platba zdarma mají černé „0 Kč“ (v EUR „0,00 €“) ve výběru v kroku 1 i v souhrnu kroků 2 a 3. Zelená zůstává jen u slevového kódu a u hlášky „Máte dopravné zdarma“.'],
+      ['done','Krok 2: přihlášení bez boxu, e-mail a telefon vedle sebe','Předěláno podle prototypu 25. 11. 2026: přihlášení je nenápadný řádek bez modrého boxu (ikona, „Už u nás máte účet? Po přihlášení vám údaje vyplníme.“ a odkaz „Přihlásit se“ hned za textem). Pole jdou E-mail + Telefon vedle sebe, pak Jméno + Příjmení; na úzké šířce pod sebou ve stejném pořadí. Při chybě se fokus posune na první chybné pole ve stejném pořadí.'],
+      ['done','Chybové stavy bez hlášky pod polem','Sjednoceno 25. 11. 2026: košík krok 2 má chybu stejně jako rezervace — červený popisek a 1px červený rámeček pole, bez textu pod polem. Text chyby zůstává jen pro čtečky (aria-describedby). V kroku 1 mají chybějící doprava / platba 1px rámeček karty místo 2px.'],
+      ['diff','Dostupnost s fajfkou, informační hlášky v boxu','Rozhodnuto 25. 11. 2026: zůstává jak je. Prototyp má „Skladem 12 ks“ bez ikony a osobní odběr jako prostý text; u nás zůstává dostupnost s fajfkou (komponenta Skladovost, stejně jako jinde na webu) a informační hlášky v modrém kontejneru.'],
+      ['wait','Příslušenství (cross-sell) „K vašemu nákupu se hodí“','Pravidla doplní Pickerly s VAPP. Náš blok zůstává beze změny.'],
+      ['wait','Doprava do zahraničí, ceny DE/AT/PL/ES, přihlášení přes Google','Otevřené body ze specifikace (kap. 7), v návrhu zatím nic.']
+    ]},
+    { title:'Společná pravidla a ostatní', sub:'specifikace kap. 1 a 7', items:[
+      ['done','Oprava komponenty Select','Při otevření nabídky padala chyba v konzoli (chybějící předchozí stav). Opraveno, používá se v rezervacích i v košíku.'],
+      ['wait','E-mail v kontaktech','Poznámka k probrání s designérkou (25. 11. 2026), zatím beze změny. Pravidlo „do kontaktů nikdy e-mail, jen telefon“ se v dodaných podkladech nepotvrdilo — prototyp Servisu má v patičce info@vapp.cz. U nás je v hlavičce a patičce obchod@vapp.cz.'],
+      ['done','Drobečková navigace jen s předchozí úrovní','Podle specifikace se zobrazuje jen předchozí úroveň, ne aktuální stránka. Potvrzeno 25. 11. 2026: naše drobečková navigace to tak už má, nic se nemění.'],
+      ['wait','Poptávka produktu','Prototyp poptávky není součástí dodaných podkladů. Klientem schválené (19. 11. 2026) jsou jen čtyři prototypy: servis, rezervace servisu, rezervace přívěsu a košík. Neimplementováno, naše stránka Poptat produkt je beze změny; čeká na prototyp nebo zadání.']
+    ]}
+  ];
+  renderVals(){
+    const fl = this.state.filter;
+    const all = this.G.reduce((a,g)=>a.concat(g.items), []);
+    const count = (k)=>all.filter(i=>i[0] === k).length;
+    const notes = { done:'provedeno podle podkladů', diff:'provedeno, vědomě jinak než v prototypu', ask:'potřebuji vaše rozhodnutí', wait:'čeká na data nebo třetí stranu' };
+    return {
+      stats:['done','diff','ask','wait'].map(k=>({ key:k, n:count(k), label:this.ST[k], note:notes[k] })),
+      filters:[['all','Vše (' + all.length + ')']].concat(['done','diff','ask','wait'].map(k=>[k, this.ST[k] + ' (' + count(k) + ')'])).map(([k,label])=>({ label, pressed:fl === k ? 'true' : 'false', onClick:()=>this.setState({ filter:k }) })),
+      groups:this.G.map(g=>({ title:g.title, sub:g.sub, items:g.items.filter(i=>fl === 'all' || i[0] === fl).map(([key,task,note,idea])=>({ key, task, note, label:this.ST[key], idea:idea || '', hasIdea:!!idea })) })).filter(g=>g.items.length)
+    };
+  }
+}
+</script>
+</body>
+</html>

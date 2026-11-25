@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0!important;padding:0!important;background:#F7F9FB;}
+  #dc-root{margin:0!important;padding:0!important;width:100%!important;max-width:none!important;border:0!important;}
+  #dc-root>.sc-host{margin:0!important;padding:0!important;width:100%!important;}
+  a{color:#1E5AA8;} a:hover{color:#1A4A8A;}
+  .vp-in{max-width:1560px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px;}
+  @media (max-width:819px){ .vp-in{padding-left:16px;padding-right:16px;} }
+  .rz-i{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-align:inherit;line-height:inherit;cursor:pointer;}
+  .rz-i:focus-visible,.rz-lnk:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;border-radius:4px;}
+  .rz-lnk{color:#1E5AA8;font-weight:700;text-decoration:none;transition:color .12s ease;} .rz-lnk:hover{color:#1A4A8A;}
+  .rz-h1{font-size:36px;font-weight:700;line-height:1.15;letter-spacing:-0.02em;}
+  .rz-h2{font-size:22px;font-weight:700;line-height:1.25;}
+  @media (max-width:819px){ .rz-h1{font-size:26px;line-height:1.2;} .rz-h2{font-size:18px;line-height:1.3;} }
+  .rz-card{background:#FFFFFF;border-radius:8px;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);}
+  .rz-card[data-err="1"]{box-shadow:0 0 0 1px #C5232B;}
+  /* kroky */
+  .rz-back{display:inline-flex;align-items:center;gap:6px;font-size:14px;white-space:nowrap;}
+  @media (max-width:819px){ .rz-back{display:none;} }
+  @media (max-width:419px){ .rz-logo{height:24px !important;} }
+  /* rozvržení */
+  .rz-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px 32px;align-items:start;}
+  @media (min-width:1560px){ .rz-grid{grid-template-columns:minmax(0,1fr) 400px;} }
+  .rz-side{position:sticky;top:104px;}
+  @media (max-width:999px){ .rz-grid{grid-template-columns:minmax(0,1fr);} .rz-side{position:static;} .rz-side[data-mob="0"]{display:none;} .rz-root[data-mbar="1"]{padding-bottom:84px !important;} }
+  .rz-deskonly{display:block;} .rz-mobonly{display:none;}
+  @media (max-width:999px){ .rz-deskonly{display:none !important;} .rz-mobonly{display:flex;} }
+  /* služby */
+  .rz-svc{border-top:1px solid #F2F4F7;transition:background .12s ease;}
+  .rz-svc[data-on="1"]{background:#EFF4FB;}
+  .rz-svchead{display:flex;align-items:center;gap:16px;padding:16px 24px;cursor:pointer;}
+  @media (hover:hover) and (pointer:fine){ .rz-svc[data-on="0"] .rz-svchead:hover{background:#F7F9FB;} }
+  .rz-svcico{flex:none;width:44px;height:44px;border-radius:8px;background:#EFF4FB;color:#1E5AA8;display:flex;align-items:center;justify-content:center;}
+  .rz-svc[data-on="1"] .rz-svcico{background:#FFFFFF;}
+  .rz-svcsub{padding:0 24px 20px 62px;display:flex;flex-direction:column;gap:12px;}
+  .rz-vars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px;max-width:640px;}
+  .rz-cntrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;max-width:540px;}
+  @media (max-width:819px){ .rz-svchead{padding:14px 16px;gap:12px;} .rz-svcico{display:none;} .rz-svcsub{padding:0 16px 16px 50px;} .rz-vars{grid-template-columns:minmax(0,1fr);} }
+  .rz-chk{appearance:none;margin:0;flex:none;width:22px;height:22px;border-radius:6px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #91959B;cursor:pointer;display:grid;place-content:center;transition:box-shadow .12s ease, background .12s ease;}
+  .rz-chk:checked{background:#1E5AA8;box-shadow:none;}
+  .rz-chk:checked::after{content:"";width:10px;height:6px;border-left:2px solid #FFFFFF;border-bottom:2px solid #FFFFFF;transform:translateY(-1px) rotate(-45deg);}
+  .rz-chk:focus-visible,.rz-rad:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  .rz-rad{appearance:none;margin:0;flex:none;width:22px;height:22px;border-radius:999px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #91959B;cursor:pointer;display:grid;place-content:center;}
+  .rz-rad:checked{box-shadow:inset 0 0 0 2px #1E5AA8;}
+  .rz-rad:checked::after{content:"";width:10px;height:10px;border-radius:999px;background:#1E5AA8;}
+  .rz-var{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;font-size:15px;line-height:1.4;}
+  .rz-cnt{display:inline-flex;align-items:center;height:44px;border-radius:8px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #D5DAE0;}
+  .rz-cnt[data-on="1"]{box-shadow:inset 0 0 0 2px #1E5AA8;}
+  .rz-cntbtn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#1E5AA8;border-radius:8px;}
+  .rz-cntbtn:disabled{color:#B8BEC6;cursor:not-allowed;}
+  /* kalendář */
+  .rz-term{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 48px;align-items:start;}
+  @media (max-width:819px){ .rz-term{grid-template-columns:minmax(0,1fr);} }
+  .rz-num{width:28px;height:28px;border-radius:999px;background:#1E5AA8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;font-weight:700;}
+  .rz-num[data-off="1"]{background:#D5DAE0;}
+  .rz-cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;}
+  .rz-wd{font-size:13px;font-weight:700;line-height:32px;text-align:center;color:#5A626C;}
+  .rz-day{position:relative;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#15181C;transition:background .12s ease;}
+  @media (hover:hover) and (pointer:fine){ .rz-day:not(:disabled):not([aria-pressed="true"]):hover{background:#F2F4F7;} }
+  .rz-day:disabled{font-weight:400;color:#8A929C;cursor:default;}
+  .rz-day[data-full="1"]{text-decoration:line-through;}
+  .rz-day[aria-pressed="true"]{background:#1E5AA8;color:#FFFFFF;}
+  .rz-day[data-today="1"]::after{content:"";position:absolute;top:5px;right:9px;width:5px;height:5px;border-radius:999px;background:#1E5AA8;}
+  .rz-day[aria-pressed="true"][data-today="1"]::after{background:#FFFFFF;}
+  .rz-monav{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#1E5AA8;box-shadow:inset 0 0 0 1px #D5DAE0;transition:background .12s ease;}
+  .rz-monav:hover:not(:disabled){background:#EFF4FB;} .rz-monav:disabled{color:#B8BEC6;cursor:not-allowed;box-shadow:inset 0 0 0 1px #F2F4F7;}
+  .rz-times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;}
+  .rz-time{height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#15181C;transition:background .12s ease;}
+  @media (hover:hover) and (pointer:fine){ .rz-time:not(:disabled):not([aria-pressed="true"]):hover{background:#F2F4F7;} }
+  .rz-time:disabled{font-weight:400;color:#8A929C;text-decoration:line-through;cursor:default;}
+  .rz-time[aria-pressed="true"]{background:#1E5AA8;color:#FFFFFF;}
+  /* formulář — stejné prvky jako v košíku */
+  .rz-sec{padding:28px 32px;display:flex;flex-direction:column;gap:20px;container-type:inline-size;}
+  @media (max-width:549px){ .rz-sec{padding:20px 16px;} }
+  .rz-row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 24px;}
+  @container (max-width:559px){ .rz-row2{grid-template-columns:minmax(0,1fr);} }
+  .rz-lbl{display:block;font-size:16px;font-weight:700;line-height:1.35;color:#15181C;margin-bottom:8px;}
+  .rz-lbl[data-err="1"]{color:#C5232B;}
+  .rz-opt{font-weight:400;color:#5A626C;}
+  .rz-req{color:#C5232B;font-weight:700;}
+  .rz-inp{width:100%;min-width:0;height:44px;padding:0 14px;background:#F2F4F7;border:0;border-radius:6px;font-family:inherit;font-size:15px;font-weight:400;color:#15181C;transition:box-shadow .12s ease;}
+  .rz-ta{width:100%;min-width:0;min-height:104px;padding:12px 14px;background:#F2F4F7;border:0;border-radius:6px;font-family:inherit;font-size:15px;line-height:1.6;color:#15181C;resize:vertical;}
+  .rz-inp::placeholder,.rz-ta::placeholder{color:#666E78;}
+  .rz-inp:focus-visible,.rz-ta:focus-visible{outline:0;box-shadow:inset 0 0 0 2px #1E5AA8;}
+  .rz-inp[data-err="1"]{box-shadow:inset 0 0 0 1px #C5232B;}
+  @media (max-width:549px){ .rz-inp,.rz-ta{font-size:16px;} }
+  .rz-tel{display:flex;gap:12px;align-items:flex-start;} .rz-telpfx{flex:none;width:136px;}
+  @media (max-width:549px){ .rz-tel{gap:8px;} .rz-telpfx{width:120px;} }
+  .rz-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  /* mobilní lišta */
+  .rz-mbar{display:none;}
+  @media (max-width:999px){ .rz-mbar{display:flex;align-items:center;gap:16px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#FFFFFF;box-shadow:0 -6px 20px rgba(20,30,45,.10);} }
+  .rz-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px;}
+  .rz-facts>div+div{box-shadow:inset 1px 0 0 #D5DAE0;padding-left:24px;}
+  @media (max-width:649px){ .rz-facts{grid-template-columns:minmax(0,1fr);} .rz-facts>div+div{box-shadow:inset 0 1px 0 #D5DAE0;padding-left:0;padding-top:16px;} }
+  @media (min-width:650px){ .rp-facts{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);} .rp-nw{white-space:nowrap;} }
+  @keyframes rzIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .rz-in{animation:rzIn .3s ease both;}
+  @media (prefers-reduced-motion:reduce){ .rz-in{animation:none;} }
+  /* --- rezervace přívěsu: pole termínu, rozbalovací kalendář, výpis přívěsů --- */
+  .rp-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 24px;}
+  .rp-field{display:flex;height:48px;border-radius:8px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #D5DAE0;}
+  .rp-fd,.rp-ft{display:flex;align-items:center;gap:10px;padding:0 14px;font-size:16px;color:#666E78;border-radius:8px;min-width:0;}
+  .rp-fd{flex:1;} .rp-fd span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .rp-ft{flex:none;width:112px;justify-content:space-between;box-shadow:inset 1px 0 0 #D5DAE0;border-radius:0 8px 8px 0;}
+  .rp-fd[data-set="1"],.rp-ft[data-set="1"]{color:#15181C;font-weight:700;}
+  .rp-fd[data-on="1"],.rp-ft[data-on="1"]{box-shadow:inset 0 0 0 2px #1E5AA8;background:#EFF4FB;border-radius:8px;}
+  .rp-fd:disabled,.rp-ft:disabled{cursor:not-allowed;color:#8A929C;}
+  .rp-pop{display:flex;flex-direction:column;gap:12px;padding:16px 20px 20px;border-radius:8px;background:#FFFFFF;box-shadow:0 10px 30px rgba(20,30,45,.14), inset 0 0 0 1px #F2F4F7;}
+  .rp-poptime{position:absolute;top:calc(100% + 8px);right:0;z-index:40;width:min(100%,360px);}
+  .rp-pop{animation:rp-pop-in .18s cubic-bezier(.2,.8,.2,1) both;}
+  .rp-popcal{transform-origin:top left;} .rp-poptime{transform-origin:top right;}
+  @keyframes rp-pop-in{from{opacity:0;transform:translateY(-6px) scale(.98);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){ .rp-pop{animation:none;} }
+  .rp-calwrap{position:relative;height:0;margin-top:-12px;}
+  .rp-popcal{position:absolute;top:8px;left:0;right:0;z-index:40;}
+  .rp-x{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#666E78;} .rp-x:hover{background:#F2F4F7;color:#1E5AA8;}
+  .rp-months{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 48px;align-items:start;}
+  .rp-nextmob{display:none;} .rp-nextdesk{display:flex;}
+  .rp-times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;}
+  .rz-day[data-range="1"]{background:#D8E6F6;border-radius:0;}
+  @media (max-width:819px){
+    .rp-fields{grid-template-columns:minmax(0,1fr);}
+    .rp-months{grid-template-columns:minmax(0,1fr);} .rp-month[data-second="1"]{display:none;}
+    .rp-nextmob{display:flex;}
+    /* mobil: výběr data i času se otevře přímo pod polem a obsah pod ním posune (jako v prototypu) */
+    .rp-fields{display:contents;}
+    .rp-term{gap:16px !important;}
+    .rp-colp{order:1;} .rp-calwrap{order:2;height:auto;margin-top:-8px;} .rp-colr{order:3;}
+    .rp-term[data-pop="r"] .rp-calwrap{order:4;}
+    .rp-popcal{position:static;}
+    .rp-poptime{position:static;width:100%;margin-top:8px;}
+    .rp-pop>div:first-child{flex-wrap:wrap;row-gap:2px;} .rp-pop>div:first-child>span{order:3;flex:1 1 100% !important;} .rp-pop>div:first-child>button{margin-left:auto;}
+    /* kompaktní kalendář na mobilu */
+    .rp-popcal{padding:12px 14px 14px;gap:8px;}
+    .rp-popcal .rz-cal{gap:2px;}
+    .rp-popcal .rz-wd{line-height:24px;font-size:12px;}
+    .rp-popcal .rz-day{height:36px;font-size:15px;}
+    .rp-popcal .rz-day[data-today="1"]::after{top:3px;right:6px;}
+    .rp-popcal .rz-monav{width:36px;height:36px;}
+    .rp-popcal .rp-month>div:first-child{min-height:36px !important;}
+    .rp-popcal .rp-month>div:first-child>span{width:36px !important;}
+    .rp-popcal>p{font-size:12px !important;gap:4px 14px !important;}
+  }
+  .rp-tr{display:flex;align-items:center;gap:16px;padding:16px 24px;border-top:1px solid #F2F4F7;cursor:pointer;transition:background .12s ease;}
+  .rp-tr:first-child{border-top:0;}
+  .rp-tr[data-on="1"]{background:#EFF4FB;}
+  @media (hover:hover) and (pointer:fine){ .rp-tr[data-on="0"]:hover{background:#F7F9FB;} }
+  .rp-tr[data-busy="1"]{cursor:default;color:#8A929C;}
+  .rp-thumb{flex:none;width:112px;height:72px;border-radius:8px;background:#F2F4F7;color:#8A929C;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+  .rp-photo{position:relative;background-color:#FFFFFF;background-position:center;background-size:contain;background-repeat:no-repeat;box-shadow:inset 0 0 0 1px #F2F4F7;}
+  .rp-tr[data-busy="1"] .rp-photo{opacity:.55;}
+  .rp-no{position:absolute;left:4px;bottom:4px;padding:1px 6px;border-radius:6px;background:rgba(255,255,255,.92);font-size:12px;font-weight:700;line-height:1.4;color:#5A626C;}
+  .rp-lic{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:24px;padding:0 6px;border-radius:6px;box-shadow:inset 0 0 0 1px #D5DAE0;font-size:13px;font-weight:700;line-height:1;}
+  .rp-price{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:0;text-align:right;}
+  @media (max-width:649px){ .rp-tr{padding:14px 16px;gap:12px;align-items:flex-start;flex-wrap:wrap;} .rp-thumb{width:72px;height:60px;} .rp-thumb svg{width:28px;height:28px;} .rp-price{flex:1 1 100%;flex-direction:row;align-items:baseline;justify-content:flex-end;gap:6px;} }
+</style>
+<script src="./predvolby.js"></script>
+</helmet>
+<div class="rz-root" data-mbar="{{ mbarFlag }}" data-screen-label="Rezervace přívěsu" lang="cs" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;display:flex;flex-direction:column;">
+
+  <header style="position:sticky;top:0;z-index:70;background:#FFFFFF;box-shadow:0 2px 8px rgba(20,47,86,.06);">
+    <div class="vp-in" style="display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:80px;padding-top:16px;padding-bottom:16px;">
+      <a class="rz-lnk" href="index.dc.html" aria-label="VAPP — domovská stránka" style="display:flex;flex:none;"><img class="rz-logo" src="./vapp-logo.svg" alt="VAPP" style="height:32px;width:auto;display:block;"></a>
+      <dc-import name="Stepper" labels="{{ stpLabels }}" current="{{ stpCur }}" on-go="{{ stpGo }}" locked="{{ stpLocked }}" aria-label="Kroky rezervace" done-text="Rezervace odeslána" hint-size="300px,58px"></dc-import>
+      <a class="rz-lnk rz-back" href="pujcovna.dc.html"><dc-import name="Ikony" icon-name="arrow-left" size="{{ 18 }}" hint-size="18px,18px"></dc-import>Zpět na půjčovnu</a>
+    </div>
+  </header>
+
+  <main class="vp-in" style="width:100%;padding-top:28px;padding-bottom:56px;flex:1;">
+
+    <sc-if value="{{ isFlow }}" hint-placeholder-val="{{ true }}">
+    <h1 class="rz-h1" id="rz-top" tabindex="-1" style="margin:0 0 24px;color:#142F56;outline:none;">{{ h1 }}</h1>
+    <div class="rz-grid">
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0;">
+
+        <!-- KROK 1 — TERMÍN -->
+        <sc-if value="{{ is1 }}" hint-placeholder-val="{{ true }}">
+          <div class="rz-in" style="display:flex;flex-direction:column;gap:8px;">
+            <sc-if value="{{ err1 }}" hint-placeholder-val="">
+              <p id="rz-err1" role="alert" style="margin:0;font-size:14px;font-weight:700;line-height:1.5;color:#C5232B;">{{ err1Text }}</p>
+            </sc-if>
+            <section class="rz-card rz-sec" data-err="{{ err1Flag }}" aria-label="Termín zápůjčky">
+              <div ref="{{ termRef }}" class="rp-term" data-pop="{{ popWhich }}" style="display:flex;flex-direction:column;gap:12px;">
+                <div class="rp-fields">
+                  <div class="rp-colp" style="min-width:0;display:flex;flex-direction:column;position:relative;">
+                    <span class="rz-lbl" id="rp-l-p">Datum a čas vyzvednutí</span>
+                    <div class="rp-field" role="group" aria-labelledby="rp-l-p">
+                      <button type="button" class="rz-i rp-fd" data-on="{{ pdOn }}" data-set="{{ pdSet }}" aria-expanded="{{ pdExp }}" onClick="{{ openPd }}"><dc-import name="Ikony" icon-name="calendar" size="{{ 20 }}" hint-size="20px,20px"></dc-import><span>{{ pdText }}</span></button>
+                      <button type="button" class="rz-i rp-ft" data-on="{{ ptOn }}" data-set="{{ ptSet }}" aria-expanded="{{ ptExp }}" disabled="{{ ptDis }}" onClick="{{ openPt }}" aria-label="Čas vyzvednutí"><span>{{ ptText }}</span><dc-import name="Ikony" icon-name="chevron-down" size="{{ 18 }}" hint-size="18px,18px"></dc-import></button>
+                    </div>
+                    <sc-if value="{{ popTimeP }}" hint-placeholder-val="">
+                      <div class="rp-pop rp-poptime" role="dialog" aria-label="{{ popTitle }}">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                          <strong style="font-size:16px;font-weight:700;color:#142F56;">{{ popTitle }}</strong>
+                          <span style="flex:1;font-size:14px;color:#5A626C;">{{ popNote }}</span>
+                          <button type="button" class="rz-i rp-x" onClick="{{ closePop }}" aria-label="Zavřít výběr času"><dc-import name="Ikony" icon-name="x" size="{{ 20 }}" hint-size="20px,20px"></dc-import></button>
+                        </div>
+                        <div class="rp-times" role="group" aria-label="{{ popTitle }}">
+                          <sc-for list="{{ times }}" as="t" hint-placeholder-count="15">
+                            <button type="button" class="rz-i rz-time" onClick="{{ t.onPick }}" disabled="{{ t.dis }}" aria-pressed="{{ t.pressed }}">{{ t.t }}</button>
+                          </sc-for>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                  <div class="rp-colr" style="min-width:0;display:flex;flex-direction:column;position:relative;">
+                    <span class="rz-lbl" id="rp-l-r">Datum a čas vrácení</span>
+                    <div class="rp-field" role="group" aria-labelledby="rp-l-r">
+                      <button type="button" class="rz-i rp-fd" data-on="{{ rdOn }}" data-set="{{ rdSet }}" aria-expanded="{{ rdExp }}" disabled="{{ rdDis }}" onClick="{{ openRd }}"><dc-import name="Ikony" icon-name="calendar-check" size="{{ 20 }}" hint-size="20px,20px"></dc-import><span>{{ rdText }}</span></button>
+                      <button type="button" class="rz-i rp-ft" data-on="{{ rtOn }}" data-set="{{ rtSet }}" aria-expanded="{{ rtExp }}" disabled="{{ rtDis }}" onClick="{{ openRt }}" aria-label="Čas vrácení"><span>{{ rtText }}</span><dc-import name="Ikony" icon-name="chevron-down" size="{{ 18 }}" hint-size="18px,18px"></dc-import></button>
+                    </div>
+                    <sc-if value="{{ popTimeR }}" hint-placeholder-val="">
+                      <div class="rp-pop rp-poptime" role="dialog" aria-label="{{ popTitle }}">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                          <strong style="font-size:16px;font-weight:700;color:#142F56;">{{ popTitle }}</strong>
+                          <span style="flex:1;font-size:14px;color:#5A626C;">{{ popNote }}</span>
+                          <button type="button" class="rz-i rp-x" onClick="{{ closePop }}" aria-label="Zavřít výběr času"><dc-import name="Ikony" icon-name="x" size="{{ 20 }}" hint-size="20px,20px"></dc-import></button>
+                        </div>
+                        <div class="rp-times" role="group" aria-label="{{ popTitle }}">
+                          <sc-for list="{{ times }}" as="t" hint-placeholder-count="15">
+                            <button type="button" class="rz-i rz-time" onClick="{{ t.onPick }}" disabled="{{ t.dis }}" aria-pressed="{{ t.pressed }}">{{ t.t }}</button>
+                          </sc-for>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+
+                <div class="rp-calwrap"><sc-if value="{{ popCal }}" hint-placeholder-val="">
+                  <div class="rp-pop rp-popcal" role="dialog" aria-label="{{ popTitle }}">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                      <strong style="font-size:16px;font-weight:700;color:#142F56;">{{ popTitle }}</strong>
+                      <span style="flex:1;font-size:14px;color:#5A626C;">{{ popNote }}</span>
+                      <button type="button" class="rz-i rp-x" onClick="{{ closePop }}" aria-label="Zavřít kalendář"><dc-import name="Ikony" icon-name="x" size="{{ 20 }}" hint-size="20px,20px"></dc-import></button>
+                    </div>
+                    <div class="rp-months">
+                      <sc-for list="{{ months }}" as="m" hint-placeholder-count="2">
+                        <div class="rp-month" data-second="{{ m.secondFlag }}">
+                          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;">
+                            <span style="width:44px;flex:none;display:flex;"><sc-if value="{{ m.showPrev }}" hint-placeholder-val=""><button type="button" class="rz-i rz-monav" onClick="{{ onPrevMo }}" disabled="{{ prevDis }}" aria-label="Předchozí měsíc"><dc-import name="Ikony" icon-name="chevron-left" size="{{ 20 }}" hint-size="20px,20px"></dc-import></button></sc-if></span>
+                            <strong style="font-size:16px;font-weight:700;color:#142F56;">{{ m.label }}</strong>
+                            <span style="width:44px;flex:none;display:flex;"><span class="{{ m.nextCls }}"><button type="button" class="rz-i rz-monav" onClick="{{ onNextMo }}" disabled="{{ nextDis }}" aria-label="Další měsíc"><dc-import name="Ikony" icon-name="chevron-right" size="{{ 20 }}" hint-size="20px,20px"></dc-import></button></span></span>
+                          </div>
+                          <div class="rz-cal" role="group" aria-label="{{ m.label }}">
+                            <sc-for list="{{ wds }}" as="w" hint-placeholder-count="7"><span class="rz-wd" aria-hidden="true">{{ w }}</span></sc-for>
+                            <sc-for list="{{ m.cells }}" as="c" hint-placeholder-count="28">
+                              <sc-if value="{{ c.blank }}" hint-placeholder-val=""><span aria-hidden="true"></span></sc-if>
+                              <sc-if value="{{ c.isDay }}" hint-placeholder-val="{{ true }}">
+                                <button type="button" class="rz-i rz-day" onClick="{{ c.onPick }}" disabled="{{ c.dis }}" aria-pressed="{{ c.pressed }}" aria-label="{{ c.aria }}" data-range="{{ c.rangeFlag }}" data-today="{{ c.todayFlag }}">{{ c.n }}</button>
+                              </sc-if>
+                            </sc-for>
+                          </div>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <p style="margin:0;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px;line-height:1.5;color:#5A626C;">
+                      <span style="display:inline-flex;align-items:center;gap:8px;"><span aria-hidden="true" style="width:14px;height:14px;border-radius:4px;background:#1E5AA8;"></span>vyzvednutí a vrácení</span>
+                      <span style="display:inline-flex;align-items:center;gap:8px;"><span aria-hidden="true" style="width:14px;height:14px;border-radius:4px;background:#D8E6F6;"></span>doba zápůjčky</span>
+                      <span style="display:inline-flex;align-items:center;gap:8px;"><span aria-hidden="true" style="color:#8A929C;">12</span>zavřeno</span>
+                    </p>
+                  </div>
+                </sc-if></div>
+
+              </div>
+
+              <sc-if value="{{ hasTerm }}" hint-placeholder-val="">
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#15181C;">Délka zápůjčky: <strong style="font-weight:700;">{{ daysText }}</strong> <span style="color:#5A626C;">{{ weekendNote }}</span></p>
+              </sc-if>
+              <p style="margin:0;display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.5;color:#5A626C;text-wrap:pretty;"><span aria-hidden="true" style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="info-circle" size="{{ 20 }}" hint-size="20px,20px"></dc-import></span>Vydáváme a přijímáme Po–Pá 8:30–16:00. Účtujeme každých započatých 24 hodin, za každý víkend v pronájmu jeden den odečteme.</p>
+
+              <div id="rp-lic" role="radiogroup" aria-labelledby="rp-lic-l" style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+                <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px 16px;">
+                  <span id="rp-lic-l" style="{{ licLblStyle }}">Řidičský průkaz <span class="rz-req" aria-hidden="true">*</span></span>
+                  <button type="button" class="rz-i" onClick="{{ toggleLicHelp }}" aria-expanded="{{ licHelpExp }}" aria-controls="rp-lic-help" style="font-size:14px;font-weight:500;color:#1E5AA8;text-decoration:underline;text-underline-offset:3px;">Který potřebuji?</button>
+                </div>
+                <sc-if value="{{ licHelp }}" hint-placeholder-val="">
+                  <p id="rp-lic-help" style="margin:0;padding:12px 16px;border-radius:8px;background:#EFF4FB;font-size:14px;line-height:1.6;color:#15181C;max-width:640px;text-wrap:pretty;">Se skupinou B půjčíme přívěsy do 750 kg, případně těžší, pokud celková hmotnost auta a přívěsu nepřesáhne 3 500 kg. Velké přívěsy (2 000 kg a více) vyžadují BE.</p>
+                </sc-if>
+                <div style="display:flex;flex-wrap:wrap;gap:0 28px;">
+                  <label class="rz-var"><input class="rz-rad" type="radio" name="rp-lic" checked="{{ licB }}" onChange="{{ pickB }}"><strong style="font-weight:700;">Skupina B</strong></label>
+                  <label class="rz-var"><input class="rz-rad" type="radio" name="rp-lic" checked="{{ licBE }}" onChange="{{ pickBE }}"><strong style="font-weight:700;">Skupina BE</strong></label>
+                </div>
+                <sc-if value="{{ errLic }}" hint-placeholder-val=""><span class="rz-sr" role="alert">Vyberte prosím skupinu řidičského průkazu.</span></sc-if>
+              </div>
+
+              <div style="max-width:320px;">
+                <span class="rz-lbl" id="rp-what-l">Co potřebujete převézt?</span>
+                <dc-import name="Select" options="{{ whatOpts }}" value="{{ what }}" on-change="{{ onWhat }}" aria-label="Co potřebujete převézt?" hint-size="100%,44px"></dc-import>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+
+        <!-- KROK 2 — PŘÍVĚS -->
+        <sc-if value="{{ is2 }}" hint-placeholder-val="">
+          <div class="rz-in" style="display:flex;flex-direction:column;gap:8px;">
+            <sc-if value="{{ err2 }}" hint-placeholder-val="">
+              <p id="rz-err2" role="alert" style="margin:0;font-size:14px;font-weight:700;line-height:1.5;color:#C5232B;">Vyberte prosím přívěs.</p>
+            </sc-if>
+            <section class="rz-card" data-err="{{ err2Flag }}" aria-label="Výběr přívěsu" style="overflow:hidden;">
+              <sc-if value="{{ noFree }}" hint-placeholder-val="">
+                <div style="padding:24px;display:flex;flex-direction:column;gap:6px;">
+                  <strong style="font-size:17px;font-weight:700;line-height:1.35;">Pro tento výběr nemáme v termínu vhodný přívěs.</strong>
+                  <span style="font-size:15px;line-height:1.5;color:#5A626C;">Zkuste změnit termín nebo volbu „Co potřebujete převézt?“.</span>
+                  <div style="display:flex;margin-top:8px;"><dc-import name="Tlacitko" variant="secondary" size="medium" label="Změnit termín" on-click="{{ go1 }}" hint-size="160px,44px"></dc-import></div>
+                </div>
+              </sc-if>
+              <div role="radiogroup" aria-label="Volné přívěsy v termínu">
+                <sc-for list="{{ freeList }}" as="t" hint-placeholder-count="5">
+                  <label class="rp-tr" data-on="{{ t.onFlag }}">
+                    <input class="rz-rad" type="radio" name="rp-tr" checked="{{ t.checked }}" onChange="{{ t.onPick }}">
+                    <sc-if value="{{ t.hasImg }}" hint-placeholder-val=""><span class="rp-thumb rp-photo" aria-hidden="true" style="{{ t.imgStyle }}"><span class="rp-no">č. {{ t.no }}</span></span></sc-if><sc-if value="{{ t.noImg }}" hint-placeholder-val="1"><span class="rp-thumb" aria-hidden="true"><dc-import name="Ikony" icon-name="jednoose-valniky" size="{{ 40 }}" hint-size="40px,40px"></dc-import><span style="font-size:13px;line-height:1.2;color:#5A626C;">č. {{ t.no }}</span></span></sc-if>
+                    <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;">
+                      <span style="font-size:17px;font-weight:700;line-height:1.35;color:#15181C;">{{ t.name }}</span>
+                      <span style="font-size:14px;line-height:1.5;color:#5A626C;text-wrap:pretty;">{{ t.meta }}</span>
+                      <span><span class="rp-lic" title="Potřebný řidičský průkaz">{{ t.lic }}</span></span>
+                    </span>
+                    <span class="rp-price"><strong style="font-size:17px;font-weight:700;line-height:1.35;white-space:nowrap;">{{ t.price }}</strong><span style="font-size:13px;line-height:1.4;color:#5A626C;">/ den</span><span style="font-size:14px;font-weight:700;line-height:1.5;color:#142F56;white-space:nowrap;">celkem {{ t.total }}</span></span>
+                  </label>
+                </sc-for>
+              </div>
+              <sc-if value="{{ hasBusy }}" hint-placeholder-val="">
+                <div style="padding:16px 24px;display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;background:#F7F9FB;border-top:1px solid #F2F4F7;">
+                  <span style="flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px;"><strong style="font-size:15px;font-weight:700;line-height:1.4;color:#142F56;">V tomto termínu obsazené ({{ busyCount }})</strong><span style="font-size:14px;line-height:1.5;color:#5A626C;">V jiném termínu mohou být volné.</span></span>
+                  <dc-import name="Tlacitko" variant="secondary" size="medium" label="Změnit termín" on-click="{{ go1 }}" hint-size="160px,44px"></dc-import>
+                </div>
+                <sc-for list="{{ busyList }}" as="t" hint-placeholder-count="2">
+                  <div class="rp-tr" data-busy="1" aria-disabled="true">
+                    <span style="width:22px;flex:none;"></span>
+                    <sc-if value="{{ t.hasImg }}" hint-placeholder-val=""><span class="rp-thumb rp-photo" aria-hidden="true" style="{{ t.imgStyle }}"><span class="rp-no">č. {{ t.no }}</span></span></sc-if><sc-if value="{{ t.noImg }}" hint-placeholder-val="1"><span class="rp-thumb" aria-hidden="true"><dc-import name="Ikony" icon-name="jednoose-valniky" size="{{ 40 }}" hint-size="40px,40px"></dc-import><span style="font-size:13px;line-height:1.2;">č. {{ t.no }}</span></span></sc-if>
+                    <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;">
+                      <span style="font-size:17px;font-weight:700;line-height:1.35;">{{ t.name }}</span>
+                      <span style="font-size:14px;line-height:1.5;text-wrap:pretty;">{{ t.meta }}</span>
+                      <span style="display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;"><span class="rp-lic">{{ t.lic }}</span><span style="font-size:13px;font-weight:700;line-height:1.5;">V termínu obsazený</span></span>
+                    </span>
+                    <span class="rp-price"><strong style="font-size:17px;font-weight:700;line-height:1.35;white-space:nowrap;">{{ t.price }}</strong><span style="font-size:13px;line-height:1.4;">/ den</span></span>
+                  </div>
+                </sc-for>
+              </sc-if>
+            </section>
+            <p style="margin:8px 4px 0;font-size:14px;line-height:1.5;color:#5A626C;">Všechny ceny jsou včetně DPH.</p>
+            <div class="rz-mobonly">
+              <button type="button" class="rz-i rz-lnk" onClick="{{ go1 }}" style="display:inline-flex;align-items:center;gap:6px;min-height:44px;"><dc-import name="Ikony" icon-name="arrow-left" size="{{ 18 }}" hint-size="18px,18px"></dc-import>Změnit termín</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- KROK 3 — KONTAKT -->
+        <sc-if value="{{ is3 }}" hint-placeholder-val="">
+          <div class="rz-in" style="display:flex;flex-direction:column;gap:16px;">
+            <p style="margin:0;display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px 12px;font-size:16px;line-height:1.5;color:#5A626C;">
+              <span aria-hidden="true" style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="user" size="{{ 24 }}" hint-size="24px,24px"></dc-import></span>
+              <span style="flex:1 1 200px;min-width:0;"><strong style="font-weight:700;color:#15181C;">Už u nás máte účet?</strong> Po přihlášení vám údaje vyplníme.</span>
+              <button type="button" class="rz-i rz-lnk" aria-haspopup="dialog" onClick="{{ openLogin }}" style="display:inline-flex;align-items:center;gap:2px;"><span aria-hidden="true" style="display:inline-flex;margin-right:4px;"><dc-import name="Ikony" icon-name="user" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span>Přihlásit se<dc-import name="Ikony" icon-name="chevron-right" size="{{ 18 }}" hint-size="18px,18px"></dc-import></button>
+            </p>
+            <section class="rz-card rz-sec" aria-label="Kontaktní údaje">
+              <p style="margin:0;text-align:right;font-size:13px;font-weight:500;line-height:1.4;color:#666E78;"><span class="rz-req" aria-hidden="true">*</span> povinné údaje</p>
+              <div class="rz-row2">
+                <div>
+                  <label class="rz-lbl" for="rz-email" data-err="{{ ef.email }}">E-mail <span class="rz-req" aria-hidden="true">*</span></label>
+                  <input class="rz-inp" id="rz-email" type="email" autocomplete="email" required="{{ true }}" placeholder="jmeno@domena.cz" value="{{ f.email }}" onChange="{{ on.email }}" data-err="{{ ef.email }}" aria-invalid="{{ e.email }}" aria-describedby="rz-email-err">
+                  <span class="rz-sr" id="rz-email-err">{{ msg.email }}</span>
+                </div>
+                <div>
+                  <label class="rz-lbl" for="rz-phone" data-err="{{ ef.phone }}">Telefon <span class="rz-req" aria-hidden="true">*</span></label>
+                  <div class="rz-tel">
+                    <div class="rz-telpfx"><dc-import name="Select" options="{{ prefixes }}" value="{{ f.prefix }}" on-change="{{ on.prefix }}" aria-label="Předvolba" list-min-width="280px" hint-size="100%,44px"></dc-import></div>
+                    <input class="rz-inp" id="rz-phone" type="tel" inputmode="tel" autocomplete="tel-national" required="{{ true }}" placeholder="777 123 456" value="{{ f.phone }}" onChange="{{ on.phone }}" data-err="{{ ef.phone }}" aria-invalid="{{ e.phone }}" aria-describedby="rz-phone-err" style="flex:1;">
+                  </div>
+                  <span class="rz-sr" id="rz-phone-err">{{ msg.phone }}</span>
+                </div>
+                <div>
+                  <label class="rz-lbl" for="rz-name" data-err="{{ ef.name }}">Jméno a příjmení <span class="rz-req" aria-hidden="true">*</span></label>
+                  <input class="rz-inp" id="rz-name" type="text" autocomplete="name" required="{{ true }}" value="{{ f.name }}" onChange="{{ on.name }}" data-err="{{ ef.name }}" aria-invalid="{{ e.name }}" aria-describedby="rz-name-err">
+                  <span class="rz-sr" id="rz-name-err">{{ msg.name }}</span>
+                </div>
+                <div>
+                  <label class="rz-lbl" for="rz-firm">Firma a IČO <span class="rz-opt">(nepovinné)</span></label>
+                  <input class="rz-inp" id="rz-firm" type="text" autocomplete="organization" placeholder="Název s.r.o., 12345678" value="{{ f.firm }}" onChange="{{ on.firm }}">
+                </div>
+              </div>
+              <div>
+                <label class="rz-lbl" for="rz-note">Poznámka <span class="rz-opt">(nepovinné)</span></label>
+                <textarea class="rz-ta" id="rz-note" placeholder="Co povezete, dotaz…" value="{{ f.note }}" onChange="{{ on.note }}"></textarea>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:15px;line-height:1.6;color:#15181C;text-wrap:pretty;">
+                  <input class="rz-chk" id="rz-agree" type="checkbox" checked="{{ agree }}" onChange="{{ onAgree }}" data-err="{{ ef.agree }}" aria-invalid="{{ e.agree }}" aria-describedby="rz-agree-err" style="{{ agreeStyle }}">
+                  <span>K převzetí přívěsu potřebuji <strong style="font-weight:700;">originál platného řidičského průkazu</strong>. Pokud přívěs nevyzvednu do 1 hodiny od začátku rezervace, uvolní se dalším zájemcům. Souhlasím s <a href="#" style="color:#1E5AA8;">podmínkami půjčovny</a>.</span>
+                </label>
+                <sc-if value="{{ e.agree }}" hint-placeholder-val="">
+                  <p id="rz-agree-err" role="alert" style="margin:0 0 0 34px;font-size:14px;font-weight:500;line-height:1.5;color:#C5232B;">Pro odeslání je potřeba souhlas s podmínkami půjčovny.</p>
+                </sc-if>
+                <p style="margin:0 0 0 34px;font-size:14px;line-height:1.5;color:#5A626C;text-wrap:pretty;">Rezervace je nezávazná. Nájemní smlouvu podepíšeme při převzetí přívěsu a úhradě půjčovného.</p>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+      </div>
+
+      <!-- SOUHRN -->
+      <aside class="rz-side" data-mob="{{ sideMobFlag }}" aria-labelledby="rz-sum-h">
+        <div class="rz-card" style="padding:24px;display:flex;flex-direction:column;gap:16px;">
+          <h2 id="rz-sum-h" class="rz-h2" style="margin:0;color:#142F56;">Vaše rezervace</h2>
+          <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="4">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <span aria-hidden="true" style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="{{ r.icon }}" size="{{ 24 }}" hint-size="24px,24px"></dc-import></span>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;">
+                <span style="font-size:14px;line-height:1.5;color:#5A626C;">{{ r.label }}</span>
+                <span style="{{ r.valStyle }}">{{ r.value }}</span>
+                <sc-if value="{{ r.hasSub }}" hint-placeholder-val=""><span style="font-size:15px;line-height:1.5;color:#15181C;">{{ r.sub }}</span></sc-if>
+              </div>
+              <sc-if value="{{ r.canEdit }}" hint-placeholder-val=""><button type="button" class="rz-i rz-lnk" onClick="{{ r.onEdit }}" aria-label="{{ r.editAria }}" style="font-size:14px;">Změnit</button></sc-if>
+            </div>
+          </sc-for>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-top:16px;border-top:1px solid #F2F4F7;">
+            <span style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:17px;line-height:1.35;">Půjčovné</span><span style="font-size:13px;line-height:1.5;color:#5A626C;">{{ priceNote }}</span></span>
+            <strong style="font-size:24px;font-weight:700;line-height:1.2;color:#142F56;white-space:nowrap;">{{ totalText }}</strong>
+          </div>
+          <p style="margin:0;display:flex;align-items:center;gap:10px;font-size:14px;line-height:1.5;color:#15181C;"><span aria-hidden="true" style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="credit-card" size="{{ 20 }}" hint-size="20px,20px"></dc-import></span>Platíte až při převzetí – hotově nebo kartou.</p>
+          <dc-import name="Tlacitko" variant="{{ ctaVariant }}" size="large" label="{{ ctaLabel }}" icon="none" full-width="{{ true }}" on-click="{{ onNext }}" hint-size="100%,52px"></dc-import>
+          <sc-if value="{{ is3 }}" hint-placeholder-val="">
+            <p style="margin:0;text-align:center;font-size:13px;line-height:1.5;color:#5A626C;text-wrap:pretty;">Odesláním souhlasíte se <a href="#" style="color:#1E5AA8;">zpracováním osobních údajů</a> pro vyřízení rezervace.</p>
+          </sc-if>
+          <sc-if value="{{ notFirstStep }}" hint-placeholder-val="">
+            <div style="display:flex;justify-content:center;"><dc-import name="Tlacitko" variant="ghost" size="standard" label="{{ backLabel }}" icon="arrow-left" on-click="{{ onBack }}" hint-size="160px,36px"></dc-import></div>
+          </sc-if>
+          <sc-if value="{{ showHelp }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-top:16px;border-top:1px solid #F2F4F7;display:flex;flex-direction:column;gap:12px;">
+              <span style="font-size:15px;font-weight:700;line-height:1.4;color:#142F56;">Potřebujete poradit?</span>
+              <a class="rz-lnk" href="tel:+420773835329" style="display:flex;align-items:center;gap:12px;font-size:18px;line-height:1.35;"><span aria-hidden="true" style="flex:none;display:inline-flex;color:#1E5AA8;"><dc-import name="Ikony" icon-name="phone" size="24" hint-size="24px,24px"></dc-import></span>773 835 329</a>
+              <div style="display:flex;align-items:flex-start;gap:12px;">
+                <span aria-hidden="true" style="display:inline-flex;flex:none;color:#1E5AA8;"><dc-import name="Ikony" icon-name="clock" size="24" hint-size="24px,24px"></dc-import></span>
+                <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px;min-height:24px;">
+                  <span style="font-size:16px;font-weight:700;line-height:24px;color:#15181C;">Po–Pá 8:30–16:00</span>
+                  <sc-if value="{{ openNow }}" hint-placeholder-val="{{ true }}"><span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;line-height:1.4;color:#0B6937;"><span style="display:flex;align-items:center;flex:none;font-size:0;line-height:0;"><dc-import name="LedIndikator" state="open" label="" size="11" hint-size="11px,11px"></dc-import></span>Právě otevřeno</span></sc-if>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </aside>
+    </div>
+    </sc-if>
+
+    <!-- POTVRZENÍ -->
+    <sc-if value="{{ isDone }}" hint-placeholder-val="">
+      <section class="rz-card rz-in" aria-labelledby="rz-done-h" style="max-width:920px;margin:16px auto 0;padding:40px 32px;display:flex;flex-direction:column;align-items:center;gap:20px;">
+        <span aria-hidden="true" style="width:64px;height:64px;border-radius:999px;background:#0E7F43;color:#FFFFFF;display:flex;align-items:center;justify-content:center;"><dc-import name="Ikony" icon-name="check" size="{{ 32 }}" hint-size="32px,32px"></dc-import></span>
+        <h1 id="rz-done-h" class="rz-h1" tabindex="-1" style="margin:0;color:#142F56;text-align:center;font-size:30px;outline:none;">Rezervace je odeslaná</h1>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#15181C;text-align:center;text-wrap:pretty;">Potvrzení jsme poslali na <strong style="font-weight:700;overflow-wrap:anywhere;">{{ f.email }}</strong>. Den předem vám pošleme připomínku.</p>
+        <div class="rz-facts rp-facts" style="width:100%;padding:20px 24px;border-radius:8px;background:#F7F9FB;">
+          <div style="display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="font-size:13px;line-height:1.5;color:#5A626C;">Přívěs</span><strong style="font-size:15px;font-weight:700;line-height:1.5;">{{ doneTrailer }}</strong></div>
+          <div style="display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="font-size:13px;line-height:1.5;color:#5A626C;">Vyzvednutí → vrácení</span><strong class="rp-nw" style="font-size:15px;font-weight:700;line-height:1.5;">{{ doneTerm }}</strong></div>
+          <div style="display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="font-size:13px;line-height:1.5;color:#5A626C;">Půjčovné</span><strong style="font-size:15px;font-weight:700;line-height:1.5;">{{ donePrice }}</strong></div>
+        </div>
+        <div style="width:100%;display:flex;flex-direction:column;gap:8px;">
+          <h2 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#142F56;">Co bude dál</h2>
+          <ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.6;color:#15181C;">
+            <li>Přijeďte ve sjednaný čas do půjčovny v Popovičkách. Vezměte s sebou <strong style="font-weight:700;">řidičský průkaz skupiny {{ doneLic }}</strong> a občanský průkaz.</li>
+            <li>Půjčovné zaplatíte při převzetí hotově nebo kartou a podepíšeme nájemní smlouvu.</li>
+            <li>Pokud do 1 hodiny od začátku rezervace nedorazíte, přívěs uvolníme. Když se zdržíte, zavolejte na 773 835 329.</li>
+          </ol>
+        </div>
+        <div style="width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 16px;">
+          <dc-import name="Tlacitko" variant="primary" size="medium" label="Zpět na půjčovnu" icon="arrow-left" href="pujcovna.dc.html" hint-size="200px,44px"></dc-import>
+          <dc-import name="Tlacitko" variant="ghost" size="standard" label="Projít rezervaci znovu" icon="refresh" on-click="{{ onReset }}" hint-size="220px,36px"></dc-import>
+        </div>
+      </section>
+    </sc-if>
+  </main>
+
+  <sc-if value="{{ showMbar }}" hint-placeholder-val="{{ true }}">
+    <div class="rz-mbar" role="region" aria-label="Stav rezervace a pokračování">
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+        <strong style="font-size:15px;font-weight:700;line-height:1.3;color:#142F56;text-wrap:pretty;">{{ mbarTitle }}</strong>
+        <span style="font-size:13px;font-weight:500;line-height:1.3;color:#5A626C;">{{ mbarSub }}</span>
+      </div>
+      <div style="flex:none;display:flex;"><dc-import name="Tlacitko" variant="primary" size="large" label="{{ ctaShort }}" icon="none" on-click="{{ onNext }}" hint-size="150px,52px"></dc-import></div>
+    </div>
+  </sc-if>
+
+  <dc-import name="LoginPopup" open="{{ loginOpen }}" on-close="{{ closeLogin }}" hint-size="0px,0px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  // UKÁZKOVÁ DATA — přívěsy, ceny a obsazenost přijdou z rezervačního systému půjčovny.
+  // [č., název, kategorie, ložná plocha, celková hmotnost, nosnost, Kč/den, řidičák, k dispozici]
+  T = [
+    [10,'Valník LPV 3','v750','2530 × 1280',750,515,400,'B',1],
+    [14,'Valník PROFI 2','v750','2100 × 1280',750,550,400,'B',1],
+    [15,'Valník PROFI 4 s plachtou','v750','2530 × 1530',750,500,400,'B',1],
+    [12,'Valník PROFI 6 s plachtou','v750','3030 × 1530',750,485,400,'B',0],
+    [27,'Valník PROFI 6 s plachtou','v750','3030 × 1530',750,485,400,'B',1],
+    [28,'Sklopný valník PROFI 4','skl','2530 × 1530',750,505,400,'B',1],
+    [30,'Přepravník motorek MOTO 2','moto','2110 × 1550',750,530,400,'B',1],
+    [31,'Přepravník motorek MOTO 3','moto','2540 × 1550',750,530,400,'B',1],
+    [11,'Valník PROFI 156','vbr','3030 × 1530',1500,1138,700,'B',1],
+    [17,'Valník PROFI 156','vbr','3030 × 1530',1500,1138,700,'B',1],
+    [25,'Přívěs na přepravu koní','kone','pro 2 koně',2700,1810,800,'BE',1],
+    [18,'Přepravník aut PAV 2.7 4220','auta','4210 × 2020',2700,2125,800,'BE',1],
+    [19,'Přepravník aut PAV 2.7 4220','auta','4210 × 2020',2700,2125,800,'BE',0],
+    [29,'Valník PVV2 2.7 s plachtou','vbr','4000 × 2020',2700,1984,1300,'BE',1],
+    [13,'Valník PVV2 3.5 3620','vbr','3600 × 2060',3500,2835,1300,'BE',1],
+    [24,'Valník PVV2 3.5 5121','vbr','5100 × 2160',3500,2630,1300,'BE',1],
+    [26,'Valník UAT 4320','vbr','4300 × 2070',3500,2580,1300,'BE',1],
+    [20,'Třístranný sklápěč UDK','skl','3060 × 1750',3500,2630,1300,'BE',1],
+    [22,'Přepravník aut PAV 3.5 6022','auta','6000 × 2200',3500,2550,1300,'BE',1],
+    [23,'Přepravník aut PAV 3.5 6022','auta','6000 × 2200',3500,2550,1300,'BE',1],
+    [21,'Přepravník aut PAV 3.5 8022','auta','8000 × 2200',3500,2435,1600,'BE',1]
+  ];
+  // Fotky: reálné produktové fotky VAPP stejného typu (ilustrační, ne vždy přesně daný model). Klíč = č. přívěsu, jinak kategorie.
+  PHOTO = { v750:'prives-praktik-2-a.jpg', skl:'privesy-kat-07.png', moto:'prives-moto-profi-132-a.jpg', vbr:'prives-p3s-2-7-3618-a.jpg', auta:'prives-pap-2-0-4019-a.jpg', kone:'privesy-kat-09.png',
+    11:'privesy-kat-02.png', 17:'privesy-kat-02.png', 24:'privesy-kat-03.png', 26:'privesy-kat-05.png', 20:'prives-pvs-2-7-4021-a.jpg', 22:'privesy-kat-06.png', 23:'privesy-kat-06.png', 21:'privesy-kat-06.png' };
+  photoOf(x){ return this.PHOTO[x[0]] || this.PHOTO[x[2]] || ''; }
+  CATN = { v750:'Valník do 750 kg', vbr:'Brzděný valník', auta:'Přepravník aut', skl:'Sklápěč', moto:'Přepravník motorek', kone:'Přepravník koní' };
+  PT = ['8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30'];
+  WD = ['neděle','pondělí','úterý','středa','čtvrtek','pátek','sobota'];
+  WDS = ['ne','po','út','st','čt','pá','so'];
+  MO_GEN = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+  MO_NOM = ['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'];
+  HOL = { '1-1':1, '5-1':1, '5-8':1, '7-5':1, '7-6':1, '9-28':1, '10-28':1, '11-17':1, '12-24':1, '12-25':1, '12-26':1, '12-31':1 };
+  FIELDS = ['email','prefix','phone','name','firm','note'];
+  MONTHS_AHEAD = 2;
+
+  state = { step:1, pd:null, pt:null, rd:null, rt:null, pop:null, mo:0, lic:null, what:'', tr:null, licHelp:false,
+    tried1:false, tried2:false, tried3:false, agree:false, done:false, loginOpen:false,
+    f:{ email:'', prefix:'+420', phone:'', name:'', firm:'', note:'' } };
+  termRef = React.createRef();
+
+  componentDidMount(){
+    // předvýběr přívěsu z odkazu: rezervace-privesu.dc.html#prives=10
+    try { const m = /prives=(\d+)/.exec(window.location.hash || ''); if (m && this.T.some(x=>x[0] === +m[1])) this.setState({ tr:+m[1] }); } catch(e){}
+    // kliknutí mimo rozbalený kalendář / výběr času ho zavře
+    this._down = (e)=>{ const r = this.termRef.current; if (this.state.pop && r && !r.contains(e.target)) this.setState({ pop:null }); };
+    this._key = (e)=>{ if (e.key === 'Escape' && this.state.pop) this.setState({ pop:null }); };
+    document.addEventListener('pointerdown', this._down, true); document.addEventListener('keydown', this._key);
+  }
+  componentWillUnmount(){ document.removeEventListener('pointerdown', this._down, true); document.removeEventListener('keydown', this._key); }
+
+  kc(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' Kč'; }
+  key(d){ return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate(); }
+  parse(k){ const p = String(k).split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); }
+  today(){ const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  closed(d){ const w = d.getDay(); return w === 0 || w === 6 || !!this.HOL[(d.getMonth()+1) + '-' + d.getDate()]; }
+  mins(t){ const p = String(t).split(':'); return (+p[0])*60 + (+p[1]); }
+  fmtDay(d){ return this.WD[d.getDay()] + ' ' + d.getDate() + '. ' + this.MO_GEN[d.getMonth()]; }
+  shortDay(d){ return this.WDS[d.getDay()] + ' ' + d.getDate() + '. ' + (d.getMonth()+1) + '.'; }
+  dny(n){ return n + (n === 1 ? ' den' : n < 5 ? ' dny' : ' dní'); }
+  hasTerm(S){ return !!(S.pd && S.pt && S.rd && S.rt); }
+  // účtované dny: každých započatých 24 h, za každý víkend v pronájmu −1 den
+  billed(S){
+    if (!this.hasTerm(S)) return null;
+    const a = this.parse(S.pd), b = this.parse(S.rd);
+    const ms = (b - a) + (this.mins(S.rt) - this.mins(S.pt)) * 60000;
+    const n = Math.max(1, Math.ceil(ms / 864e5)); let we = 0;
+    for (let d = new Date(a); d < b; d = new Date(d.getFullYear(), d.getMonth(), d.getDate()+1)) if (d.getDay() === 6) we++;
+    return { n:Math.max(1, n - we), we };
+  }
+  // ukázková obsazenost v termínu (deterministicky z čísla přívěsu a dne vyzvednutí)
+  busy(x, S){ if (!x[8]) return true; if (!S.pd) return false; const d = this.parse(S.pd); return ((x[0]*7 + d.getDate()*3 + d.getMonth()) % 4) === 0; }
+  focusTop(id){ setTimeout(()=>{ try { window.scrollTo({ top:0 }); const el = document.getElementById(id || 'rz-top'); if (el && el.focus) el.focus({ preventScroll:true }); } catch(e){} }, 0); }
+  scrollTo(id){ setTimeout(()=>{ try { const el = document.getElementById(id); if (el){ const y = el.getBoundingClientRect().top + window.pageYOffset - 120; window.scrollTo({ top:Math.max(0,y), behavior:'smooth' }); } } catch(e){} }, 0); }
+
+  month(off, S, t0){
+    const m0 = new Date(t0.getFullYear(), t0.getMonth() + off, 1);
+    const lead = (m0.getDay() + 6) % 7, dim = new Date(m0.getFullYear(), m0.getMonth()+1, 0).getDate();
+    const forReturn = S.pop === 'rd', pdD = S.pd ? this.parse(S.pd) : null, rdD = S.rd ? this.parse(S.rd) : null;
+    const cells = [];
+    for (let i = 0; i < lead; i++) cells.push({ blank:true, isDay:false });
+    for (let n = 1; n <= dim; n++){
+      const d = new Date(m0.getFullYear(), m0.getMonth(), n), k = this.key(d);
+      const dis = this.closed(d) || d <= t0 || (forReturn && pdD && d < pdD);
+      const isEnd = k === S.pd || k === S.rd;
+      const inRange = pdD && rdD && d > pdD && d < rdD;
+      cells.push({ blank:false, isDay:true, n, dis, pressed:isEnd ? 'true' : 'false', rangeFlag:inRange ? '1' : '0', todayFlag:d.getTime() === t0.getTime() ? '1' : '0',
+        aria:this.fmtDay(d) + (dis ? ', nelze vybrat' : ''),
+        onPick:()=>{ if (forReturn) this.setState({ rd:k, rt:null, pop:'rt' });
+          else this.setState(s=>{ const keepR = s.rd && this.parse(s.rd) >= d; return { pd:k, pt:null, rd:keepR ? s.rd : null, rt:keepR ? s.rt : null, pop:'pt', tr:s.tr }; }); } });
+    }
+    return { label:this.MO_NOM[m0.getMonth()] + ' ' + m0.getFullYear(), cells };
+  }
+
+  renderVals(){
+    const S = this.state, f = S.f, t0 = this.today();
+    const hasTerm = this.hasTerm(S), bl = this.billed(S);
+    const pdD = S.pd ? this.parse(S.pd) : null, rdD = S.rd ? this.parse(S.rd) : null;
+    const cur = this.T.find(x=>x[0] === S.tr) || null;
+
+    // --- krok 1
+    const termMissP = !S.pd || !S.pt, termMissR = !S.rd || !S.rt;
+    const err1 = S.tried1 && (termMissP || termMissR || !S.lic);
+    const err1Text = termMissP ? 'Vyberte prosím den a čas vyzvednutí.' : (termMissR ? 'Vyberte prosím den a čas vrácení.' : 'Vyberte prosím skupinu řidičského průkazu.');
+    const isRet = S.pop === 'rd' || S.pop === 'rt';
+    const sameDay = S.pd && S.rd && S.pd === S.rd;
+    const tlist = isRet ? this.PT.concat(['16:00']) : this.PT;
+    const times = (S.pop === 'pt' || S.pop === 'rt') ? tlist.map(t=>{
+      const dis = S.pop === 'rt' && sameDay && S.pt && this.mins(t) <= this.mins(S.pt);
+      return { t, dis, pressed:(S.pop === 'pt' ? S.pt : S.rt) === t ? 'true' : 'false',
+        onPick:()=>{ if (S.pop === 'pt') this.setState(s=>{ const clash = s.rd === s.pd && s.rt && this.mins(s.rt) <= this.mins(t); const rt = clash ? null : s.rt;
+            return { pt:t, rt, pop: !s.rd ? 'rd' : (!rt ? 'rt' : null) }; });
+          else this.setState({ rt:t, pop:null }); } }; }) : [];
+    const months = (S.pop === 'pd' || S.pop === 'rd') ? [0,1].map(i=>{ const m = this.month(S.mo + i, S, t0);
+      return { ...m, secondFlag:i ? '1' : '0', showPrev:i === 0, nextCls:i === 0 ? 'rp-nextmob' : 'rp-nextdesk' }; }) : [];
+    const fld = (on, set)=>({ on:on ? '1' : '0', set:set ? '1' : '0', exp:on ? 'true' : 'false' });
+    const F = { pd:fld(S.pop === 'pd', !!S.pd), pt:fld(S.pop === 'pt', !!S.pt), rd:fld(S.pop === 'rd', !!S.rd), rt:fld(S.pop === 'rt', !!S.rt) };
+    const toggle = (p)=>()=>this.setState(s=>({ pop:s.pop === p ? null : p }));
+
+    // --- krok 2
+    const pool = this.T.filter(x=>(S.lic !== 'B' || x[7] === 'B') && (!S.what || (S.what === 'jine' ? (x[2] !== 'auta' && x[2] !== 'moto') : x[2] === S.what)));
+    const row = (x)=>({ no:x[0], name:x[1], lic:x[7], hasImg:!!this.photoOf(x), noImg:!this.photoOf(x), imgStyle:this.photoOf(x) ? 'background-image:url("./' + this.photoOf(x) + '");' : '', meta:this.CATN[x[2]] + ' · ' + x[3] + (/^\d/.test(x[3]) ? ' mm' : '') + ' · nosnost ' + String(x[5]).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kg',
+      price:this.kc(x[6]), total:bl ? this.kc(x[6]*bl.n) : '', checked:S.tr === x[0], onFlag:S.tr === x[0] ? '1' : '0', onPick:()=>this.setState({ tr:x[0] }) });
+    const freeRaw = pool.filter(x=>!this.busy(x, S)), busyRaw = pool.filter(x=>this.busy(x, S));
+    const trOk = !!cur && freeRaw.some(x=>x[0] === cur[0]);
+
+    // --- krok 3
+    const mail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((f.email||'').trim());
+    const errAll = { email:!mail, phone:(f.phone||'').replace(/\D/g,'').length < 9, name:(f.name||'').trim().split(/\s+/).filter(Boolean).length < 2, agree:!S.agree };
+    const e = {}, ef = {};
+    Object.keys(errAll).forEach(k=>{ e[k] = S.tried3 && errAll[k]; ef[k] = e[k] ? '1' : '0'; });
+    const on = {};
+    this.FIELDS.forEach(k=>{ on[k] = (ev)=>{ const v = (ev && ev.target) ? ev.target.value : ev; this.setState(s=>({ f:{ ...s.f, [k]:v } })); }; });
+
+    const go = (n)=>{ this.setState({ step:n, pop:null }); this.focusTop(); };
+    const onNext = ()=>{
+      if (S.step === 1){
+        if (termMissP || termMissR){ this.setState({ tried1:true, pop: termMissP ? (!S.pd ? 'pd' : 'pt') : (!S.rd ? 'rd' : 'rt') }); this.scrollTo('rz-top'); return; }
+        if (!S.lic){ this.setState({ tried1:true }); this.scrollTo('rp-lic'); return; }
+        this.setState({ step:2, tried1:false, pop:null, tr:trOk ? S.tr : null }); this.focusTop(); return;
+      }
+      if (S.step === 2){
+        if (!trOk){ this.setState({ tried2:true }); this.scrollTo('rz-top'); return; }
+        this.setState({ step:3, tried2:false }); this.focusTop(); return;
+      }
+      const firstBad = ['email','phone','name','agree'].find(k=>errAll[k]);
+      if (firstBad){ this.setState({ tried3:true }); setTimeout(()=>{ const el = document.getElementById('rz-' + firstBad); if (el && el.focus) el.focus(); }, 0); return; }
+      this.setState({ done:true }); this.focusTop('rz-done-h');
+    };
+    const labels = ['Termín','Přívěs','Kontakt'];
+
+    const val = (ok)=>'font-size:16px;line-height:1.5;' + (ok ? 'font-weight:700;color:#15181C;' : 'color:#8A929C;');
+    const none = 'zatím nevybráno';
+    const sumRows = [
+      { icon:'calendar', label:'Vyzvednutí', value:(S.pd && S.pt) ? this.fmtDay(pdD) + ', ' + S.pt : none, valStyle:val(!!(S.pd && S.pt)), hasSub:false, sub:'', canEdit:S.step > 1, onEdit:()=>go(1), editAria:'Změnit vyzvednutí' },
+      { icon:'calendar-check', label:'Vrácení', value:(S.rd && S.rt) ? this.fmtDay(rdD) + ', ' + S.rt : none, valStyle:val(!!(S.rd && S.rt)), hasSub:false, sub:'', canEdit:S.step > 1, onEdit:()=>go(1), editAria:'Změnit vrácení' },
+      { icon:cur ? 'jednoose-valniky' : 'help', label:'Přívěs', value:cur && (S.step > 1 ? trOk : true) ? cur[1] : none, valStyle:val(!!cur), hasSub:!!cur, sub:cur ? 'č. ' + cur[0] + ' · řidičák ' + cur[7] : '', canEdit:S.step > 2, onEdit:()=>go(2), editAria:'Změnit přívěs' },
+      { icon:'map-pin', label:'Kde', value:'Půjčovna VAPP, Popovičky 38, 251 01 Praha-východ', valStyle:val(true), hasSub:false, sub:'', canEdit:false, onEdit:()=>{}, editAria:'' }
+    ];
+    const priced = !!(cur && bl);
+    const termShort = hasTerm ? this.shortDay(pdD) + ' ' + S.pt + ' → ' + this.shortDay(rdD) + ' ' + S.rt : '';
+
+    return {
+      stpLabels:labels, stpCur:S.done ? labels.length + 1 : S.step, stpGo:(n)=>{ if (!S.done && n < S.step) go(n); }, stpLocked:!!S.done,
+      isFlow:!S.done, isDone:S.done, is1:S.step === 1, is2:S.step === 2, is3:S.step === 3, notFirstStep:S.step > 1,
+      h1:['Vyberte termín','Vyberte přívěs','Kontaktní údaje'][S.step-1],
+      // termín
+      termRef:this.termRef, err1, err1Flag:err1 ? '1' : '0', err1Text,
+      pdOn:F.pd.on, pdSet:F.pd.set, pdExp:F.pd.exp, pdText:pdD ? this.shortDay(pdD) : 'Datum vyzvednutí', openPd:toggle('pd'),
+      ptOn:F.pt.on, ptSet:F.pt.set, ptExp:F.pt.exp, ptText:S.pt || 'Čas', ptDis:!S.pd, openPt:toggle('pt'),
+      rdOn:F.rd.on, rdSet:F.rd.set, rdExp:F.rd.exp, rdText:rdD ? this.shortDay(rdD) : 'Datum vrácení', rdDis:!S.pd, openRd:toggle('rd'),
+      rtOn:F.rt.on, rtSet:F.rt.set, rtExp:F.rt.exp, rtText:S.rt || 'Čas', rtDis:!S.rd, openRt:toggle('rt'),
+      popCal:S.pop === 'pd' || S.pop === 'rd', popWhich:(S.pop === 'rd' || S.pop === 'rt') ? 'r' : (S.pop ? 'p' : ''), popTimeP:S.pop === 'pt', popTimeR:S.pop === 'rt',
+      popTitle:{ pd:'Vyberte den vyzvednutí', rd:'Vyberte den vrácení', pt:'Čas vyzvednutí', rt:'Čas vrácení' }[S.pop] || '',
+      popNote: S.pop === 'rd' ? 'Vrátit můžete i ve stejný den.' : (S.pop === 'pt' && pdD ? this.shortDay(pdD) : (S.pop === 'rt' && rdD ? this.shortDay(rdD) : '')),
+      closePop:()=>this.setState({ pop:null }), months, times, wds:['Po','Út','St','Čt','Pá','So','Ne'],
+      prevDis:S.mo <= 0, nextDis:S.mo >= this.MONTHS_AHEAD, onPrevMo:()=>this.setState(s=>({ mo:Math.max(0, s.mo-1) })), onNextMo:()=>this.setState(s=>({ mo:Math.min(this.MONTHS_AHEAD, s.mo+1) })),
+      hasTerm, daysText:bl ? this.dny(bl.n) : '', weekendNote:bl && bl.we ? '(víkend odečten)' : '',
+      licB:S.lic === 'B', licBE:S.lic === 'BE', errLic:S.tried1 && !S.lic, licHelp:S.licHelp, licHelpExp:S.licHelp ? 'true' : 'false',
+      licLblStyle:'font-size:16px;font-weight:700;line-height:1.35;color:' + (S.tried1 && !S.lic ? '#C5232B' : '#15181C') + ';',
+      toggleLicHelp:()=>this.setState(s=>({ licHelp:!s.licHelp })),
+      // se skupinou B nejde zvolit Auto — přepravníky aut vyžadují BE
+      pickB:()=>this.setState(s=>({ lic:'B', what:s.what === 'auta' ? '' : s.what })), pickBE:()=>this.setState({ lic:'BE' }),
+      what:S.what, onWhat:(v)=>this.setState({ what:(v === 'auta' && S.lic === 'B') ? '' : (v || '') }),
+      whatOpts:[{ value:'', label:'Vyberte' }, S.lic === 'B' ? { value:'auta', label:'Auto – jen se skupinou BE', disabled:true } : { value:'auta', label:'Auto' }, { value:'moto', label:'Motocykl' }, { value:'jine', label:'Jiné' }],
+      // přívěs
+      freeList:freeRaw.map(row), busyList:busyRaw.map(row), hasBusy:busyRaw.length > 0, busyCount:busyRaw.length, noFree:freeRaw.length === 0,
+      err2:S.tried2 && !trOk, err2Flag:(S.tried2 && !trOk) ? '1' : '0', go1:()=>go(1),
+      // kontakt
+      f, e, ef, on, agree:S.agree, onAgree:()=>this.setState(s=>({ agree:!s.agree })), agreeStyle:e.agree ? 'box-shadow:inset 0 0 0 1px #C5232B;margin-top:2px;' : 'margin-top:2px;',
+      msg:{ email:e.email ? 'Zadejte e-mail ve formátu jmeno@domena.cz.' : '', phone:e.phone ? 'Zadejte telefon.' : '', name:e.name ? 'Zadejte jméno a příjmení.' : '' },
+      prefixes:(window.VappPredvolby ? window.VappPredvolby.options() : [{ value:'+420', label:'+420', img:'vapp-flag-cz.svg' }, { value:'+421', label:'+421', img:'vapp-flag-sk.svg' }]),
+      // souhrn
+      // před výběrem přívěsu orientačně „od“: nejlevnější přívěs pro zvolený řidičák a náklad (× počet dní, když je termín)
+      ...(()=>{ const base = freeRaw.length ? freeRaw : pool; const minDay = base.length ? Math.min.apply(null, base.map(x=>x[6])) : 0;
+        if (priced) return { totalText:this.kc(cur[6]*bl.n), priceNote:this.dny(bl.n) + ' × ' + this.kc(cur[6]) };
+        if (!minDay) return { totalText:'—', priceNote:'Cenu uvidíte po výběru přívěsu' };
+        return bl ? { totalText:'od ' + this.kc(minDay*bl.n), priceNote:this.dny(bl.n) + ' · přesnou cenu uvidíte po výběru přívěsu' }
+          : { totalText:'od ' + this.kc(minDay), priceNote:'za den · přesnou cenu uvidíte po výběru přívěsu' }; })(),
+      sumRows,
+      showHelp:S.step < 3,
+      ctaLabel:['Pokračovat k výběru přívěsu','Pokračovat ke kontaktu','Odeslat rezervaci'][S.step-1],
+      ctaShort:['Vybrat přívěs','Pokračovat','Odeslat rezervaci'][S.step-1],
+      ctaVariant:S.step === 3 ? 'buy' : 'primary', backLabel:S.step === 2 ? 'Změnit termín' : 'Změnit přívěs',
+      openNow:(()=>{ const d = new Date(), wd = d.getDay(), m = d.getHours()*60 + d.getMinutes(); return wd >= 1 && wd <= 5 && m >= 510 && m < 960; })(),
+      onNext, onBack:()=>go(Math.max(1, S.step-1)),
+      showMbar:!S.done && S.step < 3, mbarFlag:(!S.done && S.step < 3) ? '1' : '0', sideMobFlag:S.step === 3 ? '1' : '0',
+      mbarTitle: S.step === 1 ? (hasTerm ? termShort : (!S.pd ? 'Vyberte den vyzvednutí' : !S.pt ? 'Vyberte čas vyzvednutí' : !S.rd ? 'Vyberte den vrácení' : 'Vyberte čas vrácení'))
+        : (priced && trOk ? this.kc(cur[6]*bl.n) : 'Vyberte přívěs'),
+      mbarSub: S.step === 1 ? (hasTerm ? this.dny(bl.n) : 'Krok 1 ze 3') : (bl ? this.dny(bl.n) + (priced && trOk ? ' · platíte na místě' : '') : ''),
+      doneTrailer:cur ? cur[1] + ' (č. ' + cur[0] + ')' : '', doneTerm:termShort.split(' → ').map(x=>x.replace(/ /g,'\u00a0')).join(' → '), donePrice:priced ? this.kc(cur[6]*bl.n) + ' · platíte na místě' : '', doneLic:cur ? cur[7] : '',
+      onReset:()=>{ this.setState({ step:1, pd:null, pt:null, rd:null, rt:null, pop:null, mo:0, lic:null, what:'', tr:null, tried1:false, tried2:false, tried3:false, agree:false, done:false }); this.focusTop(); },
+      loginOpen:S.loginOpen, openLogin:()=>this.setState({ loginOpen:true }), closeLogin:()=>this.setState({ loginOpen:false })
+    };
+  }
+}
+</script>
+</body>
+</html>

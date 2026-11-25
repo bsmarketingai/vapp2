@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0!important;padding:0!important;}
+  #dc-root{margin:0!important;padding:0!important;width:100%!important;max-width:none!important;border:0!important;}
+  #dc-root>.sc-host{margin:0!important;padding:0!important;width:100%!important;}
+</style>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  /* Stepper — UX vzor „stepper" (ux-progress-steps #1). Kolečko 32 px s číslem, pod ním název, kolečka spojuje čára 2 px.
+     Hotový = plné modré kolečko s fajfkou (jde kliknout zpět), aktuální = modrý obrys + tučný název, budoucí = šedé.
+     Na mobilu (do 819 px) jen kolečka a nad nimi „Krok 2 ze 3 — Přívěs". Přechod stavu a vyplnění čáry 300 ms. */
+  .stp{font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .stp-txt{display:none;margin:0;font-size:13px;font-weight:700;line-height:1.4;color:#142F56;white-space:nowrap;}
+  .stp-ol{--g:16px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(72px,1fr);column-gap:var(--g);list-style:none;margin:0;padding:0;}
+  .stp-li{display:flex;justify-content:center;position:relative;min-width:0;}
+  /* čára od předchozího kolečka k tomuto: šedá dráha (::before) a modrá výplň (::after, scaleX 0 → 1 za 300 ms) */
+  .stp-li[data-first="0"]::before,.stp-li[data-first="0"]::after{content:"";position:absolute;top:15px;height:2px;left:calc(-50% - var(--g) + 22px);right:calc(50% + 22px);border-radius:999px;}
+  .stp-li[data-first="0"]::before{background:#D5DAE0;}
+  .stp-li[data-first="0"]::after{background:#1E5AA8;transform-origin:left center;transform:scaleX(0);transition:transform .3s ease;}
+  .stp-li[data-line="1"]::after{transform:scaleX(1);}
+  .stp-it{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;text-decoration:none;color:inherit;border-radius:8px;padding:0 2px;}
+  .stp-it:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  button.stp-it{appearance:none;-webkit-appearance:none;background:none;border:0;margin:0;font:inherit;cursor:pointer;}
+  a.stp-it,button.stp-it{cursor:pointer;}
+  button.stp-it:disabled{cursor:default;}
+  .stp-c{width:32px;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;font-weight:700;line-height:1;
+    background:#FFFFFF;color:#666E78;box-shadow:inset 0 0 0 2px #D5DAE0;transition:background-color .3s ease,box-shadow .3s ease,color .3s ease;}
+  .stp-l{font-size:14px;font-weight:500;line-height:1.4;color:#666E78;white-space:nowrap;text-align:center;transition:color .3s ease;}
+  .stp-li[data-s="cur"] .stp-c{color:#1E5AA8;box-shadow:inset 0 0 0 2px #1E5AA8;}
+  .stp-li[data-s="cur"] .stp-l{color:#15181C;font-weight:700;}
+  .stp-li[data-s="done"] .stp-c{background:#1E5AA8;color:#FFFFFF;box-shadow:inset 0 0 0 2px #1E5AA8;}
+  .stp-li[data-s="done"] .stp-l{color:#1E5AA8;}
+  @media (hover:hover) and (pointer:fine){ a.stp-it:hover .stp-l, button.stp-it:not(:disabled):hover .stp-l{text-decoration:underline;text-underline-offset:3px;} a.stp-it:hover .stp-c, button.stp-it:not(:disabled):hover .stp-c{background:#1A4A8A;} }
+  .stp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media (max-width:819px){
+    .stp-txt{display:block;}
+    .stp-l{display:none;}
+    .stp-ol{--g:28px;grid-auto-columns:32px;}
+  }
+  @media (prefers-reduced-motion:reduce){ .stp-c,.stp-l,.stp-li::after{transition:none;} }
+</style>
+</helmet>
+<nav class="stp" aria-label="{{ ariaLabel }}">
+  <p class="stp-txt" aria-hidden="true">{{ mobText }}</p>
+  <ol class="stp-ol">
+    <sc-for list="{{ items }}" as="s" hint-placeholder-count="3">
+      <li class="stp-li" data-s="{{ s.state }}" data-first="{{ s.firstFlag }}" data-line="{{ s.lineOn }}" aria-current="{{ s.current }}">
+        <sc-if value="{{ s.isLink }}" hint-placeholder-val="">
+          <a class="stp-it" href="{{ s.href }}" aria-label="{{ s.aria }}"><span class="stp-c" aria-hidden="true"><dc-import name="Ikony" icon-name="check" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span><span class="stp-l">{{ s.label }}</span></a>
+        </sc-if>
+        <sc-if value="{{ s.isBtn }}" hint-placeholder-val="">
+          <button type="button" class="stp-it" onClick="{{ s.onGo }}" disabled="{{ s.dis }}" aria-label="{{ s.aria }}"><span class="stp-c" aria-hidden="true"><dc-import name="Ikony" icon-name="check" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span><span class="stp-l">{{ s.label }}</span></button>
+        </sc-if>
+        <sc-if value="{{ s.isStatic }}" hint-placeholder-val="{{ true }}">
+          <span class="stp-it"><span class="stp-c" aria-hidden="true"><sc-if value="{{ s.done }}" hint-placeholder-val=""><dc-import name="Ikony" icon-name="check" size="{{ 18 }}" hint-size="18px,18px"></dc-import></sc-if><sc-if value="{{ s.notDone }}" hint-placeholder-val="{{ true }}">{{ s.num }}</sc-if></span><span class="stp-l">{{ s.label }}</span><span class="stp-sr">{{ s.sr }}</span></span>
+        </sc-if>
+      </li>
+    </sc-for>
+  </ol>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 720, &quot;height&quot;: 200}, &quot;labels&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;string[]&quot;, &quot;default&quot;: [&quot;Termín&quot;, &quot;Přívěs&quot;, &quot;Kontakt&quot;]}, &quot;current&quot;: {&quot;editor&quot;: &quot;number&quot;, &quot;default&quot;: 2, &quot;tsType&quot;: &quot;number&quot;}, &quot;hrefs&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;string[]&quot;, &quot;default&quot;: null}, &quot;onGo&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(step:number)=&gt;void&quot;, &quot;default&quot;: null}, &quot;locked&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;ariaLabel&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Postup&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;doneText&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Hotovo&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals(){
+    const P = this.props;
+    const labels = Array.isArray(P.labels) && P.labels.length ? P.labels : ['Termín','Přívěs','Kontakt'];
+    const N = labels.length;
+    const cur = Math.max(1, Math.min(N + 1, parseInt(P.current ?? 1, 10) || 1));
+    const hrefs = Array.isArray(P.hrefs) ? P.hrefs : [];
+    const go = typeof P.onGo === 'function' ? P.onGo : null;
+    const locked = !!P.locked;
+    const items = labels.map((label,i)=>{
+      const n = i + 1, done = n < cur, active = n === cur;
+      const href = done && !locked ? (hrefs[i] || '') : '';
+      const isLink = done && !!href;
+      const isBtn = done && !href && !!go && !locked;
+      return {
+        label, firstFlag:i === 0 ? '1' : '0', lineOn:n <= cur ? '1' : '0',
+        state: done ? 'done' : active ? 'cur' : 'todo', current: active ? 'step' : undefined,
+        isLink, isBtn, isStatic:!isLink && !isBtn, href,
+        onGo: ()=>{ if (go && !locked) go(n); }, dis:locked,
+        aria: 'Krok ' + n + ': ' + label + ', dokončeno. Vrátit se na tento krok',
+        done, notDone:!done, num:String(n),
+        sr: done ? ', dokončeno' : (active ? ', aktuální krok' : '')
+      };
+    });
+    return {
+      items, ariaLabel: P.ariaLabel || 'Postup',
+      mobText: cur > N ? (P.doneText || 'Hotovo') : 'Krok ' + cur + ' ze ' + N + ' — ' + labels[cur - 1]
+    };
+  }
+}
+</script>
+</body>
+</html>

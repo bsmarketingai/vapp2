@@ -98,6 +98,15 @@
   .sv-tel{transition:color .12s;} .sv-tel:hover{color:#1A4A8A !important;}
   .sv-acc-chev{flex:none;display:inline-flex;color:#5189CC;margin-left:auto;transition:transform .15s ease;}
   .sv-acc-btn[aria-expanded="true"] .sv-acc-chev{transform:rotate(180deg);}
+  /* mobil: lišta s rezervací — vyjede, když hero CTA odroluje, a schová se u rezervačního bloku */
+  .sv-sbar{display:none;}
+  @media (max-width:819px){
+    .sv-sbar{display:flex;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#FFFFFF;box-shadow:0 -6px 20px rgba(20,30,45,.10);transform:translateY(110%);transition:transform .25s ease;}
+    .sv-sbar[data-shown="true"]{transform:none;}
+    .sv-sbarcall{flex:none;width:52px;height:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#1E5AA8;background:#EFF4FB;transition:background .12s;}
+    .sv-sbarcall:hover{background:#D8E6F6;} .sv-sbarcall:focus-visible{outline:2px solid #1E5AA8;outline-offset:2px;}
+  }
+  @media (prefers-reduced-motion:reduce){ .sv-sbar{transition:none !important;} }
 </style>
 </helmet>
 <div data-screen-label="Servis" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;">
@@ -118,13 +127,18 @@
         <ul class="sv-logos" aria-label="Autorizovaný servis značek" style="list-style:none;margin:24px 0 0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;">
           <li style="display:flex;align-items:center;"><img src="uploads/al-ko_logo.svg" alt="AL-KO" style="width:120px;height:44px;object-fit:contain;object-position:center;display:block;"></li><li style="display:flex;align-items:center;"><img src="uploads/bpw-logo.svg" alt="BPW" style="width:120px;height:44px;object-fit:contain;object-position:center;display:block;"></li><li style="display:flex;align-items:center;"><img src="uploads/knott_logo.svg" alt="KNOTT" style="width:120px;height:44px;object-fit:contain;object-position:center;display:block;"></li><li style="display:flex;align-items:center;"><img src="uploads/atlas_copco_logo.svg" alt="Atlas Copco" style="width:120px;height:44px;object-fit:contain;object-position:center;display:block;"></li>
         </ul>
-        <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;">
-          <dc-import name="Tlacitko" variant="primary" size="large" label="Rezervovat termín online" icon="calendar" on-click="{{ openForm }}" hint-size="280px,52px"></dc-import>
+        <div id="sv-herocta" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;">
+          <dc-import name="Tlacitko" variant="primary" size="large" label="Rezervovat termín online" icon="calendar" href="rezervace-servisu.dc.html" hint-size="280px,52px"></dc-import>
           <dc-import name="Tlacitko" variant="secondary" size="large" label="Zobrazit ceník" href="#cenik" hint-size="180px,52px"></dc-import>
         </div>
       </div>
       <aside class="sv-heroside" aria-label="Kontakt na servis" style="min-width:0;display:flex;flex-direction:column;gap:16px;">
-        <img class="sv-heroimg" src="./sekce-servis.png" alt="Technik VAPP při opravě brzd přívěsu v servisní dílně" style="display:block;width:100%;aspect-ratio:2/1;object-fit:cover;border-radius:8px;">
+        <div class="sv-heroimg" style="position:relative;width:100%;aspect-ratio:2/1;border-radius:8px;overflow:hidden;background:#F2F4F7;">
+          <iframe title="Mapa — Servis VAPP, Popovičky 38" src="https://maps.google.com/maps?q=Popovi%C4%8Dky+38%2C+251+01&amp;z=15&amp;output=embed" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block;"></iframe>
+          <div style="position:absolute;left:12px;bottom:12px;display:flex;">
+            <dc-import name="Tlacitko" variant="ontint" size="medium" label="Navigovat" icon-trailing="chevron-right" href="https://www.google.com/maps/search/?api=1&amp;query=Popovi%C4%8Dky+38%2C+251+01" hint-size="140px,44px"></dc-import>
+          </div>
+        </div>
         <div style="background:#F7F9FB;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:12px;">
           <h2 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#142F56;">Servisní dílna VAPP</h2>
           <a class="sv-lnk" href="https://www.google.cz/maps/dir//VAPP+-+p%C5%99%C3%ADv%C4%9Bsy,+p%C5%99%C3%ADslu%C5%A1enstv%C3%AD,+n%C3%A1hradn%C3%AD+d%C3%ADly+a+servis,+38,+251+01+Popovi%C4%8Dky/@49.9695313,14.6010162,13z" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.5;color:#15181C;text-decoration:none;"><span aria-hidden="true" style="flex:none;display:inline-flex;color:#1E5AA8;"><dc-import name="Ikony" icon-name="map-pin" size="24" hint-size="24px,24px"></dc-import></span>Popovičky 38, 251 01 Praha-východ</a>
@@ -167,7 +181,6 @@
                     <li style="display:flex;align-items:flex-start;gap:8px;font-size:15px;font-weight:700;line-height:1.5;color:#15181C;"><span aria-hidden="true" style="flex:none;display:inline-flex;color:#1E5AA8;"><dc-import name="Ikony" icon-name="check" size="24" hint-size="24px,24px"></dc-import></span>{{ pt }}</li>
                   </sc-for>
                 </ul>
-                <p style="margin:0;font-size:14px;line-height:1.5;color:#666E78;">Orientační doba: {{ c.time }}</p>
                 <a class="a11y-i sv-more" href="#cenik" onClick="{{ c.onCenik }}" style="display:inline-flex;align-self:flex-start;align-items:center;gap:4px;min-height:44px;font-size:15px;font-weight:700;color:#1E5AA8;text-decoration:none;">Zobrazit ceník<span aria-hidden="true" style="display:inline-flex;color:#5189CC;"><dc-import name="Ikony" icon-name="chevron-right" size="24" hint-size="24px,24px"></dc-import></span></a>
               </div>
             </div></div>
@@ -184,15 +197,11 @@
       <h2 id="sv-jak-h" style="margin:0 0 24px;font-size:28px;font-weight:700;line-height:1.2;letter-spacing:-0.01em;color:#142F56;">Jak servis probíhá</h2>
       <ol class="sv-steps">
           <li class="sv-step"><span class="sv-dot" aria-hidden="true">1</span><h3 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#15181C;"><span class="sv-sr">Krok 1: </span>Rezervujte termín</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Online nebo telefonem. Upřesněte, jaké úkony je na přívěsu potřeba provést.</p></li>
-          <li class="sv-step"><span class="sv-dot" aria-hidden="true">2</span><h3 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#15181C;"><span class="sv-sr">Krok 2: </span>Přivezte přívěs</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Do našeho servisu v Popovičkách v domluvený den a čas.</p></li>
+          <li class="sv-step"><span class="sv-dot" aria-hidden="true">2</span><h3 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#15181C;"><span class="sv-sr">Krok 2: </span>Přistavte přívěs</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Do našeho servisu v Popovičkách v domluvený den a čas.</p></li>
           <li class="sv-step"><span class="sv-dot" aria-hidden="true">3</span><h3 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#15181C;"><span class="sv-sr">Krok 3: </span>Opravu vám naceníme</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Po prohlídce vám zavoláme s cenou. Opravu provedeme pouze v rozsahu, který odsouhlasíte.</p></li>
           <li class="sv-step"><span class="sv-dot" aria-hidden="true">4</span><h3 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#15181C;"><span class="sv-sr">Krok 4: </span>Opravíme a seřídíme</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Běžné díly držíme skladem, většinu oprav zvládneme do 24 hodin.</p></li>
           <li class="sv-step"><span class="sv-dot sv-dot-done" aria-hidden="true"><dc-import name="Ikony" icon-name="check" size="24" hint-size="24px,24px"></dc-import></span><h3 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#15181C;"><span class="sv-sr">Krok 5: </span>Vyzvedněte přívěs</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Opravený, seřízený a připravený na cestu. Zaplatíte předem domluvenou cenu.</p></li>
       </ol>
-      <div hidden style="margin-top:24px;display:none;align-items:flex-start;gap:12px;background:#EFF4FB;box-shadow:inset 0 0 0 1px #B4CEEC;border-radius:8px;padding:16px 20px;">
-        <span aria-hidden="true" style="flex:none;display:inline-flex;color:#1E5AA8;"><dc-import name="Ikony" icon-name="info-circle" size="24" hint-size="24px,24px"></dc-import></span>
-        <p style="margin:0;font-size:16px;line-height:1.5;color:#15181C;text-wrap:pretty;"><strong style="font-weight:700;">Tip:</strong> Před STK si objednejte celkovou prohlídku včetně seřízení brzd. Přívěs připravíme tak, aby kontrolou prošel napoprvé.</p>
-      </div>
     </section>
 
     </div>
@@ -246,7 +255,7 @@
         <aside class="sv-censide" aria-label="Rezervace servisu" style="background:#FFFFFF;border-radius:8px;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);padding:24px;display:flex;flex-direction:column;gap:12px;">
           <h3 style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#142F56;">Nevíte, co přívěs potřebuje?</h3>
           <p style="margin:0;font-size:15px;line-height:1.6;color:#5A626C;text-wrap:pretty;">Přivezte ho na prohlídku. Posouzení a cenovou kalkulaci uděláme za <strong style="font-weight:700;color:#15181C;">1 150 Kč</strong> a bez vašeho souhlasu nic neopravíme.</p>
-          <div style="display:flex;margin-top:4px;"><div style="flex:1;min-width:0;display:flex;"><dc-import name="Tlacitko" variant="primary" size="medium" label="Rezervovat termín" icon="calendar" full-width="{{ true }}" on-click="{{ openForm }}" style="width:100%;" hint-size="100%,44px"></dc-import></div></div>
+          <div style="display:flex;margin-top:4px;"><div style="flex:1;min-width:0;display:flex;"><dc-import name="Tlacitko" variant="primary" size="medium" label="Rezervovat termín" icon="calendar" full-width="{{ true }}" href="rezervace-servisu.dc.html#sluzba=pos" style="width:100%;" hint-size="100%,44px"></dc-import></div></div>
           <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px;">
             <div style="display:flex;align-items:flex-start;gap:12px;">
               <span aria-hidden="true" style="flex:none;display:inline-flex;color:#1E5AA8;"><dc-import name="Ikony" icon-name="user" size="24" hint-size="24px,24px"></dc-import></span>
@@ -268,13 +277,13 @@
       </div>
     </section>
 
-    <section aria-label="Rezervace a kontakt na servis" style="margin-top:48px;">
+    <section id="rezervace" aria-label="Rezervace a kontakt na servis" style="margin-top:48px;">
       <div class="sv-final">
         <div style="background:#142F56;border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:12px;">
           <h2 style="margin:0;font-size:28px;font-weight:700;line-height:1.2;letter-spacing:-0.01em;color:#FFFFFF;">Rezervace servisu</h2>
           <p style="margin:0;font-size:16px;line-height:1.6;color:#B4CEEC;max-width:560px;text-wrap:pretty;">Volný termín si vyberete v online kalendáři. Zabere to pár minut.</p>
-          <div style="margin-top:auto;padding-top:20px;display:flex;">
-            <div style="flex:1;min-width:0;display:flex;"><dc-import name="Tlacitko" variant="buy" size="large" label="Vybrat termín online" icon="calendar" on-click="{{ openForm }}" full-width="{{ true }}" style="width:100%;" hint-size="100%,52px"></dc-import></div>
+          <div style="padding-top:12px;display:flex;">
+            <div style="flex:1;min-width:0;display:flex;"><dc-import name="Tlacitko" variant="buy" size="large" label="Vybrat termín online" icon="calendar" href="rezervace-servisu.dc.html" full-width="{{ true }}" style="width:100%;" hint-size="100%,52px"></dc-import></div>
           </div>
         </div>
         <div style="background:#FFFFFF;border-radius:8px;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);padding:32px;display:flex;flex-direction:column;gap:12px;">
@@ -307,15 +316,18 @@
     </div>
   </main>
 
+  <div class="sv-sbar" data-shown="{{ stickyShown }}" role="region" aria-label="Rychlá rezervace">
+    <div style="flex:1;min-width:0;display:flex;"><dc-import name="Tlacitko" variant="primary" size="large" label="Rezervovat termín" icon="calendar" full-width="{{ true }}" href="rezervace-servisu.dc.html" style="width:100%;" hint-size="100%,52px"></dc-import></div>
+    <a class="sv-sbarcall" href="tel:+420603924555" aria-label="Zavolat do servisu 603 924 555"><dc-import name="Ikony" icon-name="phone" size="24" hint-size="24px,24px"></dc-import></a>
+  </div>
   <div style="margin-top:10px;">
     <dc-import name="Paticka" bare="{{ true }}" hint-size="100%,600px"></dc-import>
   </div>
-  <dc-import name="RezervaceModal" open="{{ formOpen }}" options="{{ rezOptions }}" active-index="{{ rezIndex }}" on-pick="{{ onRezPick }}" on-close="{{ closeForm }}" on-next="{{ closeForm }}" hint-size="0px,0px"></dc-import>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { currency:'CZK', sortKey:'Výchozí řazení', shown:16, formOpen:false, rezIndex:0, accOpen:0 };
+  state = { currency:'CZK', sortKey:'Výchozí řazení', shown:16, accOpen:0 };
 
   CATS = ['AL-KO servis','BPW servis','KNOTT servis','Garanční prohlídky','Pneuservis'];
 
@@ -337,49 +349,48 @@ class Component extends DCLogic {
 
   // ceník podle vapp.cz — [název, obj. č., cena bez DPH, cena s DPH]
   ITEMS = [
-    ['Celková prohlídka před STK — přívěs do 750 kg nebrzděný (1,1 h)','s30038',990,1198],
-    ['Celková prohlídka před STK vč. seřízení brzd — do 1800 kg brzděný (1 náprava, 2,2 h)','s30039',1990,2408],
-    ['Celková prohlídka před STK vč. seřízení brzd — do 3500 kg brzděný (2 nápravy, 3 h)','s30040',2690,3255],
-    ['Celková prohlídka před STK vč. seřízení brzd — do 3500 kg brzděný (3 nápravy, 4,4 h)','s30041',3890,4707],
-    ['Garanční prohlídka VAPP/Agados — do 750 kg nebrzděný (1,1 h)','s30002',990,1198],
-    ['Garanční prohlídka VAPP/Agados — do 1800 kg brzděný (2,2 h)','s30003',1990,2408],
-    ['Garanční prohlídka VAPP/Agados — do 3500 kg brzděný (3 h)','s30005',2690,3255],
-    ['Kontrola a seřízení brzd GO — 2 kola AL-KO, BPW, KNOTT (2 h)','s30018',1890,2287],
-    ['Kontrola a seřízení brzd GO — 4 kola AL-KO, BPW, KNOTT (2,8 h)','s30021',2590,3134],
-    ['Kontrola a seřízení brzd GO — 6 kol AL-KO, BPW, KNOTT (4,5 h)','s30034',3890,4707],
-    ['Kontrola a seřízení brzd GO — 2 kola karavan (2,5 h)','s30028',2190,2650],
-    ['Kontrola a seřízení brzd GO — 4 kola karavan (3,4 h)','s30036',2990,3618],
-    ['Kontrola sbíhavosti a rozbíhavosti náprav (1 h)','s30016',875,1059],
-    ['Kontrola a seřízení geometrie náprav AL-KO plus vč. dopravy','s30035',3800,4598],
-    ['Demontáž — montáž (1 h)','s30006',870,1053],
+    ['Celková prohlídka před STK — přívěs do 750 kg nebrzděný','s30038',990,1198],
+    ['Celková prohlídka před STK vč. seřízení brzd — do 1800 kg brzděný (1 náprava)','s30039',1990,2408],
+    ['Celková prohlídka před STK vč. seřízení brzd — do 3500 kg brzděný (2 nápravy)','s30040',2690,3255],
+    ['Celková prohlídka před STK vč. seřízení brzd — do 3500 kg brzděný (3 nápravy)','s30041',3890,4707],
+    ['Garanční prohlídka VAPP/Agados — do 750 kg nebrzděný','s30002',990,1198],
+    ['Garanční prohlídka VAPP/Agados — do 1800 kg brzděný','s30003',1990,2408],
+    ['Garanční prohlídka VAPP/Agados — do 3500 kg brzděný','s30005',2690,3255],
+    ['Kontrola a seřízení brzd GO — 2 kola AL-KO, BPW, KNOTT','s30018',1890,2287],
+    ['Kontrola a seřízení brzd GO — 4 kola AL-KO, BPW, KNOTT','s30021',2590,3134],
+    ['Kontrola a seřízení brzd GO — 6 kol AL-KO, BPW, KNOTT','s30034',3890,4707],
+    ['Kontrola a seřízení brzd GO — 2 kola karavan','s30028',2190,2650],
+    ['Kontrola a seřízení brzd GO — 4 kola karavan','s30036',2990,3618],
+    ['Kontrola sbíhavosti a rozbíhavosti náprav','s30016',875,1059],
+    ['Demontáž — montáž','s30006',870,1053],
     ['Demontáž — montáž — sváření','s30027',1020,1234],
-    ['Demontáž — montáž ložiska (0,3 h)','s30007',297,359],
-    ['Demontáž — montáž zadního nárazníku PA/PAV (2,8 h)','s30010',2482,3003],
-    ['Demontáž kola a montáž zpět na vozidlo (1 kolo, 0,1 h)','s33028',98,119],
-    ['Demontáž pneu z disku (ocelový disk, 0,1 h)','s33030',98,119],
-    ['Montáž pneu na disk (ocelový disk, 0,1 h)','s33033',98,119],
-    ['Oprava průpichu bezdušové pneu (0,2 h)','s33041',174,211],
-    ['Demontáž a montáž elektroinstalace na přívěs VAPP (bez světel, 1,3 h)','s30011',1150,1392],
-    ['Montáž zástrčky 7 nebo 13 pólů (0,3 h)','s30025',290,351],
-    ['Demontáž a montáž gumového dorazu nájezdové brzdy (0,3 h)','s30012',293,355],
-    ['Demontáž a montáž tažné spojky (0,3 h)','s30013',271,328],
-    ['Demontáž a montáž tlumiče nájezdové brzdy do 2700 kg (0,4 h)','s30014',371,449],
-    ['Demontáž a montáž tlumiče nájezdové brzdy do 3500 kg (0,4 h)','s30015',371,449],
-    ['Přepouzdření nájezdové brzdy (1,1 h)','s30777',1150,1392],
-    ['Přetěsnění hydrauliky (bez těsnění a oleje, 1 h)','s30150',1000,1210],
-    ['Montáž šuplíku na nájezdy pod nový přívěs PVV (1,1 h)','s30024',980,1186],
+    ['Demontáž — montáž ložiska','s30007',297,359],
+    ['Demontáž — montáž zadního nárazníku PA/PAV','s30010',2482,3003],
+    ['Demontáž kola a montáž zpět na vozidlo (1 kolo)','s33028',98,119],
+    ['Demontáž pneu z disku (ocelový disk)','s33030',98,119],
+    ['Montáž pneu na disk (ocelový disk)','s33033',98,119],
+    ['Oprava průpichu bezdušové pneu','s33041',174,211],
+    ['Demontáž a montáž elektroinstalace na přívěs VAPP (bez světel)','s30011',1150,1392],
+    ['Montáž zástrčky 7 nebo 13 pólů','s30025',290,351],
+    ['Demontáž a montáž gumového dorazu nájezdové brzdy','s30012',293,355],
+    ['Demontáž a montáž tažné spojky','s30013',271,328],
+    ['Demontáž a montáž tlumiče nájezdové brzdy do 2700 kg','s30014',371,449],
+    ['Demontáž a montáž tlumiče nájezdové brzdy do 3500 kg','s30015',371,449],
+    ['Přepouzdření nájezdové brzdy','s30777',1150,1392],
+    ['Přetěsnění hydrauliky (bez těsnění a oleje)','s30150',1000,1210],
+    ['Montáž šuplíku na nájezdy pod nový přívěs PVV','s30024',980,1186],
     ['Montáž příslušenství','s300000',870,1053],
-    ['Posouzení a cenová kalkulace opravy (1 h)','s3000',950,1150],
+    ['Posouzení a cenová kalkulace opravy','s3000',950,1150],
     ['Ražení VIN','s30557',1500,1815],
     ['Řez z tabule překližky do 3 m na formátovací pile','s30053',50,61],
-    ['Likvidace překližky — tabule (0,2 h)','s33053',200,242]
+    ['Likvidace překližky — tabule','s33053',200,242]
   ];
 
   SORTS = ['Výchozí řazení','Od nejlevnějšího','Od nejdražšího','Podle názvu'];
 
   GROUP_ORDER = ['Prohlídky před STK','Garanční prohlídky','Brzdy a seřízení','Geometrie a nápravy','Kola a pneuservis','Elektroinstalace','Nájezdové zařízení a hydraulika','Montáže a demontáže dílů','Ostatní úkony'];
   // fotky karet služeb (pořadí shodné se services); prázdné = ikona
-  SVC_IMG = ['./servis-sluzba-stk.png', './servis-sluzba-garance.png', './servis-sluzba-brzdy.png', './servis-sluzba-geometrie.png', './servis-sluzba-pneu.png?v=2', './servis-sluzba-montaze.png'];
+  SVC_IMG = ['./servis-sluzba-stk.png', './servis-sluzba-garance.png', './servis-sluzba-brzdy.png', './servis-sluzba-pneu.png?v=2', './servis-sluzba-montaze.png'];
   // nový ceník (ceny s DPH)
   CENIK = [
     { key:'stk', name:'STK a garanční prohlídky', icon:'circle-check', img:'./servis-sluzba-stk.png', items:[
@@ -389,7 +400,7 @@ class Component extends DCLogic {
     { key:'brzdy', name:'Brzdy a nápravy', icon:'settings', img:'./servis-sluzba-brzdy.png', items:[
       ['Kontrola a seřízení brzd','2 kola AL-KO, BPW, KNOTT',2287],['Kontrola a seřízení brzd','2 kola karavan',2650],['Kontrola a seřízení brzd','4 kola AL-KO, BPW, KNOTT',3134],
       ['Kontrola a seřízení brzd','4 kola karavan',3618],['Kontrola a seřízení brzd','6 kol AL-KO, BPW, KNOTT',4707],['Kontrola sbíhavosti / rozbíhavosti náprav','',1059],
-      ['Kontrola a seřízení geometrie náprav AL-KO plus (rovné nápravy, vč. dopravy)','',4598],['Přepouzdření nájezdové brzdy','',1392],
+      ['Přepouzdření nájezdové brzdy','',1392],
       ['Demontáž-montáž tlumiče do nájezdové brzdy do 2 700 kg','',449],['Demontáž-montáž tlumiče do nájezdové brzdy do 3 500 kg','',449],
       ['Demontáž-montáž gumy doraz nájezdové brzdy','',355],['Přetěsnění hydrauliky (bez těsnění a oleje)','',1210] ] },
     { key:'montaze', name:'Montáže a opravy', icon:'tool', img:'./servis-sluzba-montaze.png', items:[
@@ -405,12 +416,11 @@ class Component extends DCLogic {
   kc(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0Kč'; }
   sluzeb(n){ return n === 1 ? 'služba' : (n < 5 ? 'služby' : 'služeb'); }
   SVC_DETAIL = [
-    ['Přívěs zkontrolujeme ve stejném rozsahu jako technik na STK a u brzděných přívěsů seřídíme brzdy. Co by na kontrole neprošlo, vám předem řekneme i s cenou opravy.', ['Nebrzděné přívěsy do 750 kg','Brzděné přívěsy do 3 500 kg s 1–3 nápravami','Seřízení brzd u brzděných přívěsů'], '1–4,5 h podle typu přívěsu'],
-    ['Pravidelná prohlídka nového přívěsu VAPP nebo Agados v záruční době. Zkontrolujeme podvozek, brzdy i osvětlení.', ['Nebrzděné přívěsy do 750 kg','Brzděné přívěsy do 1 800 kg','Brzděné přívěsy do 3 500 kg'], '1–2,5 h podle typu přívěsu'],
-    ['Jsme autorizovaný servis brzdových systémů AL-KO, BPW a KNOTT. Zkontrolujeme a seřídíme brzdy na všech kolech a opotřebené díly vyměníme.', ['Přívěsy se 2, 4 i 6 koly','Podvozky karavanů','Přepouzdření nájezdové brzdy'], '2–4,5 h podle počtu kol'],
-    ['Když přívěs táhne do strany nebo nerovnoměrně sjíždí pneumatiky, zkontrolujeme sbíhavost a nastavíme geometrii náprav. Postaráme se i o nájezdovou brzdu.', ['Kontrola sbíhavosti a rozbíhavosti','Seřízení geometrie náprav AL-KO plus','Výměna tlumiče a dorazů nájezdové brzdy'], 'od 20 minut, geometrie podle domluvy'],
-    ['Přezujeme a opravíme pneumatiky na ocelových discích přívěsu.', ['Demontáž a montáž kola','Přezutí pneumatiky na ocelový disk','Oprava průpichu bezdušové pneumatiky'], 'pár minut na kolo'],
-    ['Namontujeme příslušenství, opravíme elektroinstalaci a vyměníme opotřebené díly. Díly máme skladem, většinu prací zvládneme během jednoho dne.', ['Zástrčky 7 i 13 pólů a elektroinstalace','Tažné spojky, ložiska a nárazníky','Ražení VIN, montáž šuplíku na nájezdy'], 'od 20 minut podle rozsahu']
+    ['Přívěs zkontrolujeme ve stejném rozsahu jako technik na STK a u brzděných přívěsů seřídíme brzdy. Co by na kontrole neprošlo, vám předem řekneme i s cenou opravy.', ['Nebrzděné přívěsy do 750 kg','Brzděné přívěsy do 3 500 kg s 1–3 nápravami','Seřízení brzd u brzděných přívěsů']],
+    ['Pravidelná prohlídka nového přívěsu VAPP nebo Agados v záruční době. Zkontrolujeme podvozek, brzdy i osvětlení.', ['Nebrzděné přívěsy do 750 kg','Brzděné přívěsy do 1 800 kg','Brzděné přívěsy do 3 500 kg']],
+    ['Jsme autorizovaný servis brzdových systémů AL-KO, BPW a KNOTT. Zkontrolujeme a seřídíme brzdy na všech kolech a opotřebené díly vyměníme.', ['Přívěsy se 2, 4 i 6 koly','Podvozky karavanů','Přepouzdření nájezdové brzdy']],
+    ['Přezujeme a opravíme pneumatiky na ocelových discích přívěsu.', ['Demontáž a montáž kola','Přezutí pneumatiky na ocelový disk','Oprava průpichu bezdušové pneumatiky']],
+    ['Namontujeme příslušenství, opravíme elektroinstalaci a vyměníme opotřebené díly. Díly máme skladem, většinu prací zvládneme během jednoho dne.', ['Zástrčky 7 i 13 pólů a elektroinstalace','Tažné spojky, ložiska a nárazníky','Ražení VIN, montáž šuplíku na nájezdy']]
   ];
   // „Zobrazit ceník“ v kartách služeb: otevře odpovídající skupinu ceníku a posune na ni
   openGroup(name){
@@ -434,6 +444,16 @@ class Component extends DCLogic {
     if (n.indexOf('demontáž') >= 0 || n.indexOf('montáž') >= 0) return 'Montáže a demontáže dílů';
     return 'Ostatní úkony';
   }
+
+  componentDidMount(){
+    this._sb = ()=>{ try{
+      const h = document.getElementById('sv-herocta'), r = document.getElementById('rezervace'); if (!h || !r) return;
+      const on = h.getBoundingClientRect().bottom < 0 && !(r.getBoundingClientRect().top < window.innerHeight - 40);
+      if (on !== !!this.state.stickyOn) this.setState({ stickyOn:on });
+    }catch(e){} };
+    window.addEventListener('scroll', this._sb, { passive:true }); window.addEventListener('resize', this._sb); this._sb();
+  }
+  componentWillUnmount(){ window.removeEventListener('scroll', this._sb); window.removeEventListener('resize', this._sb); }
 
   renderVals(){
     const s = this.state;
@@ -462,11 +482,10 @@ class Component extends DCLogic {
         ['circle-check','Příprava na STK','Celková prohlídka včetně seřízení brzd. Přívěs připravíme, aby kontrolou prošel napoprvé.','1 198 Kč','Prohlídky před STK'],
         ['shield-check','Garanční prohlídky','Pro přívěsy VAPP a Agados — nebrzděné do 750 kg i brzděné do 3 500 kg.','1 198 Kč','Garanční prohlídky'],
         ['settings','Brzdy AL-KO, BPW, KNOTT','Autorizovaná kontrola a seřízení brzd na 2, 4 i 6 kol, včetně karavanů.','2 287 Kč','Brzdy a seřízení'],
-        ['arrows-horizontal','Nápravy a geometrie','Kontrola sbíhavosti, seřízení geometrie náprav AL-KO plus, servis nájezdových brzd.','355 Kč','Geometrie a nápravy'],
         ['wheel','Pneuservis','Montáž a demontáž pneumatik na ocelové disky, oprava průpichu.','119 Kč','Kola a pneuservis'],
         ['tool','Montáže a úpravy','Elektroinstalace, zástrčky 7 i 13 pólů, tažné spojky, ložiska a příslušenství.','328 Kč','Montáže a demontáže dílů']
       ].map(([icon, title, text, price, group], i)=>{ const D = this.SVC_DETAIL[i]; const open = !!(s.svcOpen||{})[i]; const img = this.SVC_IMG[i] || ''; return { icon, title, text, price, img, noImg: !img, imgStyle: img ? "flex:none;display:block;width:64px;height:64px;border-radius:8px;background:#FFFFFF center/contain no-repeat;background-origin:content-box;padding:4px;box-sizing:border-box;background-image:url('" + img + "');" : '',
-        more: D[0], points: D[1], time: D[2], detId: 'sv-det-'+i, shown: open ? 'true' : 'false', expanded: open ? 'true' : 'false',
+        more: D[0], points: D[1], detId: 'sv-det-'+i, shown: open ? 'true' : 'false', expanded: open ? 'true' : 'false',
         moreLabel: open ? 'Méně informací' : 'Více informací',
         onMore: ()=>this.setState(st=>({ svcOpen: Object.assign({}, st.svcOpen, { [i]: !(st.svcOpen||{})[i] }) })),
         onCenik: (e)=>{ if (e && e.preventDefault) e.preventDefault(); this.openGroup(group); } }; }),
@@ -490,17 +509,7 @@ class Component extends DCLogic {
       nextBatch: Math.max(0, Math.min(perPage, total - shown)),
       onPageChange: (n)=>this.setState({ shown: Math.min(total, n * perPage) }),
       loadMore: ()=>this.setState(st=>({ shown: Math.min(total, st.shown + perPage) })),
-      formOpen: s.formOpen === true,
-      rezOptions: [
-        { label:'Celková kontrola přívěsu' },
-        { label:'Kontrola a seřízení brzd' },
-        { label:'Kontrola a oprava elektroinstalace' },
-        { label:'Jiné — možnost dopsat poznámku' }
-      ],
-      rezIndex: s.rezIndex || 0,
-      onRezPick: (i)=>this.setState({ rezIndex:i }),
-      openForm: ()=>this.setState({ formOpen:true }),
-      closeForm: ()=>this.setState({ formOpen:false })
+      stickyShown: s.stickyOn ? 'true' : 'false'
     };
   }
 }

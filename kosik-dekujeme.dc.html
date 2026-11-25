@@ -179,7 +179,7 @@
         <li>{{ nextShip }}</li>
       </ol>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
-        <dc-import name="Tlacitko" variant="primary" size="medium" label="Pokračovat v nákupu" href="index.dc.html" hint-size="200px,44px"></dc-import>
+        <dc-import name="Tlacitko" variant="primary" size="medium" label="Pokračovat v nákupu" icon="arrow-left" href="index.dc.html" hint-size="220px,44px"></dc-import>
       </div>
     </section>
   </main>
@@ -198,7 +198,7 @@ class Component extends DCLogic {
   }
   renderVals(){
     const S = this.state, P = this.props;
-    const sum = S.sum || { total:'8 570\u00a0Kč', pickup:false, rows:[{ label:'Platba · Bankovním převodem / QR kódem', value:'Zdarma' }] };
+    const sum = S.sum || { total:'8 570\u00a0Kč', pickup:false, rows:[{ label:'Platba · Bankovním převodem / QR kódem', value:'0\u00a0Kč' }] };
     const f = (S.f && S.f.email) ? S.f : { email:'jan.novak@email.cz' };
     const payRow = (sum.rows||[]).find(r=>r.label.indexOf('Platba')===0) || {};
     const payLabel = (payRow.label||'').split(' · ').slice(1).join(' · ') || 'Bankovním převodem / QR kódem';

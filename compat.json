@@ -46,6 +46,11 @@
       "kind": "component"
     },
     {
+      "path": "Stepper.dc.html",
+      "title": "Stepper",
+      "kind": "component"
+    },
+    {
       "path": "kosik-krok1.dc.html",
       "title": "kosik-krok1",
       "kind": "page"
@@ -83,6 +88,21 @@
     {
       "path": "pujcovna.dc.html",
       "title": "pujcovna",
+      "kind": "page"
+    },
+    {
+      "path": "rezervace-servisu.dc.html",
+      "title": "rezervace-servisu",
+      "kind": "page"
+    },
+    {
+      "path": "rezervace-privesu.dc.html",
+      "title": "rezervace-privesu",
+      "kind": "page"
+    },
+    {
+      "path": "ukoly-pickerly-2026-11.dc.html",
+      "title": "ukoly-pickerly-2026-11",
       "kind": "page"
     },
     {

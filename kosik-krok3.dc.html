@@ -27,12 +27,7 @@
   .ck-h2{font-size:22px;font-weight:700;line-height:1.25;}
   @media (max-width:819px){ .ck-h1{font-size:26px;line-height:1.2;} .ck-h2{font-size:18px;line-height:1.3;} }
   .ck-card{background:#FFFFFF;border-radius:8px;box-shadow:0 1px 3px rgba(20,47,86,.08), 0 1px 2px rgba(20,47,86,.04);}
-  .ck-steps{display:flex;align-items:center;gap:12px;list-style:none;margin:0;padding:0;}
-  .ck-step{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;line-height:1.5;white-space:nowrap;}
-  .ck-sep{width:48px;height:2px;border-radius:999px;background:#D5DAE0;flex:none;}
-  @media (max-width:1149px){ .ck-sep{width:24px;} }
-  @media (max-width:819px){ .ck-step[data-active="0"] .ck-steplbl{display:none;} .ck-steps{gap:8px;} .ck-sep{width:16px;} }
-  @media (max-width:419px){ .ck-steplbl{display:none;} .ck-logo{height:24px !important;} }
+  @media (max-width:419px){ .ck-logo{height:24px !important;} }
   .ck-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px 32px;align-items:start;}
   @media (min-width:1560px){ .ck-grid{grid-template-columns:minmax(0,1fr) 400px;} }
   @media (max-width:1149px){ .ck-grid{grid-template-columns:minmax(0,1fr);} }
@@ -105,36 +100,12 @@
   <header style="position:sticky;top:0;z-index:70;background:#FFFFFF;box-shadow:0 2px 8px rgba(20,47,86,.06);">
     <div class="vp-in" style="display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:80px;padding-top:16px;padding-bottom:16px;">
       <a class="ck-lnk" href="index.dc.html" aria-label="VAPP — domovská stránka" style="display:flex;flex:none;"><img class="ck-logo" src="./vapp-logo.svg" alt="VAPP" style="height:32px;width:auto;display:block;"></a>
-      <nav aria-label="Kroky objednávky">
-        <ol class="ck-steps">
-          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
-            <sc-if value="{{ s.notFirst }}" hint-placeholder-val="">
-              <li aria-hidden="true" class="ck-sep" style="{{ s.sepStyle }}"></li>
-            </sc-if>
-            <li class="ck-step" data-active="{{ s.activeFlag }}" aria-current="{{ s.current }}">
-              <sc-if value="{{ s.isDone }}" hint-placeholder-val="">
-                <a href="{{ s.href }}" class="ck-lnk" style="display:flex;align-items:center;gap:8px;color:#0B6937;">
-                  <span style="width:28px;height:28px;border-radius:999px;background:#0E7F43;color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;"><dc-import name="Ikony" icon-name="check" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span>
-                  <span class="ck-steplbl">{{ s.label }}</span>
-                </a>
-              </sc-if>
-              <sc-if value="{{ s.isActive }}" hint-placeholder-val="{{ true }}">
-                <span style="width:28px;height:28px;border-radius:999px;background:#1E5AA8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;">{{ s.num }}</span>
-                <span class="ck-steplbl" style="color:#15181C;">{{ s.label }}</span>
-              </sc-if>
-              <sc-if value="{{ s.isTodo }}" hint-placeholder-val="">
-                <span style="width:28px;height:28px;border-radius:999px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #91959B;color:#5A626C;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;">{{ s.num }}</span>
-                <span class="ck-steplbl" style="color:#5A626C;">{{ s.label }}</span>
-              </sc-if>
-            </li>
-          </sc-for>
-        </ol>
-      </nav>
+      <dc-import name="Stepper" labels="{{ stpLabels }}" current="{{ stpCur }}" hrefs="{{ stpHrefs }}" aria-label="Kroky objednávky" hint-size="300px,58px"></dc-import>
     </div>
   </header>
 
   <main class="vp-in" style="width:100%;padding-top:28px;padding-bottom:56px;flex:1;">
-    <h1 class="ck-h1" style="margin:0 0 24px;color:#142F56;">Kontrola údajů</h1>
+    <h1 class="ck-h1" style="margin:0 0 24px;color:#142F56;">Shrnutí objednávky</h1>
     <div class="ck-grid">
       <div style="display:flex;flex-direction:column;gap:16px;min-width:0;">
 
@@ -266,7 +237,7 @@
 class Component extends DCLogic {
   DEMO_SUM = { rows:[
       { label:'Zboží (4 ks) bez DPH', value:'7 083\u00a0Kč' }, { label:'DPH 21 %', value:'1 487\u00a0Kč' },
-      { label:'Doprava · Osobní odběr Popovičky', value:'Zdarma', free:true }, { label:'Platba · Platba kartou online', value:'Zdarma', free:true } ],
+      { label:'Doprava · Osobní odběr Popovičky', value:'0\u00a0Kč', free:false }, { label:'Platba · Platba kartou online', value:'0\u00a0Kč', free:false } ],
     total:'8 570\u00a0Kč', country:'CZ', shipId:'osobni', shipLabel:'Osobní odběr Popovičky', point:'', pickup:true,
     items:[ { name:'Nájezdová brzda KNOTT KF13', qty:1, line:'5 900\u00a0Kč' }, { name:'Brzdové čelisti KNOTT 200×50 — malá sada na 2 kola', qty:2, line:'980\u00a0Kč' }, { name:'Náboj kola KNOTT 112×5', qty:1, line:'1 690\u00a0Kč' } ] };
   DEMO_F = { email:'jan.novak@email.cz', first:'Jan', last:'Novák', prefix:'+420', phone:'602 123 456', company:false, note:'' };
@@ -281,14 +252,8 @@ class Component extends DCLogic {
     const S = this.state, P = this.props;
     const sum = S.sum || this.DEMO_SUM;
     const f = (S.f && S.f.email) ? S.f : this.DEMO_F;
-    const labels = ['Nákupní košík','Kontaktní údaje','Kontrola údajů'];
+    const labels = ['Košík','Kontakt','Shrnutí'];
     const step = 3;
-    const steps = labels.map((label,i)=>{
-      const n = i+1, active = n===step;
-      return { num:n, label, isDone:n<step, isActive:active, isTodo:false, notFirst:i>0,
-        activeFlag: active ? '1' : '0', current: active ? 'step' : undefined, href: n===1 ? 'kosik-krok1.dc.html' : 'kosik-krok2.dc.html',
-        sepStyle: 'background:#0E7F43;' };
-    });
     const rows = sum.rows || [];
     const shipRow = rows.find(r=>r.label.indexOf('Doprava')===0) || {};
     const payRow = rows.find(r=>r.label.indexOf('Platba')===0) || {};
@@ -302,7 +267,7 @@ class Component extends DCLogic {
     else { placeHead = 'Doručovací adresa'; placeLines = [ f.street || '', [f.zip, f.city].filter(Boolean).join(' '), countryName ].filter(Boolean); }
     const rowVal = (free)=> 'white-space:nowrap;font-weight:500;color:' + (free ? '#0B6937' : '#15181C') + ';';
     return {
-      steps,
+      stpLabels:labels, stpCur:step, stpHrefs:['kosik-krok1.dc.html','kosik-krok2.dc.html','kosik-krok3.dc.html'],
       items: sum.items || this.DEMO_SUM.items,
       name: [f.first, f.last].filter(Boolean).join(' '),
       email: f.email, phone: (f.prefix || '+420') + ' ' + (f.phone || ''),
@@ -312,7 +277,7 @@ class Component extends DCLogic {
       billing: [f.bstreet, [f.bzip, f.bcity].filter(Boolean).join(' '), cn(f.bcountry)].filter(Boolean).join(', '),
       shipText: (after(shipRow.label) || sum.shipLabel || '') + ', ' + (shipRow.value || ''),
       countryName, placeHead, placeLines, placeHref,
-      payText: after(payRow.label) + (payRow.value && payRow.value !== 'Zdarma' ? ', ' + payRow.value : ''),
+      payText: after(payRow.label) + (payRow.value && payRow.value !== 'Zdarma' && !/^0[\s\u00a0,]/.test(payRow.value) ? ', ' + payRow.value : ''),
       noteText: (f.note||'').trim() || 'Bez poznámky', noteStyle: (f.note||'').trim() ? 'white-space:pre-line;' : 'color:#666E78;',
       sumRows: rows.map(r=>({ label: r.label.split(' · ')[0], value:r.value, valStyle:rowVal(!!r.free) })),
       totalText: sum.total,

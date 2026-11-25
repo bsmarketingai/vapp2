@@ -31,12 +31,7 @@
   .ck-lnk{color:#15181C;text-decoration:none;transition:color .12s ease;}
   .ck-lnk:hover{color:#1E5AA8;}
   /* hlavička košíku */
-  .ck-steps{display:flex;align-items:center;gap:12px;list-style:none;margin:0;padding:0;}
-  .ck-step{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;line-height:1.5;white-space:nowrap;}
-  .ck-sep{width:48px;height:2px;border-radius:999px;background:#D5DAE0;flex:none;}
-  @media (max-width:1149px){ .ck-sep{width:24px;} }
-  @media (max-width:819px){ .ck-step[data-active="0"] .ck-steplbl{display:none;} .ck-steps{gap:8px;} .ck-sep{width:16px;} }
-  @media (max-width:419px){ .ck-steplbl{display:none;} .ck-logo{height:24px !important;} }
+  @media (max-width:419px){ .ck-logo{height:24px !important;} }
   /* layout */
   .ck-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;grid-template-areas:"main side" "up side";gap:24px 32px;align-items:start;}
   @media (min-width:1560px){ .ck-grid{grid-template-columns:minmax(0,1fr) 400px;} }
@@ -65,7 +60,7 @@
   .ck-sp{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start;}
   @container (min-width:680px){ .ck-sp{grid-template-columns:minmax(0,1fr) minmax(0,1fr);} .ck-sp .ck-opt{gap:16px;padding:12px 20px;} .ck-sp .ck-opthd{padding:20px;} .ck-sp .ck-ptrow{padding:0 20px 12px 139px;} }
   .ck-sec{position:relative;}
-  .ck-sec::after{content:"";position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 2px #C5232B;pointer-events:none;opacity:0;transition:opacity .15s ease;z-index:1;}
+  .ck-sec::after{content:"";position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 1px #C5232B;pointer-events:none;opacity:0;transition:opacity .15s ease;z-index:1;}
   .ck-sec[data-err="1"]::after{opacity:1;}
   .ck-logobox{display:flex;align-items:center;justify-content:center;gap:4px;width:65px;height:40px;border-radius:6px;background:#FFFFFF;overflow:hidden;}
   .ck-logoimg{display:block;width:65px;height:40px;object-fit:contain;}
@@ -98,38 +93,51 @@
   .ck-foot a{color:#5A626C;text-decoration:none;transition:color .12s ease;}
   .ck-foot a:hover{color:#1E5AA8;}
   @media (prefers-reduced-motion:reduce){ .ck-barfill{transition:none;} }
+  /* mobil: lišta s cenou a CTA se přilepí dole, jakmile je vybraná doprava i platba (do té doby je CTA v Souhrnu pod platbou) */
+  .ck-mbar{display:none;}
+  @media (max-width:819px){
+    .ck-mbar{display:flex;align-items:center;gap:16px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#FFFFFF;box-shadow:0 -6px 20px rgba(20,30,45,.10);transform:translateY(110%);visibility:hidden;transition:transform .25s ease, visibility 0s linear .25s;}
+    .ck-mbar[data-shown="true"]{transform:none;visibility:visible;transition:transform .25s ease, visibility 0s;}
+    .ck-root[data-mbar="true"]{padding-bottom:84px !important;}
+  }
+  @media (prefers-reduced-motion:reduce){ .ck-mbar{transition:none !important;} }
+  .ck-mbin{display:flex;align-items:center;gap:16px;width:100%;}
+  .ck-mbtot{min-width:0;display:flex;flex-direction:column;gap:2px;}
+  .ck-mblbl{font-size:13px;font-weight:500;line-height:1.3;color:#5A626C;}
+  .ck-mbsum{font-size:20px;font-weight:700;line-height:1.2;color:#15181C;white-space:nowrap;}
+  .ck-mbnet,.ck-mbmiss,.ck-only-d{display:none;}
+  .ck-mbcta{flex:1;min-width:0;display:flex;}
+  /* tabulka položek (desktop, podle prototypu) */
+  .ck-thead,.ck-c{display:none;}
+  @media (min-width:1000px){
+    .ck-thead{display:grid;grid-template-columns:72px minmax(0,1fr) 88px 128px 116px 104px 124px 44px;gap:20px;align-items:center;padding:12px 24px;border-bottom:1px solid #F2F4F7;font-size:14px;font-weight:500;line-height:1.4;color:#5A626C;}
+    .ck-row{grid-template-columns:72px minmax(0,1fr) 88px 128px 116px 104px 124px 44px;grid-template-areas:"ph info code stock qty unit price del";padding:12px 24px;}
+    .ck-c{display:block;}
+    .ck-inl{display:none !important;}
+  }
+  /* desktop a tablet: bez Souhrnu vpravo, cena a CTA v liště u spodního okraje (podle prototypu) */
+  @media (min-width:820px){
+    .ck-grid{grid-template-columns:minmax(0,1fr) !important;grid-template-areas:"main" "up" !important;}
+    .ck-side{display:none !important;}
+    .ck-mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:14px 0;background:#FFFFFF;box-shadow:0 -6px 20px rgba(20,30,45,.10);}
+    .ck-mbin{max-width:1560px;margin:0 auto;padding:0 32px;justify-content:space-between;gap:24px;}
+    .ck-mbtot{display:grid;grid-template-columns:auto auto;align-items:baseline;column-gap:16px;row-gap:2px;}
+    .ck-mblbl{font-size:18px;font-weight:700;color:#15181C;}
+    .ck-mbsum{font-size:28px;letter-spacing:-0.01em;}
+    .ck-mbnet{display:block;grid-column:1 / -1;font-size:14px;font-weight:400;line-height:1.4;color:#5A626C;}
+    .ck-mbmiss{display:flex;align-items:center;gap:6px;margin:0 0 0 auto;font-size:14px;font-weight:500;line-height:1.5;color:#C5232B;}
+    .ck-mbcta{flex:none;}
+    .ck-only-m{display:none;} .ck-only-d{display:flex;}
+    .ck-root{padding-bottom:96px !important;}
+  }
 </style>
 </helmet>
-<div data-screen-label="Košík — krok 1" lang="cs" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;display:flex;flex-direction:column;">
+<div class="ck-root" data-mbar="{{ mbarShown }}" data-screen-label="Košík — krok 1" lang="cs" style="font-family:'Exo 2','Helvetica Neue',Arial,sans-serif;color:#15181C;background:#F7F9FB;min-height:100vh;width:100%;margin:0;padding:0;display:flex;flex-direction:column;">
 
   <header style="position:sticky;top:0;z-index:70;background:#FFFFFF;box-shadow:0 2px 8px rgba(20,47,86,.06);">
     <div class="vp-in" style="display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:80px;padding-top:16px;padding-bottom:16px;">
       <a class="ck-lnk" href="index.dc.html" aria-label="VAPP — domovská stránka" style="display:flex;flex:none;"><img class="ck-logo" src="./vapp-logo.svg" alt="VAPP" style="height:32px;width:auto;display:block;"></a>
-      <nav aria-label="Kroky objednávky">
-        <ol class="ck-steps">
-          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
-            <sc-if value="{{ s.notFirst }}" hint-placeholder-val="">
-              <li aria-hidden="true" class="ck-sep" style="{{ s.sepStyle }}"></li>
-            </sc-if>
-            <li class="ck-step" data-active="{{ s.activeFlag }}" aria-current="{{ s.current }}">
-              <sc-if value="{{ s.isDone }}" hint-placeholder-val="">
-                <a href="{{ s.href }}" class="ck-lnk" style="display:flex;align-items:center;gap:8px;color:#0B6937;">
-                  <span style="width:28px;height:28px;border-radius:999px;background:#0E7F43;color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;"><dc-import name="Ikony" icon-name="check" size="{{ 18 }}" hint-size="18px,18px"></dc-import></span>
-                  <span class="ck-steplbl">{{ s.label }}</span>
-                </a>
-              </sc-if>
-              <sc-if value="{{ s.isActive }}" hint-placeholder-val="{{ true }}">
-                <span style="width:28px;height:28px;border-radius:999px;background:#1E5AA8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;">{{ s.num }}</span>
-                <span class="ck-steplbl" style="color:#15181C;">{{ s.label }}</span>
-              </sc-if>
-              <sc-if value="{{ s.isTodo }}" hint-placeholder-val="">
-                <span style="width:28px;height:28px;border-radius:999px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #91959B;color:#5A626C;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;">{{ s.num }}</span>
-                <span class="ck-steplbl" style="color:#5A626C;">{{ s.label }}</span>
-              </sc-if>
-            </li>
-          </sc-for>
-        </ol>
-      </nav>
+      <dc-import name="Stepper" labels="{{ stpLabels }}" current="{{ stpCur }}" hrefs="{{ stpHrefs }}" aria-label="Kroky objednávky" hint-size="300px,58px"></dc-import>
     </div>
   </header>
 
@@ -150,21 +158,25 @@
       <div style="grid-area:main;display:flex;flex-direction:column;gap:16px;min-width:0;container-type:inline-size;">
 
         <section class="ck-card" aria-label="Položky v košíku">
+          <div class="ck-thead" aria-hidden="true"><span></span><span>Název</span><span>Obj. č.</span><span>Dostupnost</span><span style="text-align:center;">Množství</span><span style="text-align:right;">Cena za ks</span><span style="text-align:right;">Celkem s DPH</span><span></span></div>
           <sc-for list="{{ items }}" as="it" hint-placeholder-count="3">
             <div class="ck-row">
               <a href="{{ it.href }}" tabindex="-1" aria-hidden="true" style="grid-area:ph;display:block;border-radius:6px;overflow:hidden;"><img class="ck-thumb" src="{{ it.img }}" alt=""></a>
               <div style="grid-area:info;min-width:0;display:flex;flex-direction:column;gap:6px;">
                 <a class="ck-lnk ck-title" href="{{ it.href }}" style="text-wrap:pretty;">{{ it.name }}</a>
-                <span style="font-size:13px;font-weight:400;line-height:1.4;color:#666E78;">Obj. č. {{ it.code }}</span>
-                <dc-import name="Skladovost" state="in" text="{{ it.stock }}" hint-size="120px,18px"></dc-import>
+                <span class="ck-inl" style="font-size:13px;font-weight:400;line-height:1.4;color:#666E78;">Obj. č. {{ it.code }}</span>
+                <span class="ck-inl" style="display:flex;"><dc-import name="Skladovost" state="in" text="{{ it.stock }}" hint-size="120px,18px"></dc-import></span>
               </div>
-              <div class="ck-qty" style="grid-area:qty;">
+              <span class="ck-c" style="grid-area:code;font-size:15px;line-height:1.4;color:#5A626C;">{{ it.code }}</span>
+              <span class="ck-c" style="grid-area:stock;"><dc-import name="Skladovost" state="in" text="{{ it.stock }}" hint-size="120px,18px"></dc-import></span>
+              <span class="ck-c" style="grid-area:unit;justify-self:end;font-size:15px;line-height:1.4;color:#5A626C;white-space:nowrap;">{{ it.unitText }}</span>
+              <div class="ck-qty" style="grid-area:qty;justify-self:center;">
                 <dc-import name="Kvantifikator" size="standard" value="{{ it.qty }}" min="{{ 1 }}" max="{{ it.max }}" on-change="{{ it.onQty }}" hint-size="108px,44px"></dc-import>
               </div>
               <div class="ck-price" style="grid-area:price;justify-self:end;text-align:right;display:flex;flex-direction:column;gap:2px;">
                 <span style="font-size:17px;font-weight:700;line-height:1.3;white-space:nowrap;">{{ it.lineTotal }}</span>
                 <sc-if value="{{ it.multi }}" hint-placeholder-val="">
-                  <span style="font-size:13px;font-weight:400;line-height:1.4;color:#666E78;white-space:nowrap;">{{ it.unitNote }}</span>
+                  <span class="ck-inl" style="font-size:13px;font-weight:400;line-height:1.4;color:#666E78;white-space:nowrap;">{{ it.unitNote }}</span>
                 </sc-if>
               </div>
               <div style="grid-area:del;justify-self:end;">
@@ -340,6 +352,23 @@
     </sc-if>
   </main>
 
+  <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ true }}">
+    <div class="ck-mbar" data-shown="{{ mbarShown }}" role="region" aria-label="Celkem a pokračování v objednávce">
+      <div class="ck-mbin">
+        <div class="ck-mbtot">
+          <span class="ck-mblbl">Celkem s DPH</span>
+          <strong class="ck-mbsum">{{ totalText }}</strong>
+          <span class="ck-mbnet">{{ netText }} bez DPH</span>
+        </div>
+        <sc-if value="{{ showMissing }}" hint-placeholder-val="">
+          <p class="ck-mbmiss" role="alert"><dc-import name="Ikony" icon-name="alert-circle" size="{{ 18 }}" hint-size="18px,18px"></dc-import>{{ missingText }}</p>
+        </sc-if>
+        <div class="ck-mbcta ck-only-m"><dc-import name="Tlacitko" variant="buy" size="large" label="Pokračovat" icon="none" icon-trailing="chevron-right" full-width="{{ true }}" on-click="{{ onContinue }}" aria-label="Pokračovat ke kontaktním údajům" hint-size="100%,52px"></dc-import></div>
+        <div class="ck-mbcta ck-only-d"><dc-import name="Tlacitko" variant="buy" size="large" label="Pokračovat ke kontaktním údajům" icon="none" icon-trailing="chevron-right" on-click="{{ onContinue }}" hint-size="320px,52px"></dc-import></div>
+      </div>
+    </div>
+  </sc-if>
+
   <footer class="ck-foot" style="background:#FFFFFF;border-top:1px solid #F2F4F7;">
     <div class="vp-in" style="display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:20px;padding-bottom:20px;font-size:13px;font-weight:500;line-height:1.4;color:#5A626C;">
       <span>© 2026 VAPP</span>
@@ -419,13 +448,7 @@ class Component extends DCLogic {
     const S = this.state, P = this.props;
     const step = Math.min(3, Math.max(1, parseInt(P.step ?? 1, 10) || 1));
     const threshold = P.freeShippingThreshold ?? 5000;
-    const labels = ['Nákupní košík','Kontaktní údaje','Kontrola údajů'];
-    const steps = labels.map((label,i)=>{
-      const n = i+1, done = n<step, active = n===step;
-      return { num:n, label, isDone:done, isActive:active, isTodo:n>step, notFirst:i>0,
-        activeFlag: active ? '1' : '0', current: active ? 'step' : undefined, href:'kosik-krok1.dc.html',
-        sepStyle: 'background:' + (n<=step ? '#0E7F43' : '#D5DAE0') + ';' };
-    });
+    const labels = ['Košík','Kontakt','Shrnutí'];
 
     const cart = S.cart;
     const pieces = cart.reduce((a,i)=>a+i.qty,0);
@@ -436,7 +459,7 @@ class Component extends DCLogic {
 
     const items = cart.map((it,idx)=>({
       ...it, code: it.id, href:'detail-nahradnidil-V1.dc.html',
-      lineTotal: this.fmt(it.qty*it.price), multi: it.qty>1, unitNote: it.qty + ' × ' + this.fmt(it.price),
+      lineTotal: this.fmt(it.qty*it.price), unitText: this.fmt(it.price), multi: it.qty>1, unitNote: it.qty + ' × ' + this.fmt(it.price),
       removeAria: 'Odebrat z košíku: ' + it.name,
       onQty: (v)=>this.setState(s=>({ cart: s.cart.map((c,j)=> j===idx ? {...c, qty:v} : c) })),
       onRemove: ()=>this.setState(s=>({ cart: s.cart.filter((_,j)=>j!==idx) }))
@@ -448,7 +471,7 @@ class Component extends DCLogic {
     const shipOpts = shipList.map(o=>{
       const pr = shipPrice(o), checked = S.ship===o.id;
       return { ...o, checked, hasIcons: !!o.icons, icons: o.icons || [], logo: o.logo || '',
-        priceText: pr===0 ? 'Zdarma' : this.fmt(pr), priceStyle: priceStyle(pr===0),
+        priceText: this.fmt(pr), priceStyle: priceStyle(false),
         onPick: ()=>this.setShip(o.id),
         showPoint: checked && !!o.point, hasPoint: checked && !!o.point && !!S.point, point: S.point,
         pointLabel: S.point ? 'Změnit výdejní místo' : 'Vybrat výdejní místo' };
@@ -459,8 +482,8 @@ class Component extends DCLogic {
         hasIcons: !!o.icons, icons: o.icons || [], logo: o.logo || '',
         iconWrapStyle: 'color:' + (off ? '#91959B' : '#1E5AA8') + ';',
         labelStyle: off ? 'color:#666E78;' : '',
-        priceText: o.price===0 ? 'Zdarma' : this.fmt(o.price),
-        priceStyle: off ? 'font-size:16px;font-weight:700;line-height:1.35;white-space:nowrap;color:#666E78;' : priceStyle(o.price===0),
+        priceText: this.fmt(o.price),
+        priceStyle: off ? 'font-size:16px;font-weight:700;line-height:1.35;white-space:nowrap;color:#666E78;' : priceStyle(false),
         onPick: ()=>this.setState({ pay:o.id }) };
     });
 
@@ -474,8 +497,8 @@ class Component extends DCLogic {
     if (discount) sumRows.push({ label:'Sleva ' + S.code, value:'− ' + this.fmt(discount), valStyle:rowVal(true) });
     sumRows.push({ label:'Zboží (' + pieces + ' ks) bez DPH', value:this.fmt(goodsNet), valStyle:rowVal(false) });
     sumRows.push({ label:'DPH 21 %', value:this.fmt(goodsAfter-goodsNet), valStyle:rowVal(false) });
-    sumRows.push({ label: shipSel ? 'Doprava · ' + shipSel.label : 'Doprava', value: !shipSel ? '—' : (sp===0 ? 'Zdarma' : this.fmt(sp)), valStyle:rowVal(!!shipSel && sp===0) });
-    sumRows.push({ label: paySel ? 'Platba · ' + paySel.label : 'Platba', value: !paySel ? '—' : (pp===0 ? 'Zdarma' : this.fmt(pp)), valStyle:rowVal(!!paySel && pp===0) });
+    sumRows.push({ label: shipSel ? 'Doprava · ' + shipSel.label : 'Doprava', value: !shipSel ? '—' : this.fmt(sp), valStyle:rowVal(false) });
+    sumRows.push({ label: paySel ? 'Platba · ' + paySel.label : 'Platba', value: !paySel ? '—' : this.fmt(pp), valStyle:rowVal(false) });
     const missingText = !shipSel && !paySel ? 'Vyberte způsob dopravy a platby.' : (!shipSel ? 'Vyberte způsob dopravy.' : 'Vyberte způsob platby.');
 
     this._sum = { rows: sumRows.map(r=>({ label:r.label, value:r.value, free: r.valStyle.indexOf('#0B6937')>=0 })), total: this.fmt(total),
@@ -491,12 +514,13 @@ class Component extends DCLogic {
     const applyCode = ()=>{ const c = (S.codeDraft||'').trim().toUpperCase(); if (c) this.setState({ code:c, codeDraft:'' }); };
 
     return {
-      steps, items, isEmpty: cart.length===0, hasItems: cart.length>0,
+      stpLabels:labels, stpCur:step, stpHrefs:['kosik-krok1.dc.html','kosik-krok2.dc.html','kosik-krok3.dc.html'], items, isEmpty: cart.length===0, hasItems: cart.length>0,
       shipOpts, payOpts, sumRows, upsell, hasUpsell: upsell.length>0,
       freeReached, freeMissing: !freeReached, freeRemain: this.fmt(threshold - goodsAfter), freePct: pct,
       freeThresholdText: this.fmt(threshold),
       barStyle: 'width:' + pct + '%;background:' + (freeReached ? '#0E7F43' : '#1E5AA8') + ';',
-      totalText: this.fmt(total), showMissing: S.tried && (!shipSel || !paySel), missingText,
+      mbarShown: (shipSel && paySel) ? 'true' : 'false', mbarHidden: (shipSel && paySel) ? 'false' : 'true',
+      totalText: this.fmt(total), netText: this.fmt(total/1.21), showMissing: S.tried && (!shipSel || !paySel), missingText,
       shipErr: S.tried && !shipSel, payErr: S.tried && !paySel,
       shipErrFlag: (S.tried && !shipSel) ? '1' : '0', payErrFlag: (S.tried && !paySel) ? '1' : '0',
       countries: this.COUNTRIES, country: S.country,
